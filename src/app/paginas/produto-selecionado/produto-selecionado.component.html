@@ -1,0 +1,25 @@
+<div class="card mb-3">
+    <img src="{{ produto.linkImg }}" class="card-img-top" alt="...">
+    <div class="container">
+        <div class="card-body">
+            <p class="card-title">{{ produto.nome }}</p>
+            <h5 class="card-text">R${{ produto.valor }}</h5>
+        </div>
+
+        <div class="input-group mb-3" id="add">
+            <button class="btn btn" type="button" id="button-addon1"
+                (click)="quantidadeAltera(0)"><strong>-</strong></button>
+            <input type="text" class="form-control" aria-label="Example text with button addon" id="quantidade"
+                aria-describedby="button-addon1" disabled [(ngModel)]="quantidade">
+            <button class="btn btn" type="button" id="button-addon2"
+                (click)="quantidadeAltera(1)"><strong>+</strong></button>
+        </div>
+        <div class="nav justify-content-center" id="addMaior">
+            <button class="btn me-3" type="button" (click)="quantidadeAltera(5)">+ 5 uni.</button>
+            <button class="btn me-3" type="button" (click)="quantidadeAltera(12)">+ 12 uni.</button>
+            <button class="btn" type="button" (click)="quantidadeAltera(15)">+ 15 uni.</button>
+        </div>
+        <button class="btn" id="btn-adicionar"><a id="adicionar-a">ADICIONAR({{ quantidade }})</a> <a id="total-a">R${{ total | number : "1.2" }}</a></button>
+    </div>
+</div>
+

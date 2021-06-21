@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sena Distribuidora - Pagina Inicial</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/img1.png" class="d-block w-100" id="img-carousel">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img2.png" class="d-block w-100" id="img-carousel">
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/img3.png" class="d-block w-100" id="img-carousel">
+                </div>
+            </div>
+        </div>
+        <div id="divisao"></div>
+        <div class="row" id="opcoes">
+            <div class="d-grid gap-1 col" id="divisao-btn1">
+                <button id="btn-op1" class="btn" [routerLink]="['/pesquisa', 'cerveja']"
+                    (click)="buscaEspecifica('cerveja')"><img src="assets/caneca-de-cerveja.png" width="27px">
+                    Cervejas</button>
+                <button id="btn-op1" class="btn" [routerLink]="['/pesquisa', 'vinho']"><img src="assets/vinho.png"
+                        width="27px"> Vinhos</button>
+                <button id="btn-op1" class="btn" [routerLink]="['/pesquisa', 'mercearia']"><img
+                        src="assets/mercearias.png" width="27px"> Mercearia</button>
+            </div>
+            <div class="d-grid gap-1 col" id="divisao-btn2">
+                <button id="btn-op2" class="btn" [routerLink]="['/pesquisa', 'destilado']"><img src="assets/vodka.png"
+                        width="27px"> Destilados</button>
+                <button id="btn-op2" class="btn" [routerLink]="['/pesquisa', 'sem-alcool']"><img src="assets/suco.png"
+                        width="27px"> Sem Álcool</button>
+                <button id="btn-op2" class="btn" [routerLink]="['/pesquisa', 'tabacaria']"><img src="assets/tabaco.png"
+                        width="27px"> Tabacaria</button>
+            </div>
+        </div>
+        <div id="divisao"></div>
+        <p id="titu"><strong>CERVEJAS</strong></p>
+        <div class="scrollProdutos">
+            <div class="card" id="card-prod" style="width: 8.5rem;"
+                *ngFor="let produto of produtos | async | filter:'cerveja' | slice:0:5">
+                <img src="{{ produto.linkImg }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                </div>
+            </div>
+            <div class="seta" id="seta-direita" [routerLink]="['/veja-tudo']">
+                <img src="assets/seta-direita.png" id="img-seta-direita">
+                <p class="text-muted" id="veja-tudo">Veja tudo</p>
+            </div>
+        </div>
+        <div id="divisao"></div>
+        <p id="titu"><strong>DESTILADOS</strong></p>
+        <div class="scrollProdutos">
+            <div class="card" id="card-prod" style="width: 8.5rem;"
+                *ngFor="let produto of produtos | async | filter:'destilado' | slice:0:5">
+                <img src="{{ produto.linkImg }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                </div>
+            </div>
+            <div class="seta" id="seta-direita" [routerLink]="['/veja-tudo']">
+                <img src="assets/seta-direita.png" id="img-seta-direita">
+                <p class="text-muted" id="veja-tudo">Veja tudo</p>
+            </div>
+        </div>
+        <div id="divisao"></div>
+        <p id="titu"><strong>VINHOS</strong></p>
+        <div class="scrollProdutos">
+            <div class="card" id="card-prod" style="width: 8.5rem;"
+                *ngFor="let produto of produtos | async | filter:'vinho' | slice:0:5">
+                <img src="{{ produto.linkImg }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                </div>
+            </div>
+            <div class="seta" id="seta-direita" [routerLink]="['/veja-tudo']">
+                <img src="assets/seta-direita.png" id="img-seta-direita">
+                <p class="text-muted" id="veja-tudo">Veja tudo</p>
+            </div>
+        </div>
+        <div id="divisao"></div>
+        <p id="titu"><strong>SEM ÁLCOOL</strong></p>
+        <div class="scrollProdutos">
+            <div class="card" id="card-prod" style="width: 8.5rem;"
+                *ngFor="let produto of produtos | async | filter:'sem-alcool' | slice:0:5">
+                <img src="{{ produto.linkImg }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                </div>
+            </div>
+            <div class="seta" id="seta-direita" [routerLink]="['/veja-tudo']">
+                <img src="assets/seta-direita.png" id="img-seta-direita">
+                <p class="text-muted" id="veja-tudo">Veja tudo</p>
+            </div>
+        </div>
+        <div id="divisao"></div>
+        <p id="titu"><strong>TABACARIA</strong></p>
+        <div class="scrollProdutos">
+            <div class="card" id="card-prod" style="width: 8.5rem;"
+                *ngFor="let produto of produtos | async | filter:'tabacaria' | slice:0:5">
+                <img src="{{ produto.linkImg }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                </div>
+            </div>
+            <div class="seta" id="seta-direita" [routerLink]="['/veja-tudo']">
+                <img src="assets/seta-direita.png" id="img-seta-direita">
+                <p class="text-muted" id="veja-tudo">Veja tudo</p>
+            </div>
+        </div>
+        <div id="divisao"></div>
+        <p id="titu"><strong>MERCEARIA</strong></p>
+        <div class="scrollProdutos">
+            <div class="card" id="card-prod" style="width: 8.5rem;"
+                *ngFor="let produto of produtos | async | filter:'mercearia' | slice:0:5">
+                <img src="{{ produto.linkImg }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                </div>
+            </div>
+            <div class="seta" id="seta-direita" [routerLink]="['/veja-tudo']">
+                <img src="assets/seta-direita.png" id="img-seta-direita">
+                <p class="text-muted" id="veja-tudo">Veja tudo</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="display: none;">Ícones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+        <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a>
+    </div>
+</body>
+
+</html>

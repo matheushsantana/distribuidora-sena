@@ -1,0 +1,17 @@
+<body>
+
+  <nav class="navbar sticky-top justify-content-center" id="navbar">
+    <div class="container-fluid">
+      <p id="slogan">Bem-vindo a melhor distribuidora de Cuiabá!</p>
+      <form class="d-flex col-12">
+        <div class="input-group flex-nowrap">
+          <input type="text" class="form-control" [(ngModel)]="valor" placeholder="Qual a Bebida de Hoje?" id="valor" name="valor" [(ngModel)]="valor">
+          <button type="submit" [routerLink]="['/pesquisa', valor ]" class="btn btn-success">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </nav>
+
+    <router-outlet></router-outlet>
+  
+</body>

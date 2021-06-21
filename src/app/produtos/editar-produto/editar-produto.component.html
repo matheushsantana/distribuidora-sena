@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribuidora Sena - Atualização Produtos</title>
+</head>
+
+<body>
+    <h4 id="titulo">ATUALIZAR PRODUTO</h4>
+    <div class="container">
+        <form #f="ngForm" (ngSubmit)="onSubmit()">
+            <div class="row g-2">
+                <div class="col-6">
+                    <label for="nomeProduto" class="form-label"><strong>Nome Produto</strong></label>
+                    <input type="text" class="form-control" placeholder="Digite o nome do Produto" name="nomeProduto"
+                        [(ngModel)]="produto.nome">
+                </div>
+                <div class="col-6">
+                    <label for="valorVenda" class="form-label"><strong>Valor de Venda</strong></label>
+                    <input type="text" class="form-control" placeholder="Valor de Venda do Produto" name="valorVenda"
+                        [(ngModel)]="produto.valor">
+                </div>
+            </div>
+            <div class="col-12" style="display: none;">
+                <input type="text" class="form-control" name="linkImg" [(ngModel)]="produto.linkImg">
+            </div>
+            <div class="col-12">
+                <label for="categoriaProduto" class="form-label"><strong>Tipo do Produto</strong></label>
+                <select class="form-select" name="categoriaProduto" [(ngModel)]="produto.categoria">
+                    <option selected>Selecione...</option>
+                    <option value="Cerveja1">Cerveja</option>
+                    <option value="vinho1">Vinho</option>
+                    <option value="mercearia1">Mercearia</option>
+                    <option value="destilado1">Destilado</option>
+                    <option value="sem alcool1">Sem Alcool</option>
+                    <option value="tabacaria1">Tabacaria</option>
+
+                </select>
+            </div><br>
+
+            
+            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end" id="btn-submit">
+                <button type="submit" class="btn btn-success">Atualizar</button>
+                <button class="btn btn-danger" [routerLink]="['/produtos']">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
