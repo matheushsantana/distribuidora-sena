@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Carrinho } from './carrinho';
 import { map } from 'rxjs/operators';
+import { data } from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -12,33 +13,33 @@ export class CarrinhoService {
 
   constructor(private db: AngularFireDatabase) { };
 
-  ngOnInit(){
+  ngOnInit() {
   }
 
   adicionaProduto(carrinho: Carrinho) {
-    this.db.list('carrinho/'+ this.idCliente).push(carrinho)
-      .then((result: any) => {
-        console.log(result.key);
+    this.db.list('carrinho/' + this.idCliente).push(carrinho)
+      .catch((error: any) => {
+        console.error(error);
       });
-    alert("Cadastrado com Sucesso!");
+    alert("Produto Adicionado");
   }
 
-  recebeId(id){
+  recebeId(id) {
     this.idCliente = id;
     console.log(this.idCliente)
   }
 
-  getAllProdCarrinho(){
-    return this.db.list('carrinho/usuario/'+ this.idCliente)
-    .snapshotChanges()
-    .pipe(
-      map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
-      })
-    );
+  getAllProdCarrinho() {
+    return this.db.list('carrinho/usuario/' + this.idCliente)
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
+        })
+      );
   }
 
-  deleteProdCarrinho(key: string){
+  deleteProdCarrinho(key: string) {
     this.db.object('carrinho/usuario/' + this.idCliente + '/' + `${key}`).remove();
   }
 }
