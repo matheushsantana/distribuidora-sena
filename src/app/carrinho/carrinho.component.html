@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Valor uni.</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Valor Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let produto of carrinho | async">
+                    <td class="col-4">{{ produto.produto }}</td>
+                    <td class="col-2">R$ {{ produto.valorUni }} </td>
+                    <td class="col-2">{{ produto.quantidade }}</td>
+                    <td class="col-2">R$ {{ produto.valorTotal }}</td>
+                    <td class="col-2"><button class="btn btn-danger" (click)="removeProduto(produto.key)">remover</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

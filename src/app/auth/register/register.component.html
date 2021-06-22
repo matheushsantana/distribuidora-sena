@@ -1,0 +1,24 @@
+<div class="container">
+    <form class="row g-3" [formGroup]="formRegister" (ngSubmit)="onSubmit()">
+        <h5>Cadastro</h5>
+        <div class="col-6">
+            <label class="form-label">Nome</label>
+            <input type="text" formControlName="firstname" class="form-control" placeholder="Primeiro Nome">
+        </div>
+        <div class="col-6">
+            <label class="form-label">E-mail</label>
+            <input type="email" formControlName="email" class="form-control" placeholder="Ex. exemplo@gmail.com">
+        </div>
+        <div class="col-6">
+            <label class="form-label">Senha</label>
+            <input type="password" formControlName="password1" class="form-control" placeholder="senha">
+        </div>
+        <div class="col-6">
+            <label class="form-label">Confime a Senha</label>
+            <input type="password" formControlName="password2" class="form-control" placeholder="confirme a senha">
+        </div>
+        <div class=" col-12 d-grid gap-2 d-md-flex justify-content-end">
+            <button type="submit" class="btn btn-primary" [disabled]="!formRegister.valid">Cadastrar</button>
+        </div>
+    </form>
+</div>

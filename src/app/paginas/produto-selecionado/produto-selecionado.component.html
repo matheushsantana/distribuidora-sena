@@ -19,7 +19,8 @@
             <button class="btn me-3" type="button" (click)="quantidadeAltera(12)">+ 12 uni.</button>
             <button class="btn" type="button" (click)="quantidadeAltera(15)">+ 15 uni.</button>
         </div>
-        <button class="btn" id="btn-adicionar"><a id="adicionar-a">ADICIONAR({{ quantidade }})</a> <a id="total-a">R${{ total | number : "1.2" }}</a></button>
+        <button class="btn" id="btn-adicionar" (click)="adicionar(quantidade, total)">
+            <a id="adicionar-a">ADICIONAR({{ quantidade }})</a> <a id="total-a">R${{ total | number : "1.2" }}</a></button>
     </div>
 </div>
 

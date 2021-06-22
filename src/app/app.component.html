@@ -2,7 +2,22 @@
 
   <nav class="navbar sticky-top justify-content-center" id="navbar">
     <div class="container-fluid">
-      <p id="slogan">Bem-vindo a melhor distribuidora de Cuiabá!</p>
+      <div class="barra-superior" *ngIf="!(authenticated$ | async)">
+
+      </div>
+
+      <ng-container *ngIf="(authenticated$ | async) && (user$ | async)">
+        <div class="barra-superior">
+          <div class="sub-barra">
+            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
+            <img id="btn-home" [routerLink]="['/']" src="assets/home.png">
+            <img id="btn-carrinho" [routerLink]="['/carrinho' , (user$|async)?.id]" src="assets/carrinho.png">
+            <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
+          </div>
+          <a id="name">{{(user$|async)?.firsname}}</a>
+          <p id="idCliente" style="display: none;">{{(user$|async)?.id}}</p>
+        </div>
+      </ng-container>
       <form class="d-flex col-12">
         <div class="input-group flex-nowrap">
           <input type="text" class="form-control" [(ngModel)]="valor" placeholder="Qual a Bebida de Hoje?" id="valor" name="valor" [(ngModel)]="valor">

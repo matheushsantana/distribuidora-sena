@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { data } from 'jquery';
+import { Carrinho } from 'src/app/carrinho/shared/carrinho';
+import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
+import { ProdutoCarrinho } from 'src/app/carrinho/shared/produtocarrinho';
 import { Produto } from 'src/app/produtos/shared/produto';
 import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service';
 
@@ -16,7 +19,10 @@ export class ProdutoSelecionadoComponent implements OnInit {
   quantidade: number = 1;
   total: number;
 
-  constructor(private produtoDataService: ProdutoDataService) { }
+  carrinho: Carrinho;
+  produtoCarrinho: ProdutoCarrinho;
+
+  constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService) { }
 
   ngOnInit(): void {
     this.produto = new Produto();
@@ -26,10 +32,12 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.produto.nome = data.produto.nome;
         this.produto.valor = data.produto.valor;
         this.produto.categoria = data.produto.categoria;
-        this.produto.linkImg = data.produto.linkImg;
+        //this.produto.linkImg = data.produto.linkImg;
         this.key = data.key;      }
     })
     this.total = this.produto.valor;
+    this.carrinho = new Carrinho();
+    this.produtoCarrinho = new ProdutoCarrinho();
   }
 
   quantidadeAltera(valor: number){
@@ -42,5 +50,16 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.total = this.total - this.produto.valor;
       }
     }
+  }
+
+  adicionar(quantidade: number, total: number){
+
+    this.produtoCarrinho.produto = this.produto;
+    this.produtoCarrinho.quantidade = quantidade;
+    this.produtoCarrinho.total = total;
+
+    this.carrinho.produtos = this.produtoCarrinho;
+
+    this.carrinhoService.adicionaProduto(this.carrinho);
   }
 }

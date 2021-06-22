@@ -10,13 +10,15 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { CarrinhoComponent } from './carrinho/carrinho.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     ResultadoPesquisaComponent,
-    ProdutoSelecionadoComponent
+    ProdutoSelecionadoComponent,
+    CarrinhoComponent
   ],
   imports: [
     BrowserModule,
