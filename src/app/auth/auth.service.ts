@@ -6,7 +6,7 @@ import { User } from './user';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import firebase from 'firebase/app';
 import { Carrinho } from '../carrinho/shared/carrinho';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { CarrinhoService } from '../carrinho/shared/carrinho.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class AuthService {
   private userCollection: AngularFirestoreCollection<User> = this.afs.collection('users');
   carrinho: Carrinho;
 
-  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) { }
+  constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth, private carrinhoService: CarrinhoService) { }
 
   register(user: User): Observable<boolean> {
     return from(this.afAuth

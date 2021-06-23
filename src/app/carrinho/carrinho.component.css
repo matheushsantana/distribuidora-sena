@@ -1,0 +1,107 @@
+.card-title{
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(104, 104, 104);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card-text{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.divisao{
+    height: 7px;
+    background-color: rgb(231, 231, 231);;
+}
+
+#add{
+    border: rgb(116, 116, 116) 1px solid;
+    border-radius: 6px;
+    width: 130px;
+    margin-left: 18px;
+    
+}
+
+#button-addon1{
+    color: darkorange;
+    font-size: 24px;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    border: none;
+}
+
+#button-addon2{
+    color: darkorange;
+    font-size: 24px;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    border: none;
+}
+
+#quantidade{
+    border: none;
+    background-color: white;
+    text-align: center;
+    width: 40px;
+}
+
+#lixeira{
+    position: absolute;
+    width: 30px;
+    right: 2%;
+    bottom: 5%;
+    filter: contrast(30%);
+}
+
+#adicionar{
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(128, 128, 128);
+}
+
+#receber{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#receber-img{
+    filter: contrast(1%);
+    width: 25px;
+    margin-right: 10px;
+    margin-top: 12px;
+}
+
+#chat{
+    filter: contrast(1%);
+    width: 25px;
+    margin-right: 12px;
+}
+
+.conta{
+    margin-top: 15px;
+    font-weight: 400;
+    color: rgb(104, 104, 104);
+}
+
+#btn-adicionar{
+    background-color: rgb(253, 160, 46);
+    font-weight: bold;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#prodValor{
+    position: relative;
+    width: 100%;
+}
+
+#valor{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    font-weight: 600;
+    color: black;
+}

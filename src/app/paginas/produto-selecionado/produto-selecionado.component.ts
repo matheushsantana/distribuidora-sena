@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Carrinho } from 'src/app/carrinho/shared/carrinho';
+import { HttpClient } from '@angular/common/http';
 import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
-import { ProdutosCarrinho } from 'src/app/carrinho/shared/produtoscarrinho';
 import { Produto } from 'src/app/produtos/shared/produto';
 import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service';
 
@@ -18,10 +18,13 @@ export class ProdutoSelecionadoComponent implements OnInit {
   quantidade: number = 1;
   total: number;
 
-  carrinho: Carrinho;
-  produtosCarrinho: ProdutosCarrinho;
+  contador: number[];
 
-  constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService) { }
+  carrinho: Carrinho;
+
+  urlContador = 'https://sena-distribuidora-default-rtdb.firebaseio.com/cliente/';
+
+  constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.produto = new Produto();
@@ -31,12 +34,15 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.produto.nome = data.produto.nome;
         this.produto.valor = data.produto.valor;
         this.produto.categoria = data.produto.categoria;
-        //this.produto.linkImg = data.produto.linkImg;
+        this.produto.linkImg = data.produto.linkImg;
         this.key = data.key;      }
     })
     this.total = this.produto.valor;
     this.carrinho = new Carrinho();
-    this.produtosCarrinho = new ProdutosCarrinho();
+    this.pegaContador().subscribe(dados => {
+      this.contador = dados
+      console.log('contador', this.contador)
+    });
   }
 
   quantidadeAltera(valor: number){
@@ -51,16 +57,22 @@ export class ProdutoSelecionadoComponent implements OnInit {
     }
   }
 
+  pegaContador(){
+    return this.http.get<any[]>(`${this.urlContador + this.carrinhoService.idCliente + '/contador.json'}`);
+  }
+
+
   adicionar(quantidade: number, total: number){
 
-    this.produtosCarrinho.nome = this.produto.nome;
-    this.produtosCarrinho.valor = this.produto.valor;
-    this.produtosCarrinho.quantidade = quantidade;
-    this.produtosCarrinho.total = total;
-    this.produtosCarrinho.linkImg = 'null';
+    this.carrinho.nome = this.produto.nome;
+    this.carrinho.valor = this.produto.valor;
+    this.carrinho.quantidade = quantidade;
+    this.carrinho.total = total;
+    this.carrinho.linkImg = 'null';
 
-    this.carrinho.produto = this.produtosCarrinho; 
+    var aux = this.contador
+    console.log(aux)
 
-    this.carrinhoService.adicionaProduto(this.carrinho);
+    this.carrinhoService.adicionaProduto('1', this.carrinho);
   }
 }

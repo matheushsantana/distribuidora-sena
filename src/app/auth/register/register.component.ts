@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Carrinho } from 'src/app/carrinho/shared/carrinho';
+import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 
@@ -47,6 +49,7 @@ onSubmit(){
   this.authService.register(newUser)
   .subscribe(
     (u)=>{ alert('Registrado com Sucesso!')
+      console.log(newUser);
       this.router.navigateByUrl('/');
     },
     (err) => {
@@ -55,6 +58,5 @@ onSubmit(){
     }
   );
 }
-
 
 }

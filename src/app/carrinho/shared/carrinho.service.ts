@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Carrinho } from './carrinho';
 import { map } from 'rxjs/operators';
-import { data } from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +15,13 @@ export class CarrinhoService {
   ngOnInit() {
   }
 
-  adicionaProduto(carrinho: Carrinho) {
-    this.db.list('carrinho/' + this.idCliente).push(carrinho)
+  adicionaProduto(contador: string, carrinho: Carrinho) {
+    this.db.list('cliente/' + this.idCliente + '/carrinho').update('0' , carrinho)
       .catch((error: any) => {
         console.error(error);
       });
     alert("Produto Adicionado");
+    this.db.list('cliente/' + this.idCliente + '/contador').push(contador)
   }
 
   recebeId(id) {
@@ -30,7 +30,7 @@ export class CarrinhoService {
   }
 
   getAllProdCarrinho() {
-    return this.db.list('carrinho/usuario/' + this.idCliente)
+    return this.db.list('cliente/' + this.idCliente + '/carrinho')
       .snapshotChanges()
       .pipe(
         map(changes => {
@@ -40,6 +40,7 @@ export class CarrinhoService {
   }
 
   deleteProdCarrinho(key: string) {
-    this.db.object('carrinho/usuario/' + this.idCliente + '/' + `${key}`).remove();
+    this.db.object('carrinho/' + this.idCliente + '/' + `${key}`).remove();
   }
+
 }

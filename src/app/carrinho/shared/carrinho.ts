@@ -1,9 +1,8 @@
-import { ProdutosCarrinho } from "./produtoscarrinho";
-
 export class Carrinho {
-    
-    produto: ProdutosCarrinho;
-    total: number = 0;
-    keyCarrinho: string;
 
+    nome: string;
+    valor: number;
+    linkImg: string;
+    quantidade: number;
+    total: number;
 }
