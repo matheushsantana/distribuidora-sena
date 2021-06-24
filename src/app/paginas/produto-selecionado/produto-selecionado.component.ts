@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { Produto } from 'src/app/produtos/shared/produto';
 import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service';
+import { Contador } from 'src/app/carrinho/shared/contador';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -18,8 +20,8 @@ export class ProdutoSelecionadoComponent implements OnInit {
   quantidade: number = 1;
   total: number;
 
-  contador: number[];
-
+  contador: Contador;
+  recebeContador: Contador;
   carrinho: Carrinho;
 
   urlContador = 'https://sena-distribuidora-default-rtdb.firebaseio.com/cliente/';
@@ -37,12 +39,23 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.produto.linkImg = data.produto.linkImg;
         this.key = data.key;      }
     })
+
     this.total = this.produto.valor;
     this.carrinho = new Carrinho();
+    this.contador = new Contador();
+    this.recebeContador = new Contador();
+
     this.pegaContador().subscribe(dados => {
-      this.contador = dados
-      console.log('contador', this.contador)
-    });
+      if(dados == null){
+        this.recebeContador = {valor: 0}
+      }else{
+        this.recebeContador = dados;
+        console.log('valor recebido',this.recebeContador)
+      }
+    }, err => {
+      console.log('Erro ao listar contador', err);
+    })
+    console.log('saiu')
   }
 
   quantidadeAltera(valor: number){
@@ -58,21 +71,20 @@ export class ProdutoSelecionadoComponent implements OnInit {
   }
 
   pegaContador(){
-    return this.http.get<any[]>(`${this.urlContador + this.carrinhoService.idCliente + '/contador.json'}`);
+    return this.http.get<any>(`${this.urlContador + this.carrinhoService.idCliente + '/carrinho/contador.json'}`);
   }
 
 
   adicionar(quantidade: number, total: number){
+    this.contador.valor = this.recebeContador.valor;
+    console.log('valor contador', this.contador.valor)
 
     this.carrinho.nome = this.produto.nome;
     this.carrinho.valor = this.produto.valor;
     this.carrinho.quantidade = quantidade;
     this.carrinho.total = total;
     this.carrinho.linkImg = 'null';
-
-    var aux = this.contador
-    console.log(aux)
-
-    this.carrinhoService.adicionaProduto('1', this.carrinho);
+    
+    this.carrinhoService.adicionaProduto(this.contador ,this.carrinho);
   }
 }

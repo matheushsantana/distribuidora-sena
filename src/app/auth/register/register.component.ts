@@ -51,6 +51,7 @@ onSubmit(){
     (u)=>{ alert('Registrado com Sucesso!')
       console.log(newUser);
       this.router.navigateByUrl('/');
+      location.reload();
     },
     (err) => {
       console.log(err)

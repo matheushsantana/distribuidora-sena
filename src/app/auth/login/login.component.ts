@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (u) => {
           this.loginOkNotification(u);
-          this.router.navigateByUrl('/');
+          window.location.href = '/'
           this.loading = false;
         },
         (err) => {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (u)=> {
           this.loginOkNotification(u);
-          this.router.navigateByUrl('/');
+          window.location.href = '/'
           this.loading = false;
         },
         (err) => {

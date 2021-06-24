@@ -2,9 +2,16 @@
 
   <nav class="navbar sticky-top justify-content-center" id="navbar">
     <div class="container-fluid">
-      <div class="barra-superior" *ngIf="!(authenticated$ | async)">
-
-      </div>
+      <ng-container *ngIf="!(authenticated$ | async)">
+        <div class="barra-superior">
+          <div class="sub-barra">
+            <a id="login" [routerLink]="['/auth/login']">FAÇA SEU LOGIN E APROVEITE</a>
+            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
+            <img id="btn-home2" [routerLink]="['/']" src="assets/home.png">
+            <img id="btn-sair" [routerLink]="['/auth/login']" src="assets/btn-login.png">
+          </div>
+        </div>
+      </ng-container>
 
       <ng-container *ngIf="(authenticated$ | async) && (user$ | async)">
         <div class="barra-superior">
@@ -20,13 +27,14 @@
       </ng-container>
       <form class="d-flex col-12">
         <div class="input-group flex-nowrap">
-          <input type="text" class="form-control" [(ngModel)]="valor" placeholder="Qual a Bebida de Hoje?" id="valor" name="valor" [(ngModel)]="valor">
+          <input type="text" class="form-control" [(ngModel)]="valor" placeholder="Qual a Bebida de Hoje?" id="valor"
+            name="valor" [(ngModel)]="valor">
           <button type="submit" [routerLink]="['/pesquisa', valor ]" class="btn btn-success">Buscar</button>
         </div>
       </form>
     </div>
   </nav>
 
-    <router-outlet></router-outlet>
-  
+  <router-outlet></router-outlet>
+
 </body>

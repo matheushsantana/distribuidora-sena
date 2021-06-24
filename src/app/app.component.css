@@ -33,6 +33,12 @@
     right: 80px;
 }
 
+#btn-home2{
+    width: 28px;
+    position: absolute;
+    right: 40px;
+}
+
 #btn-carrinho{
     width: 27px;
     position: absolute;
@@ -47,4 +53,9 @@
 #endereco{
     color: rgb(228, 228, 0);
     font-size: 14px;
+}
+
+#login{
+    color: rgb(204, 204, 3);
+    font-weight: 500;
 }

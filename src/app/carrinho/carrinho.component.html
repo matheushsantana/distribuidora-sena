@@ -10,17 +10,17 @@
                 </div>
                 <div class="col-8">
                     <div class="card-body">
-                        <img id="lixeira" src="assets/lixeira.png">
+                        <img id="lixeira" (click)="apagarProduto(produto.key)" src="assets/lixeira.png">
                         <p class="card-title">{{ produto.nome }}</p>
                         <p class="card-text">R${{ produto.valor }}</p>
                     </div>
                     <div class="input-group mb-3" id="add">
                         <button class="btn btn" type="button" id="button-addon1"
-                            (click)="quantidadeAltera(0)"><strong>-</strong></button>
+                            (click)="quantidadeAltera(0, produto.key)"><strong>-</strong></button>
                         <input type="text" class="form-control" aria-label="Example text with button addon" id="quantidade"
-                            aria-describedby="button-addon1" disabled [(ngModel)]="quantidade">
+                            aria-describedby="button-addon1" disabled [(ngModel)]="produto.quantidade">
                         <button class="btn btn" type="button" id="button-addon2"
-                            (click)="quantidadeAltera(1)"><strong>+</strong></button>
+                            (click)="quantidadeAltera(1, produto.key)"><strong>+</strong></button>
                     </div>
                 </div>
             </div>
@@ -42,9 +42,9 @@
 <div class="divisao"></div>
 <div class="container">
     <div class="conta">
-        <div id="prodValor"><p>Produtos</p> <p id="valor">R$30,97</p></div>
-        <div id="prodValor"><p>Frente</p> <p id="valor">R$4,99</p></div>
-        <div id="prodValor"><p>Total a Pagar</p> <p id="valor">R$35,96</p></div>
+        <div id="prodValor"><p>{{ quantidadeProd }} Produtos</p> <p id="valor">R${{ total | number : "1.2" }}</p></div>
+        <div id="prodValor"><p>Entrega</p> <p id="valor">R${{ frete | number : "1.2" }}</p></div>
+        <div id="prodValor"><p>Total a Pagar</p> <p id="valor">R${{ totalFinal | number : "1.2" }}</p></div>
         <button class="btn" id="btn-adicionar" >Fazer Pedido</button>
     </div>
 </div>
