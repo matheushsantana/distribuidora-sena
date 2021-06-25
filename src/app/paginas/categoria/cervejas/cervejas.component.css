@@ -1,44 +1,30 @@
-#carouselExampleIndicators{
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
 #divisao{
     width: 100%;
     height: 7px;
     background-color: rgba(68, 68, 68, 0.164);
 }
 
-#opcoes{
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-#divisao-btn1{
-    padding-right: 3px;
-
-}
-#divisao-btn2{
-    padding-left: 3px;
-
-}
-
-#btn-op1{
+#divisao1{
     width: 100%;
-    color: black;
-    text-align: start;
-    font-size: 18px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    border-color: rgba(0, 0, 0, 0.226);
+    height: 2px;
+    background-color: rgba(68, 68, 68, 0.164);
 }
 
-#btn-op2{
-    width: 100%;
-    color: black;
-    text-align: start;
-    font-size: 18px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    border-color: rgba(0, 0, 0, 0.226);
+#btn-voltar{
+    width: 30px;
+    filter: contrast(1%);
+    margin-right: 5px;
+}
+
+.voltar{
+    padding: 7px;
+}
+
+.voltar a{
+    font-weight: bold;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
 }
 
 #titu{

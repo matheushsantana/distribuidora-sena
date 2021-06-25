@@ -25,7 +25,7 @@ export class AppComponent {
   ngOnInit() {
     setTimeout(()=>{
      this.pegaId()
-    }, 2000);
+    }, 2500);
   }
 
   logout(){

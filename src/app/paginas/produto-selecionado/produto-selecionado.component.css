@@ -4,6 +4,23 @@
     
 }
 
+#btn-voltar{
+    width: 30px;
+    filter: contrast(1%);
+    margin-right: 5px;
+}
+
+.voltar{
+    padding: 7px;
+}
+
+.voltar a{
+    font-weight: bold;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+}
+
 #button-addon1{
     color: darkorange;
     font-size: 24px;

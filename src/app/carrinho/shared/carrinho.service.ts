@@ -16,15 +16,15 @@ export class CarrinhoService {
   ngOnInit() {
   }
 
-  atualizaCarrinho(id: number, carrinho: Carrinho){
-    this.db.list('cliente/' + this.idCliente + '/carrinho/produtos').update(id.toString() , carrinho)
+  atualizaCarrinho(id: number, carrinho: Carrinho) {
+    this.db.list('cliente/' + this.idCliente + '/carrinho/produtos').update(id.toString(), carrinho)
       .catch((error: any) => {
         console.error(error);
       });
   }
 
   adicionaProduto(contador: Contador, carrinho: Carrinho) {
-    this.db.list('cliente/' + this.idCliente + '/carrinho/produtos').update(contador.valor.toString() , carrinho)
+    this.db.list('cliente/' + this.idCliente + '/carrinho/produtos').update(contador.valor.toString(), carrinho)
       .catch((error: any) => {
         console.error(error);
       });
@@ -32,7 +32,7 @@ export class CarrinhoService {
     alert("Produto Adicionado");
   }
 
-  atualziaContador(contador:  Contador){
+  atualziaContador(contador: Contador) {
     contador.valor = contador.valor + 1;
     this.db.list('cliente/' + this.idCliente + '/carrinho').update('contador', contador)
       .catch((error: any) => {
@@ -40,9 +40,17 @@ export class CarrinhoService {
       });
   }
 
+
+  atualziaContador2(contador: Contador) {
+    this.db.list('cliente/' + this.idCliente + '/carrinho').update('contador', contador)
+      .catch((error: any) => {
+        console.error(error);
+      });
+  }
+
+
   recebeId(id) {
     this.idCliente = id;
-    console.log(this.idCliente)
   }
 
   getAllProdCarrinho() {
@@ -55,8 +63,15 @@ export class CarrinhoService {
       );
   }
 
-  deleteProdCarrinho(key: string) {
-    this.db.object('cliente/' + this.idCliente + '/carrinho/produtos' + `${key}`).remove();
+  deleteProdCarrinho(key: string, aux: number) {
+    this.db.object('cliente/' + this.idCliente + '/carrinho/produtos/' + `${key}`).remove();
+
+    if (aux == 1) {
+      var cont: Contador;
+      cont  = new Contador();
+      cont.valor = 0;
+      this.atualziaContador2(cont)
+    }
   }
 
 }

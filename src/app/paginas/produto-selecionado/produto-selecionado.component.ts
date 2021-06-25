@@ -58,6 +58,10 @@ export class ProdutoSelecionadoComponent implements OnInit {
     console.log('saiu')
   }
 
+  voltaPagina(){
+    window.history.back()
+  }
+
   quantidadeAltera(valor: number){
     if(valor >= 1){
       this.quantidade = this.quantidade + valor;
@@ -77,7 +81,6 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   adicionar(quantidade: number, total: number){
     this.contador.valor = this.recebeContador.valor;
-    console.log('valor contador', this.contador.valor)
 
     this.carrinho.nome = this.produto.nome;
     this.carrinho.valor = this.produto.valor;

@@ -21,11 +21,14 @@ export class ResultadoPesquisaComponent implements OnInit {
   ngOnInit(): void {
     this.produtos = this.produtoService.getAllProduto();
     this.route.params.subscribe(params => this.term = params['produto']);
-    console.log(this.term)
   }
 
   selecionaProduto(produto: Produto, key: string) {
     this.produtoDataService.changeProduto(produto, key);
+  }
+  
+  voltaPagina(){
+    window.history.back()
   }
 
 }

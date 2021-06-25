@@ -10,6 +10,7 @@ const appRoutes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: '', component: HomePageComponent},
   { path: 'produtos', loadChildren: () => import('./produtos/produtos.module').then(m => m.ProdutosModule) },
+  { path: 'categoria', loadChildren: () => import('./paginas/categoria/categoria.module').then(m => m.CategoriaModule) },
   { path: 'pesquisa/:produto', component: ResultadoPesquisaComponent },
   { path: 'produto-selecionado', component: ProdutoSelecionadoComponent },
   { path: 'carrinho/:id', component: CarrinhoComponent },

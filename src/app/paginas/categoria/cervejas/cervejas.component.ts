@@ -5,11 +5,11 @@ import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service
 import { ProdutoService } from 'src/app/produtos/shared/produto.service';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  selector: 'app-cervejas',
+  templateUrl: './cervejas.component.html',
+  styleUrls: ['./cervejas.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class CervejasComponent implements OnInit {
 
   produtos: Observable<Produto[]>;
 
@@ -19,11 +19,12 @@ export class HomePageComponent implements OnInit {
     this.produtos = this.produtoService.getAllProduto();
   }
 
-  buscaEspecifica(chave: string){
-  }
-
   selecionaProduto(produto: Produto, key: string) {
     this.produtoDataService.changeProduto(produto, key);
+  }
+
+  voltaPagina(){
+    window.history.back()
   }
 
 }

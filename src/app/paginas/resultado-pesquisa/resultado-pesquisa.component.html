@@ -1,3 +1,7 @@
+<div class="voltar">
+    <a (click)="voltaPagina()"><img id="btn-voltar" src="assets/btn-voltar.png">Voltar</a>
+ </div>
+ <div id="divisao1"></div>
 <div class="container">
     <div class="card mb-3" style="max-width: 540px;" *ngFor="let produto of produtos | async | filter:term"
      (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']">
