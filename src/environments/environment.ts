@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyCt7xe3_qLjvagb6ahAdinDgW1QyHQPyDA",
-    authDomain: "sena-distribuidora.firebaseapp.com",
-    projectId: "sena-distribuidora",
-    storageBucket: "sena-distribuidora.appspot.com",
-    messagingSenderId: "540481408396",
-    appId: "1:540481408396:web:51a0dc3c5b7d0127805aa9"
+    apiKey: "AIzaSyAPzJUkWa3xc7cgGN840g00qlBLYTpJLjY",
+    authDomain: "projeto-distribuidora.firebaseapp.com",
+    databaseURL: "https://projeto-distribuidora-default-rtdb.firebaseio.com",
+    projectId: "projeto-distribuidora",
+    storageBucket: "projeto-distribuidora.appspot.com",
+    messagingSenderId: "694750816507",
+    appId: "1:694750816507:web:96d7cf5efeda572eb7685e"
   }
 };
 

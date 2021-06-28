@@ -24,7 +24,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
   recebeContador: Contador;
   carrinho: Carrinho;
 
-  urlContador = 'https://sena-distribuidora-default-rtdb.firebaseio.com/cliente/';
+  urlContador = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
   constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService, private http: HttpClient) { }
 
@@ -62,11 +62,16 @@ export class ProdutoSelecionadoComponent implements OnInit {
     window.history.back()
   }
 
-  quantidadeAltera(valor: number){
+  quantidadeAltera(valor: number, aux: number){
     if(valor >= 1){
-      this.quantidade = this.quantidade + valor;
-      this.total = this.quantidade * this.produto.valor;
-    }else if(valor === 0){
+      if(this.quantidade == 1 && aux == 1 ){
+        this.quantidade = this.quantidade + (valor - 1);
+        this.total = this.quantidade * this.produto.valor;
+      }else {
+        this.quantidade = this.quantidade + valor;
+        this.total = this.quantidade * this.produto.valor;
+      }
+      }else if(valor === 0){
       if(this.quantidade >= 2){
         this.quantidade--;
         this.total = this.total - this.produto.valor;
@@ -86,7 +91,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
     this.carrinho.valor = this.produto.valor;
     this.carrinho.quantidade = quantidade;
     this.carrinho.total = total;
-    this.carrinho.linkImg = 'null';
+    this.carrinho.linkImg = this.produto.linkImg;
     
     this.carrinhoService.adicionaProduto(this.contador ,this.carrinho);
   }

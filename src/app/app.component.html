@@ -1,5 +1,4 @@
 <body>
-
   <nav class="navbar sticky-top justify-content-center" id="navbar">
     <div class="container-fluid">
       <ng-container *ngIf="!(authenticated$ | async)">
@@ -18,11 +17,10 @@
           <div class="sub-barra">
             <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
             <img id="btn-home" [routerLink]="['/']" src="assets/home.png">
-            <img id="btn-carrinho" [routerLink]="['/carrinho' , (user$|async)?.id]" src="assets/carrinho.png">
+            <img id="btn-carrinho" (click)="verifica()" src="assets/carrinho.png">
             <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
           </div>
           <a id="receber">Receber agora em</a>
-          <p id="idCliente" style="display: none;">{{(user$|async)?.id}}</p>
         </div>
       </ng-container>
       <form class="d-flex col-12">

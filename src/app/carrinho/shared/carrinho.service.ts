@@ -3,28 +3,27 @@ import { AngularFireDatabase } from '@angular/fire/database';
 import { Carrinho } from './carrinho';
 import { map } from 'rxjs/operators';
 import { Contador } from './contador';
+import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrinhoService {
 
-  idCliente: string;
-
-  constructor(private db: AngularFireDatabase) { };
+  constructor(private db: AngularFireDatabase, private clienteLogado: ClienteLogado) { };
 
   ngOnInit() {
   }
 
   atualizaCarrinho(id: number, carrinho: Carrinho) {
-    this.db.list('cliente/' + this.idCliente + '/carrinho/produtos').update(id.toString(), carrinho)
+    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos').update(id.toString(), carrinho)
       .catch((error: any) => {
         console.error(error);
       });
   }
 
   adicionaProduto(contador: Contador, carrinho: Carrinho) {
-    this.db.list('cliente/' + this.idCliente + '/carrinho/produtos').update(contador.valor.toString(), carrinho)
+    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos').update(contador.valor.toString(), carrinho)
       .catch((error: any) => {
         console.error(error);
       });
@@ -34,7 +33,7 @@ export class CarrinhoService {
 
   atualziaContador(contador: Contador) {
     contador.valor = contador.valor + 1;
-    this.db.list('cliente/' + this.idCliente + '/carrinho').update('contador', contador)
+    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho').update('contador', contador)
       .catch((error: any) => {
         console.error(error);
       });
@@ -42,19 +41,15 @@ export class CarrinhoService {
 
 
   atualziaContador2(contador: Contador) {
-    this.db.list('cliente/' + this.idCliente + '/carrinho').update('contador', contador)
+    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho').update('contador', contador)
       .catch((error: any) => {
         console.error(error);
       });
   }
 
 
-  recebeId(id) {
-    this.idCliente = id;
-  }
-
   getAllProdCarrinho() {
-    return this.db.list('cliente/' + this.idCliente + '/carrinho/produtos')
+    return this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos')
       .snapshotChanges()
       .pipe(
         map(changes => {
@@ -64,7 +59,7 @@ export class CarrinhoService {
   }
 
   deleteProdCarrinho(key: string, aux: number) {
-    this.db.object('cliente/' + this.idCliente + '/carrinho/produtos/' + `${key}`).remove();
+    this.db.object('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos/' + `${key}`).remove();
 
     if (aux == 1) {
       var cont: Contador;

@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ClienteLogado } from '../cliente/clienteLogado.service';
+import { Pedido } from '../pedido/shared/pedido';
+import { PedidoService } from '../pedido/shared/pedido.service';
 import { Carrinho } from './shared/carrinho';
 import { CarrinhoService } from './shared/carrinho.service';
 import { Contador } from './shared/contador';
@@ -24,10 +27,11 @@ export class CarrinhoComponent implements OnInit {
   recebeContador: Contador;
   contador: Contador;
   quantidadeProd: number;
+  pedido: Pedido;
 
-  url = 'https://sena-distribuidora-default-rtdb.firebaseio.com/cliente/';
+  url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
-  constructor(private carrinhoService: CarrinhoService, private http: HttpClient) {
+  constructor(private carrinhoService: CarrinhoService, private http: HttpClient, private pedidoService: PedidoService, private clienteLogado: ClienteLogado) {
   }
 
   ngOnInit(): void {
@@ -43,7 +47,6 @@ export class CarrinhoComponent implements OnInit {
   }
 
   quantidadeAltera(valor: number, key: number) {
-    console.log('key', key)
     if (valor >= 1) {
       this.produtos[key].quantidade = Number(this.produtos[key].quantidade) + 1;
       this.produtos[key].total = Number(this.produtos[key].total) + Number(this.produtos[key].valor);
@@ -78,13 +81,12 @@ export class CarrinhoComponent implements OnInit {
   }
 
   listarCarrinho() {
-    return this.http.get<Carrinho[]>(`${this.url + this.carrinhoService.idCliente + '/carrinho/produtos.json'}`);
+    return this.http.get<Carrinho[]>(`${this.url + this.clienteLogado.cliente.id + '/carrinho/produtos.json'}`);
   }
 
   conta() {
     this.listarCarrinho().subscribe(dados => {
       this.produtos = dados;
-      console.log('dados', dados)
       this.totalPedido()
     }, err => {
       console.log('Erro ao listar os sistemas', err);
@@ -101,24 +103,18 @@ export class CarrinhoComponent implements OnInit {
     this.quantidadeProd = 0;
     this.totalFinal = this.frete;
     var qtdAux = (Object.keys(this.produtos).length)
-    console.log('quantos?', qtdAux)
     while(a < qtdAux){
-      console.log('while 1 entrou')
       if(this.produtos[j] != null) {
         this.qtd++
         a++
         j++
-        console.log('a:', a)
       }else{
         a++
         j++
       }
     }
-    console.log('while 1 saiu')
-    console.log('qtd', this.qtd)
 
     while (aux < this.qtd) {
-      console.log('while 2 entrou')
       if (this.produtos[i] != null) {
         this.total = Number(this.total) + Number(this.produtos[i].total);
         this.quantidadeProd = this.quantidadeProd + this.produtos[i].quantidade;
@@ -130,7 +126,6 @@ export class CarrinhoComponent implements OnInit {
       }
       
     }
-    console.log('while 2 saiu')
   }
 
   apagarProduto(key: string) {
@@ -145,5 +140,35 @@ export class CarrinhoComponent implements OnInit {
         this.conta()
       }, 1000);
     }
+  }
+
+  pegarDados() {
+    return this.http.get<Pedido>(`${this.url + this.clienteLogado.cliente.id + '/pedido.json'}`);
+  }
+
+  fazerPedido(){
+
+    this.pegarDados().subscribe(dados => {
+      this.pedido = new Pedido();
+      this.pedido = dados;
+      console.log('pedido existente: ' ,this.pedido)
+      
+      if(this.pedido == null){
+        this.pedido = new Pedido();
+        this.pedido.clienteId = this.clienteLogado.cliente.id;
+        this.pedido.clienteNome = this.clienteLogado.cliente.nome;
+        this.pedido.clienteNumero = '';
+        this.pedido.data = '';
+        this.pedido.metodoPag = 'Dinheiro';
+        this.pedido.clienteEndereco = '';
+        this.pedido.estado = 'Pedido esta em preparo...'
+        this.pedido.produtos = this.produtos;
+        this.pedido.valor = this.total;
+  
+        this.pedidoService.insertPedido(this.pedido)
+      } else {
+        alert('Espere a entrega do pedido feito para realizar outro!')
+      }
+    })   
   }
 }

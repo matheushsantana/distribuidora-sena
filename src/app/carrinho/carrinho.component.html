@@ -13,13 +13,13 @@
             </div>
             <a id="carregando">Carregando...</a>
         </div>
-        <div class="card mb-3" style="max-width: 540px;" *ngFor="let produto of carrinho | async">
+        <div class="card mb-3" style="height: 100px;" *ngFor="let produto of carrinho | async">
             <div class="row g-0">
                 <div class="col-4">
                     <img src="{{ produto.linkImg }}" width="100px">
                 </div>
                 <div class="col-8">
-                    <div class="card-body">
+                    <div class="card-body" style="padding-top: 2%; padding-bottom: 2%;">
                         <img id="lixeira" (click)="apagarProduto(produto.key)" src="assets/lixeira.png">
                         <p class="card-title">{{ produto.nome }}</p>
                         <p class="card-text">R${{ produto.valor }}</p>
@@ -67,6 +67,6 @@
             <p>Total a Pagar</p>
             <p id="valor">R${{ totalFinal | number : "1.2" }}</p>
         </div>
-        <button class="btn" id="btn-adicionar">Fazer Pedido</button>
+        <button class="btn" id="btn-adicionar" (click)="fazerPedido()">Fazer Pedido</button>
     </div>
 </div>

@@ -12,6 +12,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PedidoComponent } from './pedido/pedido.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomePageComponent,
     ResultadoPesquisaComponent,
     ProdutoSelecionadoComponent,
-    CarrinhoComponent
+    CarrinhoComponent,
+    PedidoComponent
   ],
   imports: [
     BrowserModule,

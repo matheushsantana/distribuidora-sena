@@ -3,11 +3,13 @@
     font-weight: 600;
     color: rgb(104, 104, 104);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 0%;
 }
 
 .card-text{
     font-weight: bold;
     font-size: 14px;
+    padding-top: 0%;
 }
 
 .divisao{
@@ -26,7 +28,6 @@
     border-radius: 6px;
     width: 130px;
     margin-left: 18px;
-    
 }
 
 #button-addon1{
