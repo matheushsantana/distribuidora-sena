@@ -21,7 +21,6 @@ export class CadastroProdutosComponent implements OnInit {
 
   ngOnInit() {
     this.produto = new Produto();
-    this.produto.linkImg = 'null';
   }
 
   onSubmit() {

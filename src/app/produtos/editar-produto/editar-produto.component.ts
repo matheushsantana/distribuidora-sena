@@ -25,7 +25,8 @@ export class EditarProdutoComponent implements OnInit {
         this.produto.nome = data.produto.nome;
         this.produto.valor = data.produto.valor;
         this.produto.categoria = data.produto.categoria;
-        this.produto.linkImg = data.produto.linkImg;
+        this.produto.imgGrande = data.produto.imgGrande;
+        this.produto.imgPequena = data.produto.imgPequena;
         this.key = data.key;
       }
     })

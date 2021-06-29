@@ -6,6 +6,7 @@ import { Produto } from 'src/app/produtos/shared/produto';
 import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service';
 import { Contador } from 'src/app/carrinho/shared/contador';
 import { Observable } from 'rxjs';
+import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -26,7 +27,8 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   urlContador = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
-  constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService, private http: HttpClient) { }
+  constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService, private http: HttpClient,
+    private clienteLogado: ClienteLogado) { }
 
   ngOnInit(): void {
     this.produto = new Produto();
@@ -36,7 +38,8 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.produto.nome = data.produto.nome;
         this.produto.valor = data.produto.valor;
         this.produto.categoria = data.produto.categoria;
-        this.produto.linkImg = data.produto.linkImg;
+        this.produto.imgGrande = data.produto.imgGrande;
+        this.produto.imgPequena = data.produto.imgPequena;
         this.key = data.key;      }
     })
 
@@ -80,7 +83,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
   }
 
   pegaContador(){
-    return this.http.get<any>(`${this.urlContador + this.carrinhoService.idCliente + '/carrinho/contador.json'}`);
+    return this.http.get<any>(`${this.urlContador + this.clienteLogado.cliente.id + '/carrinho/contador.json'}`);
   }
 
 
@@ -91,7 +94,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
     this.carrinho.valor = this.produto.valor;
     this.carrinho.quantidade = quantidade;
     this.carrinho.total = total;
-    this.carrinho.linkImg = this.produto.linkImg;
+    this.carrinho.linkImg = this.produto.imgPequena;
     
     this.carrinhoService.adicionaProduto(this.contador ,this.carrinho);
   }
