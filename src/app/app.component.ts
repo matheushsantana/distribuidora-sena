@@ -7,6 +7,7 @@ import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
 import { CarrinhoService } from './carrinho/shared/carrinho.service';
 import { ClienteLogado } from './cliente/clienteLogado.service';
+import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
 import { Pedido } from './pedido/shared/pedido';
 import { PedidoService } from './pedido/shared/pedido.service';
@@ -23,12 +24,13 @@ export class AppComponent {
   idCliente: string;
   valor: string;
   cliente: Cliente;
-  verificaPedido: boolean; 
+  verificaPedido: boolean;
+  test: Observable<any>;
 
   url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
   constructor(private authService: AuthService, private afs: AngularFirestore, private router: Router, private carrinhoService: CarrinhoService,
-    private clienteLogado: ClienteLogado, private http: HttpClient, private pedidoService: PedidoService){
+    private clienteLogado: ClienteLogado, private http: HttpClient, private pedidoService: PedidoService, private clienteVerificaCadastro: ClienteVerificaCadastro){
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
   }
@@ -38,6 +40,7 @@ export class AppComponent {
       this.cliente.id = dados.id;
       this.cliente.nome = dados.firsname;
       this.clienteLogado.recebeDados(this.cliente);
+      this.clienteVerificaCadastro.verifica()
     })
   }
 
@@ -62,5 +65,8 @@ export class AppComponent {
       }
     })
   }
-  
+
+  mudaCor(){
+    console.log('funcionou')
+  }
 }

@@ -1,0 +1,22 @@
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" id="clientes" (click)="mudaComponent(0)">Clientes</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="produtos" (click)="mudaComponent(1)">Produtos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="pedidos" (click)="mudaComponent(2)">Pedidos</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="concluidos" (click)="mudaComponent(3)">Concluidos</a>
+    </li>
+</ul>
+
+<div class="container">
+        <h5 id="nomeSelect">{{ selecionado }}</h5>
+        <app-menu-clientes *ngIf="component[0] != false"></app-menu-clientes>
+        <app-menu-produtos *ngIf="component[1] != false"></app-menu-produtos>
+        <app-menu-pedidos *ngIf="component[2] != false"></app-menu-pedidos>
+        <app-menu-concluidos *ngIf="component[3] != false"></app-menu-concluidos>
+</div>

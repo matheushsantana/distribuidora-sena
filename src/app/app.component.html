@@ -1,5 +1,5 @@
 <body>
-  <nav class="navbar sticky-top justify-content-center" id="navbar">
+  <nav class="navbar justify-content-center" id="navbar">
     <div class="container-fluid">
       <ng-container *ngIf="!(authenticated$ | async)">
         <div class="barra-superior">
@@ -23,14 +23,16 @@
           <a id="receber">Receber agora em</a>
         </div>
       </ng-container>
-      <form class="d-flex col-12">
-        <div class="input-group flex-nowrap">
-          <input type="text" class="form-control" [(ngModel)]="valor" placeholder="Qual a Bebida de Hoje?" id="valor"
-            name="valor" [(ngModel)]="valor">
-          <button type="submit" [routerLink]="['/pesquisa', valor ]" class="btn btn-success">Buscar</button>
-        </div>
-      </form>
     </div>
+  </nav>
+  <nav class="navbar sticky-top" id="nav2">
+    <form class="d-flex col-12">
+      <div class="input-group flex-nowrap">
+        <input type="text" class="form-control" [(ngModel)]="valor" placeholder="Qual a Bebida de Hoje?" id="valor"
+          name="valor" [(ngModel)]="valor">
+        <button type="submit" [routerLink]="['/pesquisa', valor ]" class="btn btn-success">Buscar</button>
+      </div>
+    </form>
   </nav>
 
   <router-outlet></router-outlet>

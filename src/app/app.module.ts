@@ -13,6 +13,8 @@ import { environment } from 'src/environments/environment';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PedidoComponent } from './pedido/pedido.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { ClienteComponent } from './cliente/cliente.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { PedidoComponent } from './pedido/pedido.component';
     ResultadoPesquisaComponent,
     ProdutoSelecionadoComponent,
     CarrinhoComponent,
-    PedidoComponent
+    PedidoComponent,
+    ClienteComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { PedidoComponent } from './pedido/pedido.component';
     AppRoutingModule,
     FormsModule,
     Ng2SearchPipeModule,
-    HttpClientModule
+    HttpClientModule,
+    LazyLoadImageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

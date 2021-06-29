@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
 import { ClienteLogado } from '../cliente/clienteLogado.service';
 import { Pedido } from '../pedido/shared/pedido';
 import { PedidoService } from '../pedido/shared/pedido.service';
@@ -29,9 +30,12 @@ export class CarrinhoComponent implements OnInit {
   quantidadeProd: number;
   pedido: Pedido;
 
+  imgPadrao = 'assets/pre-carregamento-prod.gif'
+
   url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
-  constructor(private carrinhoService: CarrinhoService, private http: HttpClient, private pedidoService: PedidoService, private clienteLogado: ClienteLogado) {
+  constructor(private carrinhoService: CarrinhoService, private http: HttpClient, private pedidoService: PedidoService, 
+    private clienteLogado: ClienteLogado, private location: Location) {
   }
 
   ngOnInit(): void {
@@ -43,7 +47,7 @@ export class CarrinhoComponent implements OnInit {
   }
 
   voltaPagina(){
-    window.history.back()
+    this.location.back();
   }
 
   quantidadeAltera(valor: number, key: number) {

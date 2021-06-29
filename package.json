@@ -24,6 +24,8 @@
     "@firebase/storage": "^0.5.2",
     "file-drop-element": "^1.0.1",
     "firebase": "^8.6.3",
+    "ng-lazyload-image": "^9.1.0",
+    "ng-scroll": "^1.0.4",
     "ng2-search-filter": "^0.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

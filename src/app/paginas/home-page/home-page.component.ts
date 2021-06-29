@@ -7,11 +7,13 @@ import { ProdutoService } from 'src/app/produtos/shared/produto.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
 })
+
 export class HomePageComponent implements OnInit {
 
   produtos: Observable<Produto[]>;
+  imgPadrao = 'assets/pre-carregamento-prod.gif'
 
   constructor(private produtoService: ProdutoService, private produtoDataService: ProdutoDataService) { }
 

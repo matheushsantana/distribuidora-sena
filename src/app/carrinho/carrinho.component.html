@@ -16,7 +16,7 @@
         <div class="card mb-3" style="height: 100px;" *ngFor="let produto of carrinho | async">
             <div class="row g-0">
                 <div class="col-4">
-                    <img src="{{ produto.imgPequena }}" width="100px">
+                    <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.linkImg" width="100px">
                 </div>
                 <div class="col-8">
                     <div class="card-body" style="padding-top: 2%; padding-bottom: 2%;">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <p id="adicionar">Adicionar mais produtos</p>
+        <p id="adicionar" [routerLink]="[ '/' ]">Adicionar mais produtos</p>
     </div>
 </div>
 <div class="divisao"></div>

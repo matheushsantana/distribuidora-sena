@@ -1,0 +1,19 @@
+.nav{
+    background-color: #211F20;
+}
+
+.nav-item a{
+    color: white;
+    font-weight: 500;
+    padding: 10px;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    margin-top: 10px;
+    padding-bottom: 5px;
+}
+
+#nomeSelect{
+    text-align: center;
+    padding-top: 10px;
+    border-bottom: 1px solid black;
+}

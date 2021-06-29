@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
 import { Produto } from 'src/app/produtos/shared/produto';
 import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service';
@@ -15,8 +16,10 @@ export class ResultadoPesquisaComponent implements OnInit {
 
   produtos: Observable<Produto[]>;
   term: string;
+  imgPadrao = 'assets/pre-carregamento-prod.gif'
 
-  constructor(private produtoService: ProdutoService, private produtoDataService: ProdutoDataService, private route: ActivatedRoute) { }
+  constructor(private produtoService: ProdutoService, private produtoDataService: ProdutoDataService, private route: ActivatedRoute,
+     private location: Location) { }
 
   ngOnInit(): void {
     this.produtos = this.produtoService.getAllProduto();
@@ -28,7 +31,7 @@ export class ResultadoPesquisaComponent implements OnInit {
   }
   
   voltaPagina(){
-    window.history.back()
+    this.location.back();
   }
 
 }

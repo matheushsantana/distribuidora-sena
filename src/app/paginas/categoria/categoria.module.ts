@@ -15,6 +15,7 @@ import { SemAlcoolComponent } from './sem-alcool/sem-alcool.component';
 import { TabacariaComponent } from './tabacaria/tabacaria.component';
 import { CategoriaRoutingModule } from "./categoria.routing.module";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
+import { LazyLoadImageModule } from "ng-lazyload-image";
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
         AngularFireStorageModule,
         CategoriaRoutingModule,
         Ng2SearchPipeModule,
+        LazyLoadImageModule
     ],
     exports: [],
     declarations: [ 
