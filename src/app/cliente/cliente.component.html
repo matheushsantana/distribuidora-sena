@@ -1,1 +1,33 @@
-<p>cliente works!</p>
+<div class="container">
+    <h5 id="titu">COMPLETE SEUS DADOS</h5>
+    <form class="row g-3" #f="ngForm" (ngSubmit)="onSubmit()">
+        <div class="col-md-6">
+            <label for="inputNome" class="form-label">Nome</label>
+            <input type="inputNome" class="form-control" name="nome"
+            [(ngModel)]="cliente.nome">
+        </div>
+        <div class="col-12">
+            <label for="inputTelefone" class="form-label">Telefone</label>
+            <input type="text" class="form-control" placeholder="Ex. (65)96585-5524"
+            name="inputTelefone" [(ngModel)]="cliente.telefone">
+        </div>
+        <div class="col-12">
+            <label for="inputEndereco" class="form-label">Endereço</label>
+            <input type="text" class="form-control" placeholder="Ex. Rua marechal, quadra 3"
+            name="inputEndereco" [(ngModel)]="cliente.enderecoRua">
+        </div>
+        <div class="col-12">
+            <label for="inputNumero" class="form-label">Número</label>
+            <input type="number" class="form-control" placeholder="Ex. 341"
+            name="inputNumero" [(ngModel)]="cliente.enderecoNumero">
+        </div>
+        <div class="col-md-6">
+            <label for="inputBairro" class="form-label">Bairro</label>
+            <input type="text" class="form-control" 
+            name="inputBairro" [(ngModel)]="cliente.enderecoBairro">
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+        </div>
+    </form>
+</div>

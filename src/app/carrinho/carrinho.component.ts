@@ -8,6 +8,8 @@ import { PedidoService } from '../pedido/shared/pedido.service';
 import { Carrinho } from './shared/carrinho';
 import { CarrinhoService } from './shared/carrinho.service';
 import { Contador } from './shared/contador';
+import { ClienteVerificaCadastro } from '../cliente/clienteVefificaCadastro.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrinho',
@@ -29,13 +31,15 @@ export class CarrinhoComponent implements OnInit {
   contador: Contador;
   quantidadeProd: number;
   pedido: Pedido;
+  metodoPagamento: string = 'Selecione a forma de pagamento';
 
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
   url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
-  constructor(private carrinhoService: CarrinhoService, private http: HttpClient, private pedidoService: PedidoService, 
-    private clienteLogado: ClienteLogado, private location: Location) {
+  constructor(private carrinhoService: CarrinhoService, private http: HttpClient, private pedidoService: PedidoService,
+    private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -46,7 +50,7 @@ export class CarrinhoComponent implements OnInit {
     }, 2500);
   }
 
-  voltaPagina(){
+  voltaPagina() {
     this.location.back();
   }
 
@@ -107,12 +111,12 @@ export class CarrinhoComponent implements OnInit {
     this.quantidadeProd = 0;
     this.totalFinal = this.frete;
     var qtdAux = (Object.keys(this.produtos).length)
-    while(a < qtdAux){
-      if(this.produtos[j] != null) {
+    while (a < qtdAux) {
+      if (this.produtos[j] != null) {
         this.qtd++
         a++
         j++
-      }else{
+      } else {
         a++
         j++
       }
@@ -128,7 +132,7 @@ export class CarrinhoComponent implements OnInit {
       } else {
         i++
       }
-      
+
     }
   }
 
@@ -150,29 +154,40 @@ export class CarrinhoComponent implements OnInit {
     return this.http.get<Pedido>(`${this.url + this.clienteLogado.cliente.id + '/pedido.json'}`);
   }
 
-  fazerPedido(){
+  fazerPedido() {
 
     this.pegarDados().subscribe(dados => {
       this.pedido = new Pedido();
       this.pedido = dados;
-      console.log('pedido existente: ' ,this.pedido)
-      
-      if(this.pedido == null){
-        this.pedido = new Pedido();
-        this.pedido.clienteId = this.clienteLogado.cliente.id;
-        this.pedido.clienteNome = this.clienteLogado.cliente.nome;
-        this.pedido.clienteNumero = '';
-        this.pedido.data = '';
-        this.pedido.metodoPag = 'Dinheiro';
-        this.pedido.clienteEndereco = '';
-        this.pedido.estado = 'Pedido esta em preparo...'
-        this.pedido.produtos = this.produtos;
-        this.pedido.valor = this.total;
-  
-        this.pedidoService.insertPedido(this.pedido)
+      console.log('pedido existente: ', this.pedido)
+
+      if (this.clienteVerificaCadastro.aux != null) {
+        if (this.pedido == null) {
+          if(this.metodoPagamento != 'Selecione a forma de pagamento'){
+            this.pedido = new Pedido();
+            this.pedido.clienteId = this.clienteLogado.cliente.id;
+            this.pedido.clienteNome = this.clienteLogado.cliente.nome;
+            this.pedido.clienteNumero = this.clienteVerificaCadastro.dadosCliente.telefone;
+            this.pedido.data = '';
+            this.pedido.metodoPag = 'Dinheiro';
+            this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
+            this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
+            this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
+            this.pedido.estado = 'Pedido esta em preparo...'
+            this.pedido.produtos = this.produtos;
+            this.pedido.valor = this.total;
+
+            this.pedidoService.insertPedido(this.pedido)
+          } else {
+            alert('Escolha a forma de Pagamento!')
+          } 
+        }else{
+          alert('Espere a entrega do pedido feito para realizar outro!')
+          }
       } else {
-        alert('Espere a entrega do pedido feito para realizar outro!')
+        alert('Complete seu cadastro para Continuar')
+        this.router.navigate(['/cadastro/cliente'])
       }
-    })   
+    })
   }
 }

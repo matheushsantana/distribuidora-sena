@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
 
   private loginOkNotification(u: User){
     alert('Logado com Sucesso. Bem Vindo ' + u.firsname + '!' )
+    window.location.href = '/'
   }
 
   private loginErrorNotification(err){
@@ -39,7 +40,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (u) => {
           this.loginOkNotification(u);
-          window.location.href = '/'
           this.loading = false;
         },
         (err) => {
@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (u)=> {
           this.loginOkNotification(u);
-          window.location.href = '/'
           this.loading = false;
         },
         (err) => {

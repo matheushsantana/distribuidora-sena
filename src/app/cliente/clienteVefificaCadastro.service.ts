@@ -12,15 +12,16 @@ export class ClienteVerificaCadastro {
 
     url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/'
     aux: Cliente[];
+    dadosCliente: any;
 
     constructor(private clienteLogado: ClienteLogado, private clienteService: ClienteService, private router: Router,
         private http: HttpClient) { }
 
     verifica(){
-        console.log('entrou verifica')
         this.buscaCliente().subscribe(dados => {
-            console.log('dados', dados)
+            this.dadosCliente = new Cliente();
             this.aux = dados
+            this.dadosCliente = this.aux
         })
     }
 

@@ -54,6 +54,14 @@
 </div>
 <div class="divisao"></div>
 <div class="container">
+    <select class="form-select" id="select" [(ngModel)]="metodoPagamento">
+        <option selected>Selecione a forma de pagamento</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão">Cartão</option>
+    </select>
+</div>
+<div class="divisao"></div>
+<div class="container">
     <div class="conta">
         <div id="prodValor">
             <p>{{ quantidadeProd }} Produtos</p>

@@ -1,18 +1,19 @@
-<div>
+<div class="pagina">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
         <div class="card text-center">
             <div class="card-body">
-                <h5 class="card-title">Login</h5>
+                <h5 class="card-title">FAÇA SEU LOGIN</h5>
+                <button class="btn me-2" id="btnGoogle" (click)="loginGoogle()" type="button" [disabled]="loading">
+                    <img id="icon-img-google"
+                                src="assets/google-icon.png" alt=""> Continuar com o Google
+                </button>
                 <p class="card-text">
                     <input class="form-control" formControlName="email" type="email" placeholder="E-mail" autocomplete="email">
-                    <input class="form-control" formControlName="password" type="password" placeholder="Password" autocomplete="password">
+                    <input class="form-control" formControlName="password" type="password" placeholder="Senha" autocomplete="password">
                 </p>
-                <button class="btn btn-danger me-2" (click)="loginGoogle()" type="button" [disabled]="loading">Google
-                    Login</button>
-                <button class="btn btn-success" type="submit" [disabled]="!loginForm.valid || loading">
-                    <mat-icon>check</mat-icon>Login
-                </button>
+                <button class="btn btn-primary me-2" type="button" id="button" [routerLink]="['/auth/cadastro']">Cadastrar</button>
+                <button class="btn btn-success" type="submit" id="button" [disabled]="!loginForm.valid || loading">Login</button>
             </div>
         </div>
     </form>

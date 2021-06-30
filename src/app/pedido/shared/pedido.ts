@@ -5,7 +5,9 @@ export class Pedido {
     clienteId: string;
     clienteNome: string;
     clienteNumero: string;
-    clienteEndereco: string;
+    clienteEnderecoRua: string;
+    clienteEnderecoNumero: number;
+    clienteEnderecoBairro: string;
     data: string;
     valor: number;
     metodoPag: string;

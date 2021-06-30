@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Carrinho } from 'src/app/carrinho/shared/carrinho';
 import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
-import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { Produto } from 'src/app/produtos/shared/produto';
 import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service';
 import { Contador } from 'src/app/carrinho/shared/contador';
 import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
-import { ClienteVerificaCadastro } from 'src/app/cliente/clienteVefificaCadastro.service';
+import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
+import { Router } from '@angular/router';
+import { Pedido } from 'src/app/pedido/shared/pedido';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -27,12 +28,15 @@ export class ProdutoSelecionadoComponent implements OnInit {
   recebeContador: Contador;
   carrinho: Carrinho;
 
+  pedido: Pedido;
+
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
+  urlPedido = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
   urlContador = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
   constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService, private http: HttpClient,
-    private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro) { }
+    private clienteLogado: ClienteLogado, private location: Location, private router: Router) { }
 
   ngOnInit(): void {
     this.produto = new Produto();
@@ -46,7 +50,6 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.produto.imgPequena = data.produto.imgPequena;
         this.key = data.key;  
       }
-      this.verificaDadosCliente();
     })
 
     this.total = this.produto.valor;
@@ -93,33 +96,34 @@ export class ProdutoSelecionadoComponent implements OnInit {
     return this.http.get<any>(`${this.urlContador + this.clienteLogado.cliente.id + '/carrinho/contador.json'}`);
   }
 
-  verificaDadosCliente(){
-    if(this.clienteVerificaCadastro.aux != null){
-      console.log('tem dados')
-    } else {
-      console.log('não tem dados')
-    }
-
-    /*if (this.aux == null) {
-            this.router.navigateByUrl('/cadastro/cliente');
-            return 
-        } else {
-            this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
-            return 
-        }*/
+  pegarDados() {
+    return this.http.get<Pedido>(`${this.urlPedido + this.clienteLogado.cliente.id + '/pedido.json'}`);
   }
-
 
   adicionar(quantidade: number, total: number){
 
-    /*this.contador.valor = this.recebeContador.valor;
+    this.pegarDados().subscribe(dados => {
 
-    this.carrinho.nome = this.produto.nome;
-    this.carrinho.valor = this.produto.valor;
-    this.carrinho.quantidade = quantidade;
-    this.carrinho.total = total;
-    this.carrinho.linkImg = this.produto.imgPequena;
-    
-    this.carrinhoService.adicionaProduto(this.contador ,this.carrinho);*/
+      if(this.clienteLogado.cliente != null){
+        if(dados == null){
+          this.contador.valor = this.recebeContador.valor;
+
+          this.carrinho.nome = this.produto.nome;
+          this.carrinho.valor = this.produto.valor;
+          this.carrinho.quantidade = quantidade;
+          this.carrinho.total = total;
+          this.carrinho.linkImg = this.produto.imgPequena;
+          
+          this.carrinhoService.adicionaProduto(this.contador ,this.carrinho);
+          this.voltaPagina();
+        } else {
+          alert('Espere a entrega do pedido feito para adiconar novos produtos!')
+          this.router.navigate(['/pedido/' + this.clienteLogado.cliente.id])
+        }
+      }else{
+        alert('Faça o Login para adicionar produtos ao carrinho!')
+        this.router.navigate(['/auth/login'])
+      }
+    })
   }
 }

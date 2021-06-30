@@ -4,6 +4,11 @@
     color: rgb(104, 104, 104);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding-bottom: 0%;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
 
 .card-text{
@@ -57,6 +62,11 @@
     text-align: center;
     width: 40px;
 }
+
+#select{
+    border: none;
+}
+
 
 #lixeira{
     position: absolute;
