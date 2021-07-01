@@ -11,26 +11,13 @@ import { ClienteService } from 'src/app/cliente/shared/cliente.service';
 })
 export class MenuClientesComponent implements OnInit {
 
-  clientesAux: any[] = [];
-  clientes: string[] = [];
-
-  url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente.json'
+  clientes: Observable<any>;
 
   constructor(private clienteService: ClienteService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.lerDados();
-  }
 
-  pegarDados() {
-    return this.http.get<any[]>(`${this.url}`);
+    this.clientes = this.clienteService.getAllCliente();
   }
-
-  lerDados(){
-    this.pegarDados().subscribe(dados => {
-      this.clientesAux = dados;
-      this.clientes[0] = this.clientesAux
-    })
-  }
-
+  
 }

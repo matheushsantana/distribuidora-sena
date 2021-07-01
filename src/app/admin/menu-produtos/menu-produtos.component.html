@@ -1,1 +1,15 @@
-<p>menu-produtos works!</p>
+<div class="container">
+    <div class="card mb-3" style="max-width: 540px;" *ngFor="let produto of produtos | async">
+        <div class="row g-0">
+            <div class="col-4">
+                <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgPequena " width="100px">
+            </div>
+            <div class="col-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produto.nome }}</h5>
+                    <p class="card-text">R${{ produto.valor }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

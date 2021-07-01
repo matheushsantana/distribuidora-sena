@@ -1,17 +1,11 @@
 <div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">Numero</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-
-            </tr>
-        </tbody>
-    </table>
+    <div class="card mb-3" *ngFor="let cliente of clientes | async">
+        <div class="row g-0">
+            <div class="col-md-12" id="dados">
+                <a><strong>Nome:</strong> {{ cliente.dados.nome }}</a><br>
+                <a><strong>Telefone:</strong> {{ cliente.dados.telefone | mask: '(00) 00000-0000' }}</a><br>
+                <a><strong>Endereço:</strong> {{ cliente.dados.enderecoRua }}, {{ cliente.dados.enderecoNumero }}, {{ cliente.dados.enderecoBairro }}</a>
+            </div>
+        </div>
+    </div>
 </div>

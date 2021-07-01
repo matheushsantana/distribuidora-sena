@@ -1,3 +1,4 @@
+import { Data } from "@angular/router";
 import { Carrinho } from "src/app/carrinho/shared/carrinho";
 
 export class Pedido {

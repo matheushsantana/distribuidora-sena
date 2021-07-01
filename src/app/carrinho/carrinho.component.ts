@@ -33,6 +33,8 @@ export class CarrinhoComponent implements OnInit {
   pedido: Pedido;
   metodoPagamento: string = 'Selecione a forma de pagamento';
 
+  data = new Date();
+
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
   url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
@@ -168,12 +170,12 @@ export class CarrinhoComponent implements OnInit {
             this.pedido.clienteId = this.clienteLogado.cliente.id;
             this.pedido.clienteNome = this.clienteLogado.cliente.nome;
             this.pedido.clienteNumero = this.clienteVerificaCadastro.dadosCliente.telefone;
-            this.pedido.data = '';
+            this.pedido.data = this.data.getDate() + '/' + this.data.getMonth() + '/' + this.data.getFullYear() + ' - ' + this.data.getHours() + ':' + this.data.getMinutes();
             this.pedido.metodoPag = 'Dinheiro';
             this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
             this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
             this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
-            this.pedido.estado = 'Pedido esta em preparo...'
+            this.pedido.estado = 'Aguardando a distribuidora aceitar...'
             this.pedido.produtos = this.produtos;
             this.pedido.valor = this.total;
 

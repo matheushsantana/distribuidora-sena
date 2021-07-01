@@ -46,7 +46,6 @@ export class AppComponent {
 
       setTimeout(() => {
         this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
-        console.log(this.dadosCliente)
       }, 1000);
       
     })

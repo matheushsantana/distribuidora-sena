@@ -1,0 +1,14 @@
+#titu{
+    text-align: center;
+    padding-top: 10px;
+    border-bottom: 1px solid black;
+}
+
+.nav-item a{
+    color: black;
+    font-weight: 500;
+    padding: 10px;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+    padding-bottom: 5px;
+}
