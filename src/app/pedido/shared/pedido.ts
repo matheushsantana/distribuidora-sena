@@ -3,6 +3,7 @@ import { Carrinho } from "src/app/carrinho/shared/carrinho";
 
 export class Pedido {
 
+    pedidoId: number;
     clienteId: string;
     clienteNome: string;
     clienteNumero: string;

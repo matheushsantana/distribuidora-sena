@@ -1,5 +1,5 @@
 <div class="card">
-    <h5 class="card-header">Pedido: 345 // Data: {{ pedido.data }}</h5>
+    <h5 class="card-header">Pedido: {{ pedido.pedidoId }} // Data: {{ pedido.data }}</h5>
     <div class="card-body">
         <h5 class="card-title">Cliente: {{ pedido.clienteNome }}</h5>
         <p class="card-text"><strong>Endereço:</strong> {{ pedido.clienteEnderecoRua }}, {{ pedido.clienteEnderecoNumero
@@ -10,9 +10,12 @@
         <p class="card-text"><strong>produtos:</strong></p>
 
         <p class="card-text" *ngFor="let produto of produtosPedido | async" id="produtos">({{ produto.quantidade }}){{ produto.nome }}</p>
-        <div class="d-grid gap-2 d-md-flex">      
-            <button class="btn btn-primary" type="button" (click)="updatePedido('Pedido em preparo pela Distribuidora...')">Aceitar</button>
-            <button class="btn btn-danger" type="button" (click)="updatePedido('Pedido recusado pela Distribuidora...')">Recusar</button>         
+        <div class="d-grid gap-2 d-md-flex" *ngIf="mostraBtn != false" id="btn-update-pedido">      
+            <button class="btn btn-primary" type="button" (click)="updatePedido()">{{ btn }}</button>        
         </div>
+        <div class="d-grid gap-2 d-md-flex">      
+            <button class="btn btn-danger" type="button" (click)="fechar()">Fechar</button>        
+        </div>
+            
     </div>
 </div>

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Pedido } from 'src/app/pedido/shared/pedido';
 import { PedidoDataService } from 'src/app/pedido/shared/pedido-data.service';
-import { AceitarComponent } from '../aceitar/aceitar.component';
+import { MenuPedidosComponent } from '../menu-pedidos.component';
 
 @Component({
   selector: 'app-visualizar',
@@ -15,11 +15,14 @@ export class VisualizarComponent implements OnInit {
 
   pedido: Pedido;
   produtosPedido: Observable<any>;
+  opcoesBtn = ['Aceitar','Preparado','Finalizar']
+  estado = ['Aguardando a Distribuidora aceitar...','Pedido em preparo pela Distribuidora...','Pedido saiu para entrega...','Pedido finalizado...'];
+  btn: string;
+  mostraBtn: boolean = true;
 
-  constructor(private db: AngularFireDatabase, private pedidoDataService: PedidoDataService, private aceitar: AceitarComponent) { }
+  constructor(private db: AngularFireDatabase, private pedidoDataService: PedidoDataService, private menuPedidos: MenuPedidosComponent) { }
 
   ngOnInit(): void {
-    console.log('carregou')
     this.pedido = new Pedido();
     this.pedidoDataService.currentPedido.subscribe(data => {
       this.pedido.clienteEnderecoBairro = data.pedido.clienteEnderecoBairro,
@@ -32,9 +35,32 @@ export class VisualizarComponent implements OnInit {
       this.pedido.metodoPag = data.pedido.metodoPag,
       this.pedido.produtos = data.pedido.produtos,
       this.pedido.valor = data.pedido.valor,
+      this.pedido.pedidoId = data.pedido.pedidoId,
       this.pedido.clienteId = data.pedido.clienteId
       this.produtosPedido = this.getAllProdPedido();
+      console.log(this.pedido)
+      this.mudaBotao();
     })
+  }
+
+  mudaBotao(){
+    console.log('entrou muda btn')
+    for(var i = 0; i < 3; i++){
+      console.log('entrou for:', i)
+      if(this.pedido.estado == this.estado[i] && this.pedido.estado != this.estado[3]){
+        console.log('entroi if')
+        this.btn = this.opcoesBtn[i];
+        this.mostraBtn = true;
+        break
+      }else {
+        console.log('entrou else')
+        this.mostraBtn = false;
+      }
+    }
+  }
+
+  fechar(){
+    this.menuPedidos.mostraDetalhes = false
   }
 
   getAllProdPedido() {
@@ -47,13 +73,24 @@ export class VisualizarComponent implements OnInit {
       );
   }
 
-  updatePedido(aux: string){
-    this.pedido.estado = aux;
-    this.db.list('cliente/' + this.pedido.clienteId).update('pedido', this.pedido)
-    .catch((error: any) =>{
-      console.error(error);
-    });
-    this.aceitar.mostraDetalhes = false;
+  updatePedido(){
+    console.log('entrou update ?')
+    for(var i = 0; i < 4; i++){
+      console.log('entrou for ?')
+      if(this.estado[i] == this.pedido.estado){
+        console.log('cotandor: ', i)
+        console.log('estado atual: ',this.pedido.estado)
+        this.pedido.estado = this.estado[i + 1];
+        console.log('estado futuro: ',this.pedido.estado)
+
+        this.db.list('cliente/' + this.pedido.clienteId).update('pedido', this.pedido)
+        .catch((error: any) =>{
+          console.error(error);
+        });
+        this.menuPedidos.mostraDetalhes = false
+        break
+      }
+    }
   }
 
 }

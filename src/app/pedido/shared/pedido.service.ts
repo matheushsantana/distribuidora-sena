@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
 import { Pedido } from './pedido';
 
@@ -11,7 +10,7 @@ import { Pedido } from './pedido';
 })
 export class PedidoService {
 
-  constructor(private db: AngularFireDatabase, private carrinhoService: CarrinhoService, private router: Router, private clienteLogado: ClienteLogado) { }
+  constructor(private db: AngularFireDatabase, private router: Router, private clienteLogado: ClienteLogado) { }
 
   insertPedido(pedido: Pedido){
     var key = 'pedido';
@@ -27,7 +26,7 @@ export class PedidoService {
   }
 
   getAllPedido(){
-    return this.db.list('cliente/' + this.clienteLogado.cliente.id + '/pedido')
+    return this.db.list('cliente/' + this.clienteLogado.cliente.id)
     .snapshotChanges()
     .pipe(
       map(changes => {

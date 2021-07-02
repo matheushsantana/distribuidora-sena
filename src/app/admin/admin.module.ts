@@ -9,10 +9,6 @@ import { MenuPedidosComponent } from './menu-pedidos/menu-pedidos.component';
 import { MenuConcluidosComponent } from './menu-concluidos/menu-concluidos.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { AceitarComponent } from './menu-pedidos/aceitar/aceitar.component';
-import { PreparoComponent } from './menu-pedidos/preparo/preparo.component';
-import { FinalizadoComponent } from './menu-pedidos/finalizado/finalizado.component';
-import { EntregaComponent } from './menu-pedidos/entrega/entrega.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { VisualizarComponent } from './menu-pedidos/visualizar/visualizar.component';
 
@@ -32,10 +28,6 @@ import { VisualizarComponent } from './menu-pedidos/visualizar/visualizar.compon
     MenuProdutosComponent,
     MenuPedidosComponent,
     MenuConcluidosComponent,
-    AceitarComponent,
-    PreparoComponent,
-    FinalizadoComponent,
-    EntregaComponent,
     VisualizarComponent
   ],
   schemas: [],

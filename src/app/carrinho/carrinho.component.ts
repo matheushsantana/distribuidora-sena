@@ -32,6 +32,7 @@ export class CarrinhoComponent implements OnInit {
   quantidadeProd: number;
   pedido: Pedido;
   metodoPagamento: string = 'Selecione a forma de pagamento';
+  contadorProd: Contador
 
   data = new Date();
 
@@ -167,19 +168,27 @@ export class CarrinhoComponent implements OnInit {
         if (this.pedido == null) {
           if(this.metodoPagamento != 'Selecione a forma de pagamento'){
             this.pedido = new Pedido();
-            this.pedido.clienteId = this.clienteLogado.cliente.id;
-            this.pedido.clienteNome = this.clienteLogado.cliente.nome;
-            this.pedido.clienteNumero = this.clienteVerificaCadastro.dadosCliente.telefone;
-            this.pedido.data = this.data.getDate() + '/' + this.data.getMonth() + '/' + this.data.getFullYear() + ' - ' + this.data.getHours() + ':' + this.data.getMinutes();
-            this.pedido.metodoPag = 'Dinheiro';
-            this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
-            this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
-            this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
-            this.pedido.estado = 'Aguardando a distribuidora aceitar...'
-            this.pedido.produtos = this.produtos;
-            this.pedido.valor = this.total;
+            this.contadorProd = new Contador();
+            this.carrinhoService.getContadorPedido().subscribe(contador =>{
+              this.pedido.pedidoId = contador[0].valor
+              console.log('valor', contador[0].valor)
+              console.log('pegou?', this.pedido.pedidoId)
+              this.contadorProd.valor = this.pedido.pedidoId
+              this.pedido.clienteId = this.clienteLogado.cliente.id;
+              this.pedido.clienteNome = this.clienteLogado.cliente.nome;
+              this.pedido.clienteNumero = this.clienteVerificaCadastro.dadosCliente.telefone;
+              this.pedido.data = this.data.getDate() + '/' + this.data.getMonth() + '/' + this.data.getFullYear() + ' - ' + this.data.getHours() + ':' + this.data.getMinutes();
+              this.pedido.metodoPag = 'Dinheiro';
+              this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
+              this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
+              this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
+              this.pedido.estado = 'Aguardando a distribuidora aceitar...'
+              this.pedido.produtos = this.produtos;
+              this.pedido.valor = this.total;
 
-            this.pedidoService.insertPedido(this.pedido)
+              this.pedidoService.insertPedido(this.pedido);
+              this.carrinhoService.atualizarContadorPedido(this.contadorProd);
+            });
           } else {
             alert('Escolha a forma de Pagamento!')
           } 

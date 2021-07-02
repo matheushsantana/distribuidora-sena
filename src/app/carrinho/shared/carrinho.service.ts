@@ -69,4 +69,21 @@ export class CarrinhoService {
     }
   }
 
+  getContadorPedido() {
+    return this.db.list('contador')
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
+        })
+      );
+  }
+  atualizarContadorPedido(contador: Contador) {
+    contador.valor = contador.valor + 1;
+    this.db.list('contador').update('ContadorPedido', contador)
+      .catch((error: any) => {
+        console.error(error);
+      });
+  }
+
 }
