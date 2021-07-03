@@ -20,7 +20,7 @@ export class PedidoComponent implements OnInit {
   statuspedido: Observable<any>;
   carregando: boolean;
 
-  estado = ['Aguardando a Distribuidora aceitar...','Pedido em preparo pela Distribuidora...','Pedido saiu para entrega...','Pedido finalizado...']
+  estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 'Pedido saiu para entrega...', 'Pedido finalizado...', 'Seu pedido foi cancelado...']
 
   url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
@@ -31,28 +31,30 @@ export class PedidoComponent implements OnInit {
     this.carregando = false;
     setTimeout(() => {
       this.preencheCampos();
-      this.infoPedido =  this.pedidoService.getAllPedido()
+      this.infoPedido = this.pedidoService.getAllPedido()
       this.estraiInfo();
       this.carregando = true;
     }, 2500);
   }
 
-  barraStatus(dados: Observable<any>){
+  barraStatus(dados: Observable<any>) {
     var barra = document.getElementById('progressBar') as HTMLElement
-    for(var i = 0; i < 3; i++){
-      var aux = String(dados)
-        if(aux == this.estado[0]){
-          barra.style.width = '20%'
-        }
-        if(aux == this.estado[1]){
-          barra.style.width = '40%'
-        }
-        if(aux == this.estado[2]){
-          barra.style.width = '70%'
-        }
-        if(aux == this.estado[3]){
-          barra.style.width = '100%'
-        }
+    var aux = String(dados)
+    if (aux == this.estado[0]) {
+      barra.style.width = '20%'
+    }
+    if (aux == this.estado[1]) {
+      barra.style.width = '40%'
+    }
+    if (aux == this.estado[2]) {
+      barra.style.width = '70%'
+    }
+    if (aux == this.estado[3]) {
+      barra.style.width = '100%'
+    }
+    if (aux == this.estado[4]) {
+      barra.style.width = '100%'
+      barra.className = 'progress-bar progress-bar-striped bg-danger'
     }
   }
 
@@ -60,7 +62,7 @@ export class PedidoComponent implements OnInit {
     return this.http.get<Pedido>(`${this.url + this.clienteLogado.cliente.id + '/pedido.json'}`);
   }
 
-  preencheCampos(){
+  preencheCampos() {
     this.pegarDados().subscribe(dados => {
       this.pedido = new Pedido();
       this.pedido = dados;
@@ -68,11 +70,11 @@ export class PedidoComponent implements OnInit {
     })
   }
 
-  estraiInfo(){
-    this.infoPedido.subscribe(dados =>{
+  estraiInfo() {
+    this.infoPedido.subscribe(dados => {
       var aux = (Object.keys(dados).length)
-      for(var i = 0; i < aux; i++){
-        if(dados[i].key  == 'pedido'){
+      for (var i = 0; i < aux; i++) {
+        if (dados[i].key == 'pedido') {
           this.statuspedido = dados[i].estado
         }
       }

@@ -188,6 +188,7 @@ export class CarrinhoComponent implements OnInit {
 
               this.pedidoService.insertPedido(this.pedido);
               this.carrinhoService.atualizarContadorPedido(this.contadorProd);
+              this.carrinhoService.deletarCarrinho();
             });
           } else {
             alert('Escolha a forma de Pagamento!')

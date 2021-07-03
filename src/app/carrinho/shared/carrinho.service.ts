@@ -22,6 +22,10 @@ export class CarrinhoService {
       });
   }
 
+  deletarCarrinho(){
+    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho').remove()
+  }
+
   adicionaProduto(contador: Contador, carrinho: Carrinho) {
     this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos').update(contador.valor.toString(), carrinho)
       .catch((error: any) => {

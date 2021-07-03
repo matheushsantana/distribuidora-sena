@@ -9,6 +9,7 @@ import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
 import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { Router } from '@angular/router';
 import { Pedido } from 'src/app/pedido/shared/pedido';
+import { PedidoService } from 'src/app/pedido/shared/pedido.service';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -36,7 +37,8 @@ export class ProdutoSelecionadoComponent implements OnInit {
   urlContador = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
   constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService, private http: HttpClient,
-    private clienteLogado: ClienteLogado, private location: Location, private router: Router) { }
+    private clienteLogado: ClienteLogado, private location: Location, private router: Router,
+    private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
     this.produto = new Produto();
@@ -105,7 +107,8 @@ export class ProdutoSelecionadoComponent implements OnInit {
     this.pegarDados().subscribe(dados => {
 
       if(this.clienteLogado.cliente != null){
-        if(dados == null){
+        if(dados == null || dados.estado == 'Pedido finalizado...' || dados.estado == 'Seu pedido foi cancelado...'){
+          this.pedidoService.deletePedido();
           this.contador.valor = this.recebeContador.valor;
 
           this.carrinho.nome = this.produto.nome;
