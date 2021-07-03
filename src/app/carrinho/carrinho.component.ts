@@ -182,7 +182,7 @@ export class CarrinhoComponent implements OnInit {
               this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
               this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
               this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
-              this.pedido.estado = 'Aguardando a distribuidora aceitar...'
+              this.pedido.estado = 'Aguardando a Distribuidora aceitar...'
               this.pedido.produtos = this.produtos;
               this.pedido.valor = this.total;
 

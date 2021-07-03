@@ -26,7 +26,8 @@ export class AppComponent {
   cliente: Cliente;
   verificaPedido: boolean;
   test: Observable<any>;
-  dadosCliente: any = 'Carregando...';
+  dadosCliente: any;
+  endereco: string = 'carregando'
 
   url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
 
@@ -45,6 +46,7 @@ export class AppComponent {
       this.clienteVerificaCadastro.verifica()
       setTimeout(() => {
         this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
+        this.endereco = this.dadosCliente.enderecoRua + ', ' + this.dadosCliente.enderecoNumero + ', ' + this.dadosCliente.enderecoBairro
       }, 1000);
       
     })

@@ -35,8 +35,8 @@ export class PedidoService {
     );
   }
 
-  deletePedido(key: string){
-    this.db.object(`pedido/${key}`).remove();
+  deletePedido(){
+    this.db.object('cliente/' + this.clienteLogado.cliente.id + '/pedido').remove();
     alert("Apagado com Sucesso!")
   }
 }
