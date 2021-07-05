@@ -59,7 +59,7 @@ export class PedidoComponent implements OnInit {
   }
 
   pegarDados() {
-    return this.http.get<Pedido>(`${this.url + this.clienteLogado.cliente.id + '/pedido.json'}`);
+    return this.http.get<Pedido>(`${this.url + this.clienteLogado.cliente.id + '/pedido.json?auth=Ar4ycx6fHdoIBXNcCDK7b0Sz5mE0PT3G7VmLogCD'}`);
   }
 
   preencheCampos() {

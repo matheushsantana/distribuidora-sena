@@ -62,6 +62,7 @@ export class AppComponent {
   }
 
   verifica(){
+
     this.pegarDados().subscribe(dados => {
       if(dados == null){
         this.verificaPedido = false

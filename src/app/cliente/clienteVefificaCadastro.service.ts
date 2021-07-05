@@ -1,6 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { AngularFireDatabase } from "@angular/fire/database";
 import { Router } from "@angular/router";
+import { map } from "rxjs/operators";
 import { ClienteLogado } from "./clienteLogado.service";
 import { Cliente } from "./shared/cliente";
 import { ClienteService } from "./shared/cliente.service";
@@ -15,7 +17,7 @@ export class ClienteVerificaCadastro {
     dadosCliente: any;
 
     constructor(private clienteLogado: ClienteLogado, private clienteService: ClienteService, private router: Router,
-        private http: HttpClient) { }
+        private http: HttpClient, private db: AngularFireDatabase) { }
 
     verifica(){
         this.buscaCliente().subscribe(dados => {
@@ -28,4 +30,5 @@ export class ClienteVerificaCadastro {
     buscaCliente() {
         return this.http.get<Cliente[]>(`${this.url + this.clienteLogado.cliente.id + '/dados.json'}`);
     }
+
 }
