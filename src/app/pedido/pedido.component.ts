@@ -30,8 +30,10 @@ export class PedidoComponent implements OnInit {
   ngOnInit(): void {
     this.carregando = false;
     setTimeout(() => {
-      this.preencheCampos();
-      this.infoPedido = this.pedidoService.getAllPedido()
+        this.pedidoService.getAllPedido().subscribe(dados => {
+          console.log(dados)
+        this.infoPedido = dados[0]
+      })
       this.estraiInfo();
       this.carregando = true;
     }, 2500);
@@ -56,18 +58,6 @@ export class PedidoComponent implements OnInit {
       barra.style.width = '100%'
       barra.className = 'progress-bar progress-bar-striped bg-danger'
     }
-  }
-
-  pegarDados() {
-    return this.http.get<Pedido>(`${this.url + this.clienteLogado.cliente.id + '/pedido.json?auth=Ar4ycx6fHdoIBXNcCDK7b0Sz5mE0PT3G7VmLogCD'}`);
-  }
-
-  preencheCampos() {
-    this.pegarDados().subscribe(dados => {
-      this.pedido = new Pedido();
-      this.pedido = dados;
-      this.carregando = true;
-    })
   }
 
   estraiInfo() {

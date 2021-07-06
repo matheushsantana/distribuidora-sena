@@ -29,11 +29,7 @@ export class AppComponent {
   dadosCliente: any;
   endereco: string = 'carregando'
 
-  url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
-
-  constructor(private authService: AuthService, private afs: AngularFirestore, private router: Router,
-    private clienteLogado: ClienteLogado, private http: HttpClient, private pedidoService: PedidoService,
-     private clienteVerificaCadastro: ClienteVerificaCadastro, private clienteverificaCadastro: ClienteVerificaCadastro){
+  constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado, private clienteVerificaCadastro: ClienteVerificaCadastro){
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
   }
@@ -57,21 +53,15 @@ export class AppComponent {
     window.location.href = '/'
   }
 
-  pegarDados() {
-    return this.http.get<Pedido>(`${this.url + this.clienteLogado.cliente.id + '/pedido.json'}`);
-  }
-
   verifica(){
 
-    this.pegarDados().subscribe(dados => {
-      if(dados == null){
+      if(this.clienteVerificaCadastro.carrinho != null){
         this.verificaPedido = false
         this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
       }else{
         this.verificaPedido = true;
         this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
       }
-    })
   }
 
   mudaCor(){

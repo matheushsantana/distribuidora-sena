@@ -17,7 +17,7 @@ import { PedidoService } from 'src/app/pedido/shared/pedido.service';
   styleUrls: ['./produto-selecionado.component.css']
 })
 export class ProdutoSelecionadoComponent implements OnInit {
-  
+
   produto: Produto
   key: string = '';
 
@@ -33,9 +33,6 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
-  urlPedido = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
-  urlContador = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
-
   constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService, private http: HttpClient,
     private clienteLogado: ClienteLogado, private location: Location, private router: Router,
     private pedidoService: PedidoService) { }
@@ -43,87 +40,91 @@ export class ProdutoSelecionadoComponent implements OnInit {
   ngOnInit(): void {
     this.produto = new Produto();
     this.produtoDataService.currentProduto.subscribe(data => {
-      if(data.produto && data.key){
+      if (data.produto && data.key) {
         this.produto = new Produto();
         this.produto.nome = data.produto.nome;
         this.produto.valor = data.produto.valor;
         this.produto.categoria = data.produto.categoria;
         this.produto.imgGrande = data.produto.imgGrande;
         this.produto.imgPequena = data.produto.imgPequena;
-        this.key = data.key;  
+        this.key = data.key;
+        this.total = this.produto.valor;
       }
     })
-
-    this.total = this.produto.valor;
+  
     this.carrinho = new Carrinho();
     this.contador = new Contador();
     this.recebeContador = new Contador();
 
-    this.pegaContador().subscribe(dados => {
-      if(dados == null){
-        this.recebeContador = {valor: 0}
-      }else{
-        this.recebeContador = dados;
-        console.log('valor recebido',this.recebeContador)
-      }
-    }, err => {
-      console.log('Erro ao listar contador', err);
-    })
-    console.log('saiu')
+    this.pegaContador();
   }
 
-  voltaPagina(){
+  voltaPagina() {
     this.location.back();
   }
 
-  quantidadeAltera(valor: number, aux: number){
+  quantidadeAltera(valor: number, aux: number) {
 
-    if(valor >= 1){
-      if(this.quantidade == 1 && aux == 1 ){
+    if (valor >= 1) {
+      if (this.quantidade == 1 && aux == 1) {
         this.quantidade = this.quantidade + (valor - 1);
         this.total = this.quantidade * this.produto.valor;
-      }else {
+      } else {
         this.quantidade = this.quantidade + valor;
         this.total = this.quantidade * this.produto.valor;
       }
-      }else if(valor === 0){
-      if(this.quantidade >= 2){
+    } else if (valor === 0) {
+      if (this.quantidade >= 2) {
         this.quantidade--;
         this.total = this.total - this.produto.valor;
       }
     }
   }
 
-  pegaContador(){
-    return this.http.get<any>(`${this.urlContador + this.clienteLogado.cliente.id + '/carrinho/contador.json'}`);
+  pegaContador() {
+    this.carrinhoService.getContadorCarrinho().subscribe(dados => {  
+      console.log('entrou 1')
+      if (dados[0] == undefined) {
+        console.log('entrou 2')
+        this.recebeContador = new Contador();
+        this.recebeContador.valor = 0;
+        console.log('valor recebido1', this.recebeContador)
+      } else {
+        this.contador.valor = dados[0].valor
+        this.recebeContador = this.contador;
+        console.log('valor recebido2', this.recebeContador.valor)
+      }
+    }, err => {
+      console.log('Erro ao listar contador', err);
+    })
   }
 
-  pegarDados() {
-    return this.http.get<Pedido>(`${this.urlPedido + this.clienteLogado.cliente.id + '/pedido.json'}`);
-  }
+  adicionar(quantidade: number, total: number) {
 
-  adicionar(quantidade: number, total: number){
+    
 
-    this.pegarDados().subscribe(dados => {
+    this.carrinhoService.getAllPedido().subscribe(dados => {
+      this.pedido = dados[0]
 
-      if(this.clienteLogado.cliente != null){
-        if(dados == null || dados.estado == 'Pedido finalizado...' || dados.estado == 'Seu pedido foi cancelado...'){
+      if (this.clienteLogado.cliente != null) {
+        if (this.pedido == null || this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
           this.pedidoService.deletePedido();
-          this.contador.valor = this.recebeContador.valor;
+          this.contador = new Contador();
+          this.contador = this.recebeContador;
 
           this.carrinho.nome = this.produto.nome;
           this.carrinho.valor = this.produto.valor;
           this.carrinho.quantidade = quantidade;
           this.carrinho.total = total;
           this.carrinho.linkImg = this.produto.imgPequena;
-          
-          this.carrinhoService.adicionaProduto(this.contador ,this.carrinho);
+
+          this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
           this.voltaPagina();
         } else {
           alert('Espere a entrega do pedido feito para adiconar novos produtos!')
           this.router.navigate(['/pedido/' + this.clienteLogado.cliente.id])
         }
-      }else{
+      } else {
         alert('Faça o Login para adicionar produtos ao carrinho!')
         this.router.navigate(['/auth/login'])
       }

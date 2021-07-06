@@ -1,34 +1,46 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AngularFireDatabase } from "@angular/fire/database";
-import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
+import { Carrinho } from "../carrinho/shared/carrinho";
 import { ClienteLogado } from "./clienteLogado.service";
 import { Cliente } from "./shared/cliente";
-import { ClienteService } from "./shared/cliente.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ClienteVerificaCadastro {
 
-    url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/'
     aux: Cliente[];
     dadosCliente: any;
+    dadosMap: any;
+    carrinho: Carrinho;    
 
-    constructor(private clienteLogado: ClienteLogado, private clienteService: ClienteService, private router: Router,
-        private http: HttpClient, private db: AngularFireDatabase) { }
+    constructor(private clienteLogado: ClienteLogado, private db: AngularFireDatabase) { }
 
     verifica(){
         this.buscaCliente().subscribe(dados => {
             this.dadosCliente = new Cliente();
-            this.aux = dados
-            this.dadosCliente = this.aux
+            if(dados.length > 1){
+                this.aux = dados[1]
+                this.carrinho = dados[0]
+                this.dadosCliente = this.aux
+            }else{
+                this.aux = dados[0]
+                this.dadosCliente = this.aux
+                this.carrinho = null
+            }
+            
         })
     }
 
-    buscaCliente() {
-        return this.http.get<Cliente[]>(`${this.url + this.clienteLogado.cliente.id + '/dados.json'}`);
+    buscaCliente(){
+        return this.db.list('cliente/' + this.clienteLogado.cliente.id)
+            .snapshotChanges()
+            .pipe(
+            map(changes => {
+                return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
+            })
+        );
     }
 
 }

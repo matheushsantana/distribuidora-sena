@@ -27,7 +27,8 @@ export class CarrinhoService {
   }
 
   adicionaProduto(contador: Contador, carrinho: Carrinho) {
-    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos').update(contador.valor.toString(), carrinho)
+    var aux = contador.valor.toString()
+    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos').update(aux, carrinho)
       .catch((error: any) => {
         console.error(error);
       });
@@ -51,9 +52,29 @@ export class CarrinhoService {
       });
   }
 
+  getContadorCarrinho() {
+    return this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho')
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
+        })
+      );
+  }
+
 
   getAllProdCarrinho() {
     return this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos')
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
+        })
+      );
+  }
+
+  getAllPedido() {
+    return this.db.list('cliente/' + this.clienteLogado.cliente.id + '/pedido')
       .snapshotChanges()
       .pipe(
         map(changes => {
