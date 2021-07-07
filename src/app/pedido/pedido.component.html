@@ -32,7 +32,8 @@
             </div>
             <div>
                 <p>Produtos:</p>
-                <p id="dados1" *ngFor=" let produto of pedido.produtos">({{ produto.quantidade }}){{ produto.nome }}</p>
+                <p id="dados1" *ngFor=" let produto of produtos ">
+                    ({{ produto.quantidade }}){{ produto.nome }}</p>
             </div>
         </div>
     </div>

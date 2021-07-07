@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 import { ClienteLogado } from '../clienteLogado.service';
@@ -9,11 +10,11 @@ import { Cliente } from './cliente';
 })
 export class ClienteService {
 
-  constructor(private db: AngularFireDatabase, private clienteLogado: ClienteLogado) { }
+  constructor(private db: AngularFireDatabase, private clienteLogado: ClienteLogado, private location: Location) { }
 
   insertCliente(cliente: Cliente){
     this.db.list('cliente/'+ this.clienteLogado.cliente.id).update('dados', cliente)
-    window.location.href = '/carrinho/' + this.clienteLogado.cliente.id
+    this.location.back();
   }
 
   getAllCliente(){

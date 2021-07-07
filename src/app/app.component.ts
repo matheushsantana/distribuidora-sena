@@ -1,16 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
-import { CarrinhoService } from './carrinho/shared/carrinho.service';
 import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
-import { Pedido } from './pedido/shared/pedido';
-import { PedidoService } from './pedido/shared/pedido.service';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +13,10 @@ import { PedidoService } from './pedido/shared/pedido.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  user$ : Observable<User>;
-  authenticated$ : Observable<boolean>;
+
+  user$: Observable<User> = null;
+  authenticated$: Observable<boolean>;
+  auxLogin: boolean = false
   idCliente: string;
   valor: string;
   cliente: Cliente;
@@ -29,7 +25,7 @@ export class AppComponent {
   dadosCliente: any;
   endereco: string = 'carregando'
 
-  constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado, private clienteVerificaCadastro: ClienteVerificaCadastro){
+  constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado, private clienteVerificaCadastro: ClienteVerificaCadastro) {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
   }
@@ -42,29 +38,32 @@ export class AppComponent {
       this.clienteVerificaCadastro.verifica()
       setTimeout(() => {
         this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
-        this.endereco = this.dadosCliente.enderecoRua + ', ' + this.dadosCliente.enderecoNumero + ', ' + this.dadosCliente.enderecoBairro
-      }, 1000);
-      
+        if (this.dadosCliente.enderecoRua != null || this.dadosCliente.enderecoRua != undefined) {
+          this.endereco = this.dadosCliente.enderecoRua + ', ' + this.dadosCliente.enderecoNumero + ', ' + this.dadosCliente.enderecoBairro
+        } else {
+          this.endereco = 'Adicionar Endereço...'
+        }
+      }, 2000);
     })
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
     window.location.href = '/'
   }
 
-  verifica(){
+  verifica() {
 
-      if(this.clienteVerificaCadastro.carrinho != null){
-        this.verificaPedido = false
-        this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
-      }else{
-        this.verificaPedido = true;
-        this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
-      }
+    if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
+      this.verificaPedido = true;
+      this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
+    } else {
+      this.verificaPedido = false
+      this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
+    }
   }
 
-  mudaCor(){
+  mudaCor() {
     console.log('funcionou')
   }
 }

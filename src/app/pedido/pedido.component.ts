@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { ClienteLogado } from '../cliente/clienteLogado.service';
+import { Produto } from '../produtos/shared/produto';
 import { Pedido } from './shared/pedido';
 import { PedidoService } from './shared/pedido.service';
 
@@ -19,67 +18,51 @@ export class PedidoComponent implements OnInit {
   infoPedido: Observable<any>;
   statuspedido: Observable<any>;
   carregando: boolean;
+  produtos: Produto[];
+  listaProduto: any;
 
   estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 'Pedido saiu para entrega...', 'Pedido finalizado...', 'Seu pedido foi cancelado...']
 
-  url = 'https://projeto-distribuidora-default-rtdb.firebaseio.com/cliente/';
-
-  constructor(private http: HttpClient, private clienteLogado: ClienteLogado, private pedidoService: PedidoService,
-    private db: AngularFireDatabase) { }
+  constructor(private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
     this.carregando = false;
     setTimeout(() => {
         this.pedidoService.getAllPedido().subscribe(dados => {
-          console.log(dados)
-        this.infoPedido = dados[0]
+          this.pedido = dados[1]
+          this.infoPedido = dados[1]
+          this.carregando = true;
       })
-      this.estraiInfo();
-      this.carregando = true;
+      this.pedidoService.getAllPedidoProdutos().subscribe(dados => {
+            this.produtos = dados
+      });
     }, 2500);
+
+    setTimeout(() => {
+      this.barraStatus();
+    }, 3000)
+    console.log('finalizou')
   }
 
-  barraStatus(dados: Observable<any>) {
+  barraStatus() {
+    this.statuspedido = this.infoPedido['estado']
     var barra = document.getElementById('progressBar') as HTMLElement
-    var aux = String(dados)
-    if (aux == this.estado[0]) {
+    if (String(this.statuspedido) == this.estado[0]) {
       barra.style.width = '20%'
     }
-    if (aux == this.estado[1]) {
+    if (String(this.statuspedido) == this.estado[1]) {
       barra.style.width = '40%'
     }
-    if (aux == this.estado[2]) {
+    if (String(this.statuspedido) == this.estado[2]) {
       barra.style.width = '70%'
     }
-    if (aux == this.estado[3]) {
+    if (String(this.statuspedido) == this.estado[3]) {
       barra.style.width = '100%'
     }
-    if (aux == this.estado[4]) {
+    if (String(this.statuspedido) == this.estado[4]) {
       barra.style.width = '100%'
       barra.className = 'progress-bar progress-bar-striped bg-danger'
     }
-  }
-
-  estraiInfo() {
-    this.infoPedido.subscribe(dados => {
-      var aux = (Object.keys(dados).length)
-      for (var i = 0; i < aux; i++) {
-        if (dados[i].key == 'pedido') {
-          this.statuspedido = dados[i].estado
-        }
-      }
-      this.barraStatus(this.statuspedido);
-    })
-  }
-
-  getAllProdPedido() {
-    return this.db.list('cliente/' + this.pedido.clienteId + '/pedido/produtos')
-      .snapshotChanges()
-      .pipe(
-        map(changes => {
-          return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
-        })
-      );
   }
 
 }

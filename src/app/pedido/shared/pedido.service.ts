@@ -35,6 +35,17 @@ export class PedidoService {
     );
   }
 
+  getAllPedidoProdutos(){
+    return this.db.list('cliente/' + this.clienteLogado.cliente.id+ '/pedido/produtos')
+    .snapshotChanges()
+    .pipe(
+      map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
+      })
+    );
+  }
+
+
   deletePedido(){
     this.db.object('cliente/' + this.clienteLogado.cliente.id + '/pedido').remove();
   }

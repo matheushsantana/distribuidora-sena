@@ -30,7 +30,7 @@ export class CarrinhoComponent implements OnInit {
   recebeContador: Contador;
   contador: Contador;
   quantidadeProd: number;
-  pedido: Pedido;
+  pedido: any;
   metodoPagamento: string = 'Selecione a forma de pagamento';
   contadorProd: Contador
 
@@ -157,21 +157,12 @@ export class CarrinhoComponent implements OnInit {
 
   fazerPedido() {
 
-    this.carrinhoService.getAllPedido().subscribe(dados => {
-      this.pedido = dados[0]
-      console.log('deu?: ', this.pedido)
-    })
-
-
     if (this.clienteVerificaCadastro.aux != null) {
-      if (this.pedido == null) {
         if (this.metodoPagamento != 'Selecione a forma de pagamento') {
-          this.pedido = new Pedido();
-          this.contadorProd = new Contador();
           this.carrinhoService.getContadorPedido().subscribe(contador => {
-            this.pedido.pedidoId = contador[0].valor
-            console.log('valor', contador[0].valor)
-            console.log('pegou?', this.pedido.pedidoId)
+            this.pedido = new Pedido();
+            this.contadorProd = new Contador();
+            this.pedido.pedidoId = contador[0].valor;
             this.contadorProd.valor = this.pedido.pedidoId
             this.pedido.clienteId = this.clienteLogado.cliente.id;
             this.pedido.clienteNome = this.clienteLogado.cliente.nome;
@@ -192,9 +183,6 @@ export class CarrinhoComponent implements OnInit {
         } else {
           alert('Escolha a forma de Pagamento!')
         }
-      } else {
-        alert('Espere a entrega do pedido feito para realizar outro!')
-      }
     } else {
       alert('Complete seu cadastro para Continuar')
       this.router.navigate(['/cadastro/cliente'])

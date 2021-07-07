@@ -25,6 +25,7 @@ import { ClienteComponent } from './cliente/cliente.component';
     CarrinhoComponent,
     PedidoComponent,
     ClienteComponent,
+    
   ],
   imports: [
     BrowserModule,
