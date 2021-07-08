@@ -44,7 +44,8 @@ onSubmit(){
     firsname: this.formRegister.value.firstname,
     email: this.formRegister.value.email,
     password: this.formRegister.value.password1,
-    fotoPerfil: ''
+    fotoPerfil: 'assets/foto-perfil-generica.png',
+    tipo: 'cliente'
   }
   this.authService.register(newUser)
   .subscribe(

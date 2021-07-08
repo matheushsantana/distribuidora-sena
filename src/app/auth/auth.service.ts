@@ -56,6 +56,10 @@ export class AuthService {
       )
   }
 
+  usuarioAutenticado(){
+    return this.afAuth.authState
+  }
+
   loginGoogle(): Observable<User> {
     const provider = new firebase.auth.GoogleAuthProvider();
     return from(this.afAuth.signInWithPopup(provider))
@@ -66,7 +70,8 @@ export class AuthService {
             firsname: u.user.displayName,
             email: u.user.email,
             fotoPerfil: u.user.photoURL,
-            id: u.user.uid
+            id: u.user.uid,
+            tipo: 'cliente'
           };
           return this.userCollection.doc(u.user.uid)
             .set(newUser).then(() => newUser);

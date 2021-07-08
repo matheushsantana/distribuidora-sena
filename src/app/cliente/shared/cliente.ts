@@ -6,4 +6,5 @@ export class Cliente{
     enderecoNumero: number;
     enderecoBairro: string;
     telefone: string;
+    tipo: string;
 }

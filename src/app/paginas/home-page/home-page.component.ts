@@ -21,7 +21,7 @@ export class HomePageComponent implements OnInit {
     this.produtos = this.produtoService.getAllProduto();
   }
 
-  buscaEspecifica(chave: string){
+  buscaEspecifica(chave: string) {
   }
 
   selecionaProduto(produto: Produto, key: string) {

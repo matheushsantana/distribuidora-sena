@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
@@ -38,7 +37,7 @@ export class CarrinhoComponent implements OnInit {
 
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
-  constructor(private carrinhoService: CarrinhoService, private http: HttpClient, private pedidoService: PedidoService,
+  constructor(private carrinhoService: CarrinhoService, private pedidoService: PedidoService,
     private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro,
     private router: Router) {
   }
@@ -46,9 +45,9 @@ export class CarrinhoComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.carrinho = this.carrinhoService.getAllProdCarrinho();
-      this.totalPedido()
       this.carregando = true;
-    }, 2500);
+      this.totalPedido()
+    }, 1000);
   }
 
   voltaPagina() {

@@ -5,4 +5,5 @@ export interface User {
     fotoPerfil: string;
     password?: string;
     id?: string;
+    tipo: string;
 }

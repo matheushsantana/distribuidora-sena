@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PedidoComponent } from './pedido/pedido.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ClienteComponent } from './cliente/cliente.component';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import { ClienteComponent } from './cliente/cliente.component';
     HttpClientModule,
     LazyLoadImageModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

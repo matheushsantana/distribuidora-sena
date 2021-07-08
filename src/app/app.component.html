@@ -12,7 +12,19 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="(authenticated$ | async) && (user$ | async)">
+      <ng-container *ngIf="admAutenticated != false" style="display: none;">
+        <div class="barra-superior">
+          <div class="sub-barra">
+            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
+            <img id="btn-home" [routerLink]="['/']" src="assets/home.png">
+            <img id="btn-carrinho" [routerLink]="['/admin/menu']" src="assets/menu-white.png">
+            <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
+          </div>
+          <a id="receber">Bem Vindo!</a>
+          <a id="endereco"> {{(user$| async)?.firsname}}</a>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="(authenticated$ | async) && (user$ | async) && admAutenticated != true">
         <div class="barra-superior">
           <div class="sub-barra">
             <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
@@ -26,7 +38,7 @@
       </ng-container>
     </div>
   </nav>
-  <nav class="navbar sticky-top" id="nav2">
+  <nav class="navbar sticky-top" id="nav2" *ngIf="ativaNav != false">
     <form class="d-flex col-12">
       <div class="input-group flex-nowrap">
         <input type="text" class="form-control" [(ngModel)]="valor" placeholder="Qual a Bebida de Hoje?" id="valor"
@@ -38,5 +50,6 @@
 
   <router-outlet></router-outlet>
   
+  <button type="button" id="btn-carrinho-pedido" *ngIf="btnAtivo != false" class="btn btn-warning" (click)="verifica()" [routerLink]="['/carrinho', cliente.id]">{{ ativo }}</button>
 
 </body>

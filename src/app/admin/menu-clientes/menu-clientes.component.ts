@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cliente } from 'src/app/cliente/shared/cliente';
 import { ClienteService } from 'src/app/cliente/shared/cliente.service';
 
 @Component({
@@ -13,7 +11,7 @@ export class MenuClientesComponent implements OnInit {
 
   clientes: Observable<any>;
 
-  constructor(private clienteService: ClienteService, private http: HttpClient) { }
+  constructor(private clienteService: ClienteService) { }
 
   ngOnInit(): void {
 

@@ -10,6 +10,7 @@ import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { Router } from '@angular/router';
 import { Pedido } from 'src/app/pedido/shared/pedido';
 import { PedidoService } from 'src/app/pedido/shared/pedido.service';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -33,7 +34,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
-  constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService, private http: HttpClient,
+  constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService,
     private clienteLogado: ClienteLogado, private location: Location, private router: Router,
     private pedidoService: PedidoService) { }
 
@@ -51,7 +52,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.total = this.produto.valor;
       }
     })
-  
+
     this.carrinho = new Carrinho();
     this.contador = new Contador();
     this.recebeContador = new Contador();
@@ -82,7 +83,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
   }
 
   pegaContador() {
-    this.carrinhoService.getContadorCarrinho().subscribe(dados => {  
+    this.carrinhoService.getContadorCarrinho().subscribe(dados => {
       console.log('entrou 1')
       if (dados[0] == undefined) {
         console.log('entrou 2')
@@ -101,12 +102,9 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   adicionar(quantidade: number, total: number) {
 
-    
-
-    this.carrinhoService.getAllPedido().subscribe(dados => {
-      this.pedido = dados[0]
-
-      if (this.clienteLogado.cliente != null) {
+    if (this.clienteLogado.cliente != null) {
+      this.carrinhoService.getAllPedido().subscribe(dados => {
+        this.pedido = dados[0]
         if (this.pedido == null || this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
           this.pedidoService.deletePedido();
           this.contador = new Contador();
@@ -124,10 +122,11 @@ export class ProdutoSelecionadoComponent implements OnInit {
           alert('Espere a entrega do pedido feito para adiconar novos produtos!')
           this.router.navigate(['/pedido/' + this.clienteLogado.cliente.id])
         }
-      } else {
-        alert('Faça o Login para adicionar produtos ao carrinho!')
-        this.router.navigate(['/auth/login'])
-      }
-    })
+      })
+    } else {
+      alert('Faça o Login para adicionar produtos ao carrinho!')
+      this.router.navigate(['/auth/login'])
+    }
+
   }
 }

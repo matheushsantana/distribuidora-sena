@@ -6,6 +6,7 @@ import { User } from './auth/user';
 import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
+import { AuthGuard } from './guards/auth.guard';
 
 @Component({
   selector: 'app-root',
@@ -23,27 +24,42 @@ export class AppComponent {
   verificaPedido: boolean;
   test: Observable<any>;
   dadosCliente: any;
-  endereco: string = 'carregando'
+  endereco: string = 'carregando';
+  ativo: string;
+  btnAtivo: boolean = false;
+  ativaNav: boolean = true;
+  admAutenticated: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado, private clienteVerificaCadastro: ClienteVerificaCadastro) {
+  constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado, 
+    private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard) {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
+    var inicializadora = this.authGuard.aux;
   }
   ngOnInit() {
     this.user$.subscribe(dados => {
       this.cliente = new Cliente();
       this.cliente.id = dados.id;
       this.cliente.nome = dados.firsname;
+      this.cliente.tipo = dados.tipo;
       this.clienteLogado.recebeDados(this.cliente);
-      this.clienteVerificaCadastro.verifica()
-      setTimeout(() => {
-        this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
-        if (this.dadosCliente.enderecoRua != null || this.dadosCliente.enderecoRua != undefined) {
-          this.endereco = this.dadosCliente.enderecoRua + ', ' + this.dadosCliente.enderecoNumero + ', ' + this.dadosCliente.enderecoBairro
-        } else {
-          this.endereco = 'Adicionar Endereço...'
-        }
-      }, 2000);
+      if(this.cliente.tipo === 'cliente'){
+        this.clienteVerificaCadastro.verifica()
+        setTimeout(() => {
+          this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
+          if (this.dadosCliente.enderecoRua != null || this.dadosCliente.enderecoRua != undefined) {
+            this.endereco = this.dadosCliente.enderecoRua + ', ' + this.dadosCliente.enderecoNumero + ', ' + this.dadosCliente.enderecoBairro
+          } else {
+            this.endereco = 'Adicionar Endereço...'
+          }
+          this.btnEstado();
+          this.ativaNav = true
+        }, 2000);
+      } else if(this.cliente.tipo === 'admin'){
+        this.ativaNav = false;
+        this.admAutenticated = true;
+        this.router.navigate(['/admin/menu'])
+      }
     })
   }
 
@@ -53,17 +69,30 @@ export class AppComponent {
   }
 
   verifica() {
-
     if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
       this.verificaPedido = true;
+      this.btnAtivo = false;
       this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
     } else {
-      this.verificaPedido = false
+      this.verificaPedido = false;
+      this.btnAtivo = false;
       this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
     }
   }
 
   mudaCor() {
     console.log('funcionou')
+  }
+
+  btnEstado(){
+    if(this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined){
+      this.btnAtivo = true;
+      this.ativo = 'Acompanhe seu Pedido...'
+    } else if( (this.clienteVerificaCadastro.pedido === null || this.clienteVerificaCadastro.pedido === undefined) && (this.clienteVerificaCadastro.carrinho === null || this.clienteVerificaCadastro.carrinho === undefined) ){
+      this.btnAtivo = false;
+    } else if(this.clienteVerificaCadastro.carrinho != null || this.clienteVerificaCadastro.carrinho != undefined){
+      this.btnAtivo = true;
+      this.ativo = 'Ver seu Carrinho...'
+    }
   }
 }

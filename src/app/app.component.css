@@ -83,3 +83,12 @@
     color: rgb(204, 204, 3);
     font-weight: 500;
 }
+
+#btn-carrinho-pedido{
+    position: fixed;
+    width: 100%;
+    bottom: 0%;
+    margin: 10px;
+    font-weight: 600;
+    background-color: rgb(255, 153, 28);
+}
