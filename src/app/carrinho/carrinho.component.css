@@ -109,6 +109,8 @@
 #receber{
     font-weight: bold;
     font-size: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 #receber-img{
@@ -149,4 +151,20 @@
     top: 0%;
     font-weight: 600;
     color: black;
+}
+
+#endereco{
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(104, 104, 104);
+    margin-left: 12%;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+#info{
+    text-align: center;
+    background-color: rgb(231, 231, 231);
+    font-weight: 500;
+    font-size: 16px;
 }

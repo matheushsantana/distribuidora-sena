@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Carrinho } from 'src/app/carrinho/shared/carrinho';
-import { HttpClient } from '@angular/common/http';
 import { Location } from '@angular/common';
 import { Produto } from 'src/app/produtos/shared/produto';
 import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service';
@@ -8,9 +7,7 @@ import { Contador } from 'src/app/carrinho/shared/contador';
 import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
 import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { Router } from '@angular/router';
-import { Pedido } from 'src/app/pedido/shared/pedido';
 import { PedidoService } from 'src/app/pedido/shared/pedido.service';
-import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -29,14 +26,16 @@ export class ProdutoSelecionadoComponent implements OnInit {
   contador: Contador;
   recebeContador: Contador;
   carrinho: Carrinho;
+  produtosCarrinho: any;
+  produtoExiste: boolean = false;
 
-  pedido: Pedido;
+  pedido: any;
 
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
   constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService,
-    private clienteLogado: ClienteLogado, private location: Location, private router: Router,
-    private pedidoService: PedidoService) { }
+    private clienteLogado: ClienteLogado, private router: Router, private pedidoService: PedidoService,
+    private location: Location) { }
 
   ngOnInit(): void {
     this.produto = new Produto();
@@ -56,8 +55,19 @@ export class ProdutoSelecionadoComponent implements OnInit {
     this.carrinho = new Carrinho();
     this.contador = new Contador();
     this.recebeContador = new Contador();
-
     this.pegaContador();
+    this.verificaproduto();
+  }
+
+  verificaproduto(){
+    this.carrinhoService.getAllProdCarrinho().subscribe(dados => {
+      this.produtosCarrinho = dados
+
+      for(var i = 0; i < this.produtosCarrinho.length; i++){
+        if(this.produto.nome == this.produtosCarrinho[i].nome)
+          this.produtoExiste = true;
+      }
+    })
   }
 
   voltaPagina() {
@@ -84,8 +94,9 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   pegaContador() {
     this.carrinhoService.getContadorCarrinho().subscribe(dados => {
+      console.log('dados Contador: ', dados)
       console.log('entrou 1')
-      if (dados[0] == undefined) {
+      if (dados[0] == undefined || dados[0] == null) {
         console.log('entrou 2')
         this.recebeContador = new Contador();
         this.recebeContador.valor = 0;
@@ -104,20 +115,30 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
     if (this.clienteLogado.cliente != null) {
       this.carrinhoService.getAllPedido().subscribe(dados => {
-        this.pedido = dados[0]
-        if (this.pedido == null || this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
-          this.pedidoService.deletePedido();
-          this.contador = new Contador();
-          this.contador = this.recebeContador;
+        this.pedido = dados[1]
+        console.log('dados 1: ', dados)
+        console.log('dados 2: ', dados[1])
+        if (this.pedido == undefined || this.pedido.key != 'pedido' ||
+          this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
+          if (this.produtoExiste != true) {
+            this.pedidoService.deletePedido();
+            this.contador = new Contador();
+            this.contador = this.recebeContador;
 
-          this.carrinho.nome = this.produto.nome;
-          this.carrinho.valor = this.produto.valor;
-          this.carrinho.quantidade = quantidade;
-          this.carrinho.total = total;
-          this.carrinho.linkImg = this.produto.imgPequena;
+            this.carrinho.nome = this.produto.nome;
+            this.carrinho.valor = this.produto.valor;
+            this.carrinho.quantidade = quantidade;
+            this.carrinho.total = total;
+            this.carrinho.linkImg = this.produto.imgPequena;
 
-          this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
-          this.voltaPagina();
+            this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
+            this.produto = new Produto();
+          } else {
+            this.produto = new Produto();
+            alert('Esse produto ja esta adicionado em seu carrinho, confira a quantidade desejada!')
+            this.router.navigate(['/carrinho/' + this.clienteLogado.cliente.id])
+          }
+
         } else {
           alert('Espere a entrega do pedido feito para adiconar novos produtos!')
           this.router.navigate(['/pedido/' + this.clienteLogado.cliente.id])

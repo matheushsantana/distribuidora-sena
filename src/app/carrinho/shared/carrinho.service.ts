@@ -4,13 +4,14 @@ import { Carrinho } from './carrinho';
 import { map } from 'rxjs/operators';
 import { Contador } from './contador';
 import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarrinhoService {
 
-  constructor(private db: AngularFireDatabase, private clienteLogado: ClienteLogado) { };
+  constructor(private db: AngularFireDatabase, private clienteLogado: ClienteLogado, private router: Router) { };
 
   ngOnInit() {
   }
@@ -27,6 +28,7 @@ export class CarrinhoService {
   }
 
   adicionaProduto(contador: Contador, carrinho: Carrinho) {
+    console.log('entrou add')
     var aux = contador.valor.toString()
     this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos').update(aux, carrinho)
       .catch((error: any) => {
@@ -34,6 +36,7 @@ export class CarrinhoService {
       });
     this.atualziaContador(contador);
     alert("Produto Adicionado");
+    this.router.navigate(['/carrinho', this.clienteLogado.cliente.id])
   }
 
   atualziaContador(contador: Contador) {
@@ -74,7 +77,7 @@ export class CarrinhoService {
   }
 
   getAllPedido() {
-    return this.db.list('cliente/' + this.clienteLogado.cliente.id + '/pedido')
+    return this.db.list('cliente/' + this.clienteLogado.cliente.id)
       .snapshotChanges()
       .pipe(
         map(changes => {

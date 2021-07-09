@@ -1,8 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
-import { ClienteLogado } from '../cliente/clienteLogado.service';
 import { Produto } from '../produtos/shared/produto';
 import { Pedido } from './shared/pedido';
 import { PedidoService } from './shared/pedido.service';
@@ -39,6 +36,9 @@ export class PedidoComponent implements OnInit {
     }, 2500);
 
     setTimeout(() => {
+      setInterval(() => {
+        this.barraStatus();
+      }, 10000)
       this.barraStatus();
     }, 3000)
     console.log('finalizou')
@@ -58,6 +58,7 @@ export class PedidoComponent implements OnInit {
     }
     if (String(this.statuspedido) == this.estado[3]) {
       barra.style.width = '100%'
+      barra.className = 'progress-bar progress-bar-striped bg-success'
     }
     if (String(this.statuspedido) == this.estado[4]) {
       barra.style.width = '100%'

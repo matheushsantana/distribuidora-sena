@@ -25,8 +25,6 @@ export class AppComponent {
   test: Observable<any>;
   dadosCliente: any;
   endereco: string = 'carregando';
-  ativo: string;
-  btnAtivo: boolean = false;
   ativaNav: boolean = true;
   admAutenticated: boolean = false;
 
@@ -52,7 +50,6 @@ export class AppComponent {
           } else {
             this.endereco = 'Adicionar Endereço...'
           }
-          this.btnEstado();
           this.ativaNav = true
         }, 2000);
       } else if(this.cliente.tipo === 'admin'){
@@ -71,11 +68,9 @@ export class AppComponent {
   verifica() {
     if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
       this.verificaPedido = true;
-      this.btnAtivo = false;
       this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
     } else {
       this.verificaPedido = false;
-      this.btnAtivo = false;
       this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
     }
   }
@@ -84,15 +79,4 @@ export class AppComponent {
     console.log('funcionou')
   }
 
-  btnEstado(){
-    if(this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined){
-      this.btnAtivo = true;
-      this.ativo = 'Acompanhe seu Pedido...'
-    } else if( (this.clienteVerificaCadastro.pedido === null || this.clienteVerificaCadastro.pedido === undefined) && (this.clienteVerificaCadastro.carrinho === null || this.clienteVerificaCadastro.carrinho === undefined) ){
-      this.btnAtivo = false;
-    } else if(this.clienteVerificaCadastro.carrinho != null || this.clienteVerificaCadastro.carrinho != undefined){
-      this.btnAtivo = true;
-      this.ativo = 'Ver seu Carrinho...'
-    }
-  }
 }

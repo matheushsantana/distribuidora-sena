@@ -8,8 +8,8 @@
         </div>
         <div class="col-12">
             <label for="inputTelefone" class="form-label">Telefone</label>
-            <input type="text" class="form-control" placeholder="Ex. (65)96585-5524"
-            name="inputTelefone" [(ngModel)]="cliente.telefone">
+            <input type="text" class="form-control" placeholder="(00)00000-0000"
+            name="inputTelefone" [(ngModel)]="cliente.telefone" mask="(00)00000-0000">
         </div>
         <div class="col-12">
             <label for="inputEndereco" class="form-label">Endereço</label>
@@ -26,8 +26,9 @@
             <input type="text" class="form-control" 
             name="inputBairro" [(ngModel)]="cliente.enderecoBairro">
         </div>
-        <div class="col-12">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <button type="submit" class="btn btn-primary">Atualizar</button>
+            <button type="button" class="btn btn-danger" (click)="voltaPagina()">Cancelar</button>
         </div>
     </form>
 </div>

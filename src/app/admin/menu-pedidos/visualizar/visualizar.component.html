@@ -12,7 +12,7 @@
         <p class="card-text" *ngFor="let produto of produtosPedido | async" id="produtos">({{ produto.quantidade }}){{ produto.nome }}</p>
         <div class="d-grid gap-2 d-md-flex" *ngIf="mostraBtn != false" id="btn-update-pedido">      
             <button class="btn btn-success" type="button" (click)="updatePedido()">{{ btn }}</button>
-            <button class="btn btn-danger" type="button" (click)="cancelarPedido()">Cancelar Pedido</button>       
+            <button class="btn btn-danger" type="button" (click)="cancelarPedido()">Recusar Pedido</button>       
         </div>
         <div class="d-grid gap-2 d-md-flex">      
             <button class="btn btn-primary" type="button" (click)="fechar()">Minimizar Pedido</button>        

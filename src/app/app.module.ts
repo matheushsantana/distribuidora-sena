@@ -17,6 +17,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { ClienteComponent } from './cliente/cliente.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AuthGuard } from './guards/auth.guard';
     FormsModule,
     Ng2SearchPipeModule,
     HttpClientModule,
-    LazyLoadImageModule
+    LazyLoadImageModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

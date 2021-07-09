@@ -31,7 +31,8 @@ export class CarrinhoComponent implements OnInit {
   quantidadeProd: number;
   pedido: any;
   metodoPagamento: string = 'Selecione a forma de pagamento';
-  contadorProd: Contador
+  contadorProd: Contador;
+  enderecoCliente: string;
 
   data = new Date();
 
@@ -47,11 +48,18 @@ export class CarrinhoComponent implements OnInit {
       this.carrinho = this.carrinhoService.getAllProdCarrinho();
       this.carregando = true;
       this.totalPedido()
+      this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', ' 
+      + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
+       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
     }, 1000);
   }
 
   voltaPagina() {
     this.location.back();
+  }
+  
+  atualizaEndereco(){
+    this.router.navigate(['/cadastro/cliente'])
   }
 
   quantidadeAltera(valor: number, key: number) {
