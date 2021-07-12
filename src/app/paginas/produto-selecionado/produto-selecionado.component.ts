@@ -8,6 +8,8 @@ import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
 import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { Router } from '@angular/router';
 import { PedidoService } from 'src/app/pedido/shared/pedido.service';
+import { AppComponent } from 'src/app/app.component';
+import { ClienteVerificaCadastro } from 'src/app/cliente/clienteVefificaCadastro.service';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -35,7 +37,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService,
     private clienteLogado: ClienteLogado, private router: Router, private pedidoService: PedidoService,
-    private location: Location) { }
+    private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro) { }
 
   ngOnInit(): void {
     this.produto = new Produto();
@@ -120,6 +122,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
         console.log('dados 2: ', dados[1])
         if (this.pedido == undefined || this.pedido.key != 'pedido' ||
           this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
+          this.clienteVerificaCadastro.pedido = null;
           if (this.produtoExiste != true) {
             this.pedidoService.deletePedido();
             this.contador = new Contador();

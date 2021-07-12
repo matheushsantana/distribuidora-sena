@@ -1,0 +1,88 @@
+#divisao{
+    width: 100%;
+    height: 7px;
+    background-color: rgba(68, 68, 68, 0.164);
+}
+
+#divisao1{
+    width: 100%;
+    height: 2px;
+    background-color: rgba(68, 68, 68, 0.164);
+}
+
+#btn-voltar{
+    width: 30px;
+    filter: contrast(1%);
+    margin-right: 5px;
+}
+
+.voltar{
+    padding: 7px;
+}
+
+.voltar a{
+    font-weight: bold;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+}
+
+#titu{
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.507);
+    margin-top: 10px;
+}
+
+#card-prod{
+    white-space: normal;
+}
+
+#desc-prod{
+    font-size: 14px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+
+div.scrollProdutos {
+    overflow: auto;
+    white-space: nowrap;
+    padding: 0%;
+  }
+  
+div.scrollProdutos #card-prod {
+    display: inline-block;
+}
+
+#seta-direita{
+    display: inline-block;
+    position: relative;
+    top: -50px;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+#img-seta-direita{
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.438) 1px 1px 5px;
+    width: 55px;
+    padding: 10px;
+}
+
+#veja-tudo{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}

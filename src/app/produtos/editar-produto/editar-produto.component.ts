@@ -39,4 +39,11 @@ export class EditarProdutoComponent implements OnInit {
     this.produto = new Produto();
   }
 
+  delete(key: string){
+    var aux = confirm("Tem certeza que deseja apagar esse produto? os dados seram perdidos para sempre!")
+    if(aux == true){
+      this.produtoService.deleteProduto(key);
+    }
+  }
+
 }

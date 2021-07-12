@@ -1,5 +1,10 @@
 <div class="container">
-    <div class="card mb-3" *ngFor="let cliente of clientes | async">
+    <form class="d-flex" id="superior">
+        <input type="search" class="form-control me-2" placeholder="Pesquise um cliente" id="clientePesquisado"
+            name="clientePesquisado" [(ngModel)]="clientePesquisado">
+            <button class="btn btn-success" type="button" id="btn-newProd" [routerLink]="['/produtos/cadastro']">Adicionar</button>
+    </form>
+    <div class="card mb-3" *ngFor="let cliente of clientes | async | filter: clientePesquisado">
         <div class="row g-0">
             <div class="col-md-12" id="dados">
                 <a><strong>Nome:</strong> {{ cliente.dados.nome }}</a><br>

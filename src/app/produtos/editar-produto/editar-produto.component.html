@@ -24,27 +24,31 @@
                         [(ngModel)]="produto.valor">
                 </div>
             </div>
-            <div class="col-12" style="display: none;">
-                <input type="text" class="form-control" name="linkImg" [(ngModel)]="produto.imgGrande">
-            </div>
             <div class="col-12">
                 <label for="categoriaProduto" class="form-label"><strong>Tipo do Produto</strong></label>
                 <select class="form-select" name="categoriaProduto" [(ngModel)]="produto.categoria">
-                    <option selected>Selecione...</option>
-                    <option value="Cerveja1">Cerveja</option>
-                    <option value="vinho1">Vinho</option>
-                    <option value="mercearia1">Mercearia</option>
-                    <option value="destilado1">Destilado</option>
-                    <option value="sem alcool1">Sem Alcool</option>
-                    <option value="tabacaria1">Tabacaria</option>
-
+                    <option value="Cerveja">Cerveja</option>
+                    <option value="vinho seco">Vinho Seco</option>
+                    <option value="vinho suave">Vinho Suave</option>
+                    <option value="mercearia">Mercearia</option>
+                    <option value="whisky">Whisky</option>
+                    <option value="vodka">Vodka</option>
+                    <option value="cachaca">Cachaça</option>
+                    <option value="destilado gin">Gin</option>
+                    <option value="refrigerante">refrigerante</option>
+                    <option value="agua mineral">Água</option>
+                    <option value="suco">Suco</option>
+                    <option value="cerveja sem alcool">Cerveja sem Alcool</option>
+                    <option value="energetio">Energetico</option>
+                    <option value="tabacaria">Tabacaria</option>
                 </select>
             </div><br>
 
             
             <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end" id="btn-submit">
                 <button type="submit" class="btn btn-success">Atualizar</button>
-                <button class="btn btn-danger" [routerLink]="['/produtos']">Cancelar</button>
+                <button class="btn btn-danger" type="button" (click)="delete(key)">Deletar</button>
+                <button class="btn btn-primary" type="button" [routerLink]="['/admin/menu']">Voltar</button>
             </div>
         </form>
     </div>

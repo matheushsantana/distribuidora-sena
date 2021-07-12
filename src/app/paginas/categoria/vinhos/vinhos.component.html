@@ -1,1 +1,30 @@
-<p>vinhos works!</p>
+<div class="voltar">
+    <a (click)="voltaPagina()"><img id="btn-voltar" src="assets/btn-voltar.png">Voltar</a>
+</div>
+<div id="divisao1"></div>
+<div class="container">
+    <p id="titu"><strong>SECO</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'vinho seco'">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgPequena" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div id="divisao"></div>
+    <p id="titu"><strong>SUAVE</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']"
+            *ngFor="let produto of produtos | async | filter:'skol' |filter:'vinho suave'">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgPequena" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+</div>

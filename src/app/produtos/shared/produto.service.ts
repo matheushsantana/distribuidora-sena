@@ -17,7 +17,7 @@ export class ProdutoService {
       console.log(result.key);
     });
     alert("Cadastrado com Sucesso!");
-    this.router.navigate(['/produtos']);
+    this.router.navigate(['/admin/menu']);
   }
 
   updateProduto(produto: Produto, key: string){
@@ -26,7 +26,7 @@ export class ProdutoService {
       console.error(error);
     });
     alert("Editado com Sucesso!");
-    this.router.navigate(['/produtos']);
+    this.router.navigate(['/admin/menu']);
   }
 
   getAllProduto(){
@@ -42,5 +42,6 @@ export class ProdutoService {
   deleteProduto(key: string){
     this.db.object(`produto/${key}`).remove();
     alert("Apagado com Sucesso!")
+    this.router.navigate(['/admin/menu'])
   }
 }

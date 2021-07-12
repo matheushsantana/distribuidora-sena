@@ -9,7 +9,6 @@ import { environment } from "src/environments/environment";
 
 import { CadastroProdutosComponent } from "./cadastro-produtos/cadastro-produtos.component";
 import { EditarProdutoComponent } from "./editar-produto/editar-produto.component";
-import { ListaProdutosComponent } from "./lista-produtos/lista-produtos.component";
 import { ProdutosRoutingModule } from "./produtos.routing.module";
 import { ProdutoService } from "./shared/produto.service";
 import { MyFilesComponent } from './my-files/my-files.component';
@@ -31,7 +30,6 @@ import { DropzoneComponent } from './upload-files/dropzone/dropzone.component';
     declarations: [
         CadastroProdutosComponent,
         EditarProdutoComponent,
-        ListaProdutosComponent,
         MyFilesComponent,
         UploadFilesComponent,
         DropzoneComponent,

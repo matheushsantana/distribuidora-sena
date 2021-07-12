@@ -10,6 +10,7 @@ import { ClienteService } from 'src/app/cliente/shared/cliente.service';
 export class MenuClientesComponent implements OnInit {
 
   clientes: Observable<any>;
+  clientePesquisado: any;
 
   constructor(private clienteService: ClienteService) { }
 
