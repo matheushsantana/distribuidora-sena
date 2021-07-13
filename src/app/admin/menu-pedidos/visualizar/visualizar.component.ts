@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Pedido } from 'src/app/pedido/shared/pedido';
 import { PedidoDataService } from 'src/app/pedido/shared/pedido-data.service';
+import { PedidoService } from 'src/app/pedido/shared/pedido.service';
 import { MenuPedidosComponent } from '../menu-pedidos.component';
-import { PedidoFinalizadoService } from '../pedidosFinalizados.service';
 
 @Component({
   selector: 'app-visualizar',
@@ -22,7 +22,7 @@ export class VisualizarComponent implements OnInit {
   mostraBtn: boolean = true;
 
   constructor(private db: AngularFireDatabase, private pedidoDataService: PedidoDataService, private menuPedidos: MenuPedidosComponent,
-    private pedidoFinalizadoService: PedidoFinalizadoService) { }
+    private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
     this.pedido = new Pedido();
@@ -88,13 +88,13 @@ export class VisualizarComponent implements OnInit {
     for (var i = 0; i < 4; i++) {
       if (this.estado[i] == this.pedido.estado) {
         this.pedido.estado = this.estado[i + 1];
+        if (this.pedido.estado == 'Pedido finalizado...') {
+          this.pedidoService.salvaPedidoFinalizado(this.pedido)
+        }
         this.db.list('cliente/' + this.pedido.clienteId).update('pedido', this.pedido)
           .catch((error: any) => {
             console.error(error);
           });
-        if (this.pedido.estado == 'Pedido finalizado...') {
-          this.pedidoFinalizadoService.insertPedido(this.pedido)
-        }
         this.menuPedidos.mostraDetalhes = false
         break
       }

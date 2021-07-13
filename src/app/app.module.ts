@@ -19,6 +19,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { NgxMaskModule } from 'ngx-mask';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +39,7 @@ import { NgxMaskModule } from 'ngx-mask';
     Ng2SearchPipeModule,
     HttpClientModule,
     LazyLoadImageModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

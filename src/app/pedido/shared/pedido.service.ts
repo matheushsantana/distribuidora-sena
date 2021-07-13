@@ -49,4 +49,9 @@ export class PedidoService {
   deletePedido(){
     this.db.object('cliente/' + this.clienteLogado.cliente.id + '/pedido').remove();
   }
+
+  salvaPedidoFinalizado(pedido: Pedido){
+    var data: Date = new Date();
+    this.db.list('pedidosFinalizados/' + `${data.getFullYear()}/${(data.getMonth() + 1)}`).push(pedido)
+  }
 }

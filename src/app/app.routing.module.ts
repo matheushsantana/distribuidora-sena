@@ -18,7 +18,7 @@ const appRoutes: Routes = [
   { path: 'produto-selecionado', component: ProdutoSelecionadoComponent, canActivate: [AuthGuard] },
   { path: 'carrinho/:id', component: CarrinhoComponent, canActivate: [AuthGuard] },
   { path: 'pedido/:id', component: PedidoComponent, canActivate: [AuthGuard] },
-  { path: 'cadastro/cliente', component: ClienteComponent, canActivate: [AuthGuard] }
+  { path: 'cadastro/cliente', component: ClienteComponent, canActivate: [AuthGuard] },
   
 ];
 

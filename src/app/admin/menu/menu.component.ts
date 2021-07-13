@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  opcoes = ['LISTA DE CLIENTES','LISTA DE PRODUTOS','','PEDIDOS CONCLUIDOS']
+  opcoes = ['LISTA DE CLIENTES','LISTA DE PRODUTOS','','RELATORIO DE VENDAS']
   selecionado: string = 'BEM VINDO AO MENU ADMIN';
   component= [false, false, false, false,]
-  nomes = ['clientes', 'produtos', 'pedidos', 'concluidos']
+  nomes = ['clientes', 'produtos', 'pedidos', 'relatorio']
 
   constructor() { }
 
