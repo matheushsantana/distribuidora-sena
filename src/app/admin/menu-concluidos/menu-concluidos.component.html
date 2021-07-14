@@ -1,5 +1,14 @@
 <div class="container">
-  <select class="form-select" aria-label="Default select example">
-    <option *ngFor=" let data of opcoes">{{ data }}</option>
-  </select>
+  <div class="row">
+    <div class="col-8">
+      <select class="form-select" id="autoSizingSelect" [(ngModel)]="dataSelecionada">
+        <option *ngFor=" let data of opcoes">{{ data }}</option>
+      </select>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-success" (click)="carregar()">Carregar</button>
+    </div>
+  </div>
+
+  <h5>Total Vendido: R${{ totalVendido | number : "1.2" }}</h5>
 </div>
