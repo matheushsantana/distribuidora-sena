@@ -1,0 +1,25 @@
+#car-info{
+    margin-top: 10px;
+}
+
+#todo{
+    width: 100%;
+}
+
+#valor{
+    position: relative;
+    right: 0%;
+}
+
+#prodValor{
+    position: relative;
+    width: 100%;
+}
+
+#valor{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    font-weight: 600;
+    color: black;
+}

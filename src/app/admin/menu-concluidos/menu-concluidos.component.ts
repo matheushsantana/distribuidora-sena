@@ -1,8 +1,9 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Carrinho } from 'src/app/carrinho/shared/carrinho';
+import { Pedido } from 'src/app/pedido/shared/pedido';
 
 @Component({
   selector: 'app-menu-concluidos',
@@ -14,16 +15,21 @@ export class MenuConcluidosComponent implements OnInit {
   data: Date = new Date();
   dataSelecionada: any;
 
-  dataInalguracao  = [7, 2021];
+  dataInalguracao  = [6, 2021];
   dataAtual = [Number((this.data.getMonth() + 1)),  Number(this.data.getFullYear())];
   mes = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
   opcoes: any[] = [];
   auxMes: number;
   auxAno: number;
   mesSelect: Observable<any>;
+  auxData: any;
+  mostraCard = false;
+  vendas: any[] = [];
 
-  totalVendido: number = 0;
-  maisVendidos: any[];
+  totalVendido: number[] = [];
+  totalVendidoCartao: number[] = [];
+  totalVendidoDinheiro: number[] = [];
+  maisVendidos: any = [];
 
   constructor(private db: AngularFireDatabase){}
 
@@ -111,6 +117,7 @@ export class MenuConcluidosComponent implements OnInit {
     for(var i = 1; i <= 12; i++){
       if(this.mes[i] == aux[2]){
         var mesNumber = i;
+        this.auxData = this.mes[i] + '/' + aux[4]
       }
     }
 
@@ -125,12 +132,37 @@ export class MenuConcluidosComponent implements OnInit {
   }
 
   calcula(){
-    this.mesSelect.subscribe(dados => {
-      console.log('dados', dados)
+    var i: number;
+    var j: number;
+    var k: number;
+    var existe: boolean = false
 
-      for(var i = 0; i < dados.length; i++)
-      this.totalVendido += dados[i].valor;
-      console.log('total: ', this.totalVendido)
+    this.totalVendido = [0, 0];
+    this.totalVendidoCartao = [0 , 0];
+    this.totalVendidoDinheiro = [0, 0];    
+
+    this.mostraCard = true;
+    this.mesSelect.subscribe(dados => {
+      this.vendas = dados
+
+      for(i = 0; i < dados.length; i++){
+        console.log('entrou venda')
+        this.totalVendido[1] +=  this.vendas[i].valor;
+        this.totalVendido[0]++
+
+        var tamanho1 = (Object.keys(this.vendas[i].produtos).length)
+        var tamanho2 = (Object.keys(this.maisVendidos).length)
+          console.log('tamanho mais vendidos: ', tamanho2)
+          console.log('quantidade de produtos: ', tamanho1)
+        
+        if(dados[i].metodoPag == "Dinheiro"){
+          this.totalVendidoDinheiro[1] +=  this.vendas[i].valor
+          this.totalVendidoDinheiro[0]++ 
+        }else{
+          this.totalVendidoCartao[1] +=  this.vendas[i].valor
+          this.totalVendidoCartao[0]++
+        }
+      }
     })
   }
 

@@ -10,5 +10,24 @@
     </div>
   </div>
 
-  <h5>Total Vendido: R${{ totalVendido | number : "1.2" }}</h5>
+
+  <div class="card" id="car-info" *ngIf="mostraCard">
+    <div class="card-body">
+      <h5 class="card-title">{{ auxData }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Total de Vendas</h6>
+      <div id="prodValor">
+        <p>Dinheiro:</p>
+        <p id="valor">R${{ totalVendidoDinheiro[1] | number : "1.2" }} | {{ totalVendidoDinheiro[0] }} - Vendas</p>
+      </div>
+      <div id="prodValor">
+        <p>Cartão:</p>
+        <p id="valor">R${{ totalVendidoCartao[1] | number : "1.2" }} | {{ totalVendidoCartao[0] }} - Vendas</p>
+      </div>  
+      <div id="prodValor">
+        <p>Total:</p>
+        <p id="valor">R${{ totalVendido[1] | number : "1.2" }} | {{ totalVendido[0] }} - Vendas</p>
+      </div>
+    </div>
+  </div>
+
 </div>

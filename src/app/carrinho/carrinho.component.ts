@@ -175,7 +175,7 @@ export class CarrinhoComponent implements OnInit {
             this.pedido.clienteNome = this.clienteLogado.cliente.nome;
             this.pedido.clienteNumero = this.clienteVerificaCadastro.dadosCliente.telefone;
             this.pedido.data = this.data.getDate() + '/' + (this.data.getMonth() + 1) + '/' + this.data.getFullYear() + ' - ' + this.data.getHours() + ':' + this.data.getMinutes();
-            this.pedido.metodoPag = 'Dinheiro';
+            this.pedido.metodoPag = this.metodoPagamento;
             this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
             this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
             this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
