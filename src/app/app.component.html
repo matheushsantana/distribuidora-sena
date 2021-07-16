@@ -33,7 +33,7 @@
             <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
           </div>
           <a id="receber">Receber agora em</a>
-          <a id="endereco"> {{ endereco }}</a>
+          <a id="endereco" (click)="atualizaEndereco()"> {{ endereco }}</a>
         </div>
       </ng-container>
     </div>

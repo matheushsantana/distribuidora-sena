@@ -15,4 +15,5 @@ export class Pedido {
     metodoPag: string;
     produtos: Carrinho[];
     estado: string;
+    instrucoes: string;
 }

@@ -33,6 +33,7 @@ export class CarrinhoComponent implements OnInit {
   metodoPagamento: string = 'Selecione a forma de pagamento';
   contadorProd: Contador;
   enderecoCliente: string;
+  instrucoes: string;
 
   data = new Date();
 
@@ -44,21 +45,19 @@ export class CarrinhoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.carrinho = this.carrinhoService.getAllProdCarrinho();
-      this.carregando = true;
-      this.totalPedido()
-      this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', ' 
+    this.carrinho = this.carrinhoService.getAllProdCarrinho();
+    this.carregando = true;
+    this.totalPedido()
+    this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
-       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
-    }, 1000);
+      + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
   }
 
   voltaPagina() {
     this.location.back();
   }
-  
-  atualizaEndereco(){
+
+  atualizaEndereco() {
     this.router.navigate(['/cadastro/cliente'])
   }
 
@@ -75,11 +74,11 @@ export class CarrinhoComponent implements OnInit {
 
           this.produto = new Carrinho();
           this.produto.nome = this.produtos[i].nome,
-          this.produto.linkImg = this.produtos[i].linkImg,
-          this.produto.quantidade = this.produtos[i].quantidade,
-          this.produto.total = this.produtos[i].total,
-          this.produto.valor = this.produtos[i].valor,
-          this.carrinhoService.atualizaCarrinho(i, this.produto)
+            this.produto.linkImg = this.produtos[i].linkImg,
+            this.produto.quantidade = this.produtos[i].quantidade,
+            this.produto.total = this.produtos[i].total,
+            this.produto.valor = this.produtos[i].valor,
+            this.carrinhoService.atualizaCarrinho(i, this.produto)
         }
 
       } else if (valor === 0) {
@@ -100,7 +99,7 @@ export class CarrinhoComponent implements OnInit {
         }
       }
     }
-    
+
   }
 
   pegaProduros() {
@@ -163,8 +162,9 @@ export class CarrinhoComponent implements OnInit {
   }
 
   fazerPedido() {
-
     if (this.clienteVerificaCadastro.aux != null) {
+      if (this.qtd != 0) {
+        console.log('test', this.carrinho)
         if (this.metodoPagamento != 'Selecione a forma de pagamento') {
           this.carrinhoService.getContadorPedido().subscribe(contador => {
             this.pedido = new Pedido();
@@ -176,6 +176,7 @@ export class CarrinhoComponent implements OnInit {
             this.pedido.clienteNumero = this.clienteVerificaCadastro.dadosCliente.telefone;
             this.pedido.data = this.data.getDate() + '/' + (this.data.getMonth() + 1) + '/' + this.data.getFullYear() + ' - ' + this.data.getHours() + ':' + this.data.getMinutes();
             this.pedido.metodoPag = this.metodoPagamento;
+            this.pedido.instrucoes = this.instrucoes;
             this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
             this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
             this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
@@ -186,13 +187,21 @@ export class CarrinhoComponent implements OnInit {
             this.pedidoService.insertPedido(this.pedido);
             this.carrinhoService.atualizarContadorPedido(this.contadorProd);
             this.carrinhoService.deletarCarrinho();
+            return;
           });
         } else {
-          alert('Escolha a forma de Pagamento!')
+          alert('Escolha a forma de Pagamento!');
+          return;
         }
+      } else {
+        alert('Adicione Pelo menos um produto!');
+        this.router.navigate(['/']);
+      }
     } else {
-      alert('Complete seu cadastro para Continuar')
-      this.router.navigate(['/cadastro/cliente'])
+      alert('Complete seu cadastro para Continuar');
+      this.router.navigate(['/cadastro/cliente']);
+      return;
+
     }
   }
 }

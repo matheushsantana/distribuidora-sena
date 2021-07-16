@@ -38,7 +38,8 @@ export class VisualizarComponent implements OnInit {
         this.pedido.produtos = data.pedido.produtos,
         this.pedido.valor = data.pedido.valor,
         this.pedido.pedidoId = data.pedido.pedidoId,
-        this.pedido.clienteId = data.pedido.clienteId
+        this.pedido.clienteId = data.pedido.clienteId,
+        this.pedido.instrucoes = data.pedido.instrucoes
       this.produtosPedido = this.getAllProdPedido();
       console.log(this.pedido)
       this.mudaBotao();
@@ -46,16 +47,12 @@ export class VisualizarComponent implements OnInit {
   }
 
   mudaBotao() {
-    console.log('entrou muda btn')
     for (var i = 0; i < 3; i++) {
-      console.log('entrou for:', i)
       if (this.pedido.estado == this.estado[i] && this.pedido.estado != this.estado[3]) {
-        console.log('entroi if')
         this.btn = this.opcoesBtn[i];
         this.mostraBtn = true;
         break
       } else {
-        console.log('entrou else')
         this.mostraBtn = false;
       }
     }

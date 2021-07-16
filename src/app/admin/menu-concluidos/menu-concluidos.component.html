@@ -22,11 +22,26 @@
       <div id="prodValor">
         <p>Cartão:</p>
         <p id="valor">R${{ totalVendidoCartao[1] | number : "1.2" }} | {{ totalVendidoCartao[0] }} - Vendas</p>
-      </div>  
+      </div>
       <div id="prodValor">
         <p>Total:</p>
         <p id="valor">R${{ totalVendido[1] | number : "1.2" }} | {{ totalVendido[0] }} - Vendas</p>
       </div>
+      <h6 class="card-subtitle mb-2 text-muted">Produtos Vendidos</h6>
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Quantidade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let produto of maisVendido">
+            <td>{{ produto.nome }}</td>
+            <td id="qtd">{{ produto.quantidade }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 

@@ -17,9 +17,9 @@ export class AuthService {
 
   constructor(private afs: AngularFirestore, private afAuth: AngularFireAuth) { }
 
-  register(user: User): Observable<boolean> {
+  register(user: User, senha: string): Observable<boolean> {
     return from(this.afAuth
-      .createUserWithEmailAndPassword(user.email, user.password))
+      .createUserWithEmailAndPassword(user.email, senha))
       .pipe(
         switchMap((u: firebase.auth.UserCredential) =>
           this.userCollection.doc(u.user.uid)

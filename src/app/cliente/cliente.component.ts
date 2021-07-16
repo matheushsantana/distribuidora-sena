@@ -23,6 +23,9 @@ export class ClienteComponent implements OnInit {
     this.cliente.id = this.clienteLogado.cliente.id;
     this.cliente.nome = this.clienteLogado.cliente.nome;
     this.cliente.telefone = this.clienteVerificaCadastro.dadosCliente.telefone;
+    this.cliente.enderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
+    this.cliente.enderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
+    this.cliente.enderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
   }
 
   onSubmit() {

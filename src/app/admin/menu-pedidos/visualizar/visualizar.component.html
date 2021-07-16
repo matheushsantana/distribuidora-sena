@@ -7,6 +7,7 @@
         <p class="card-text"><strong>Telefone:</strong> {{ pedido.clienteNumero | mask: '(00) 00000-0000' }}</p>
         <p class="card-text"><strong>Metodo de pagamento:</strong> {{ pedido.metodoPag }}</p>
         <p class="card-text"><strong>Valor:</strong> R${{ pedido.valor | number : "1.2" }}</p>
+        <p class="card-text"><strong>Observação:</strong> {{ pedido.instrucoes }}</p>
         <p class="card-text"><strong>produtos:</strong></p>
 
         <p class="card-text" *ngFor="let produto of produtosPedido | async" id="produtos">({{ produto.quantidade }}){{ produto.nome }}</p>

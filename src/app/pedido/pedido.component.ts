@@ -24,24 +24,21 @@ export class PedidoComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregando = false;
-    setTimeout(() => {
-        this.pedidoService.getAllPedido().subscribe(dados => {
-          this.pedido = dados[1]
-          this.infoPedido = dados[1]
-          this.carregando = true;
-      })
-      this.pedidoService.getAllPedidoProdutos().subscribe(dados => {
-            this.produtos = dados
-      });
-    }, 2500);
+    this.pedidoService.getAllPedido().subscribe(dados => {
+      this.pedido = dados[1]
+      this.infoPedido = dados[1]
+      this.carregando = true;
+    })
+    this.pedidoService.getAllPedidoProdutos().subscribe(dados => {
+      this.produtos = dados
+    });
 
     setTimeout(() => {
       setInterval(() => {
         this.barraStatus();
       }, 10000)
       this.barraStatus();
-    }, 3000)
-    console.log('finalizou')
+    }, 500)
   }
 
   barraStatus() {
@@ -59,10 +56,16 @@ export class PedidoComponent implements OnInit {
     if (String(this.statuspedido) == this.estado[3]) {
       barra.style.width = '100%'
       barra.className = 'progress-bar progress-bar-striped bg-success'
+      setTimeout(() => {
+        window.location.href = "/"
+      }, 2500)
     }
     if (String(this.statuspedido) == this.estado[4]) {
       barra.style.width = '100%'
       barra.className = 'progress-bar progress-bar-striped bg-danger'
+      setTimeout(() => {
+        window.location.href = "/"
+      }, 2500)
     }
   }
 

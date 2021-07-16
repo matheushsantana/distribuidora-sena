@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'produtos', loadChildren: () => import('./produtos/produtos.module').then(m => m.ProdutosModule) },
   { path: 'categoria', loadChildren: () => import('./paginas/categoria/categoria.module').then(m => m.CategoriaModule) },
   { path: 'pesquisa/:produto', component: ResultadoPesquisaComponent },
-  { path: 'produto-selecionado', component: ProdutoSelecionadoComponent, canActivate: [AuthGuard] },
+  { path: 'produto-selecionado', component: ProdutoSelecionadoComponent },
   { path: 'carrinho/:id', component: CarrinhoComponent, canActivate: [AuthGuard] },
   { path: 'pedido/:id', component: PedidoComponent, canActivate: [AuthGuard] },
   { path: 'cadastro/cliente', component: ClienteComponent, canActivate: [AuthGuard] },

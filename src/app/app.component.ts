@@ -79,4 +79,8 @@ export class AppComponent {
     console.log('funcionou')
   }
 
+  atualizaEndereco(){
+    this.router.navigate(['/cadastro/cliente'])
+  }
+
 }

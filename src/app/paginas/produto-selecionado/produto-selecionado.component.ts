@@ -42,7 +42,9 @@ export class ProdutoSelecionadoComponent implements OnInit {
   ngOnInit(): void {
     this.produto = new Produto();
     this.produtoDataService.currentProduto.subscribe(data => {
-      if (data.produto && data.key) {
+      if(data.produto == null){
+        window.location.href = '/'
+      }else{
         this.produto = new Produto();
         this.produto.nome = data.produto.nome;
         this.produto.valor = data.produto.valor;
