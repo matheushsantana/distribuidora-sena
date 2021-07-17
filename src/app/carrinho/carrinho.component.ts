@@ -176,7 +176,11 @@ export class CarrinhoComponent implements OnInit {
             this.pedido.clienteNumero = this.clienteVerificaCadastro.dadosCliente.telefone;
             this.pedido.data = this.data.getDate() + '/' + (this.data.getMonth() + 1) + '/' + this.data.getFullYear() + ' - ' + this.data.getHours() + ':' + this.data.getMinutes();
             this.pedido.metodoPag = this.metodoPagamento;
-            this.pedido.instrucoes = this.instrucoes;
+            if(this.instrucoes == undefined || this.instrucoes == null){
+              this.pedido.instrucoes = 'Sem instruções...';
+            } else {
+              this.pedido.instrucoes = this.instrucoes;
+            }
             this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
             this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
             this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
