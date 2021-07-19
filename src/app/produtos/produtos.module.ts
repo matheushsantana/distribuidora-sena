@@ -11,9 +11,7 @@ import { CadastroProdutosComponent } from "./cadastro-produtos/cadastro-produtos
 import { EditarProdutoComponent } from "./editar-produto/editar-produto.component";
 import { ProdutosRoutingModule } from "./produtos.routing.module";
 import { ProdutoService } from "./shared/produto.service";
-import { MyFilesComponent } from './my-files/my-files.component';
-import { UploadFilesComponent } from './upload-files/upload-files.component';
-import { DropzoneComponent } from './upload-files/dropzone/dropzone.component';
+import { DropzoneComponent } from './cadastro-produtos/dropzone/dropzone.component';
 
 
 @NgModule({
@@ -30,8 +28,6 @@ import { DropzoneComponent } from './upload-files/dropzone/dropzone.component';
     declarations: [
         CadastroProdutosComponent,
         EditarProdutoComponent,
-        MyFilesComponent,
-        UploadFilesComponent,
         DropzoneComponent,
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

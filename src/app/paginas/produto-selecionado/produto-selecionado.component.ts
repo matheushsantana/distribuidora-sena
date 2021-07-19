@@ -49,8 +49,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.produto.nome = data.produto.nome;
         this.produto.valor = data.produto.valor;
         this.produto.categoria = data.produto.categoria;
-        this.produto.imgGrande = data.produto.imgGrande;
-        this.produto.imgPequena = data.produto.imgPequena;
+        this.produto.imgProduto = data.produto.imgProduto;
         this.key = data.key;
         this.total = this.produto.valor;
       }
@@ -134,7 +133,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
             this.carrinho.valor = this.produto.valor;
             this.carrinho.quantidade = quantidade;
             this.carrinho.total = total;
-            this.carrinho.linkImg = this.produto.imgPequena;
+            this.carrinho.linkImg = this.produto.imgProduto;
 
             this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
             this.produto = new Produto();

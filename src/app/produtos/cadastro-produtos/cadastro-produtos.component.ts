@@ -15,12 +15,16 @@ export class CadastroProdutosComponent implements OnInit {
   key: string = '';
 
   files: FileEntry[] = [];
-  @Output() droppedfiles = new EventEmitter<FileList>();
+
+  escondeBotao = true;
+  nameFile = true;
+
 
   constructor(private produtoService: ProdutoService, private filesService: FilesService) { }
 
   ngOnInit() {
     this.produto = new Produto();
+    this.produto.imgProduto = 'assets/produto-sem-imagem.png';
   }
 
   onSubmit() {
@@ -29,28 +33,38 @@ export class CadastroProdutosComponent implements OnInit {
   }
 
   onDropFiles(files: FileList){
+    this.escondeBotao = true;
+    this.nameFile = true;
     this.files.splice(0, this.files.length)
-    for (let i=0; i< files.length; i++)
+    for (let i=0; i< files.length; i++){
       this.files.push({
         file: files.item(i), percentage: null, uploading: null,
         bytesuploaded: null, canceled: null, error: null, finished: null,
         pauser: null, state: null, task: null
       });
-  }
-
-  selectEvent(event: DragEvent){
-    event.preventDefault();
-    this.droppedfiles.emit(event.dataTransfer.files)
+    }
   }
 
   removeFileFromList(i){
     this.files.splice(i, 1) 
   }
 
-  uploadAll(){
-    for(let i=0; i < this.files.length; i++)
-      this.filesService.upload(this.files[i]);
+  deletarFoto(){
+    this.filesService.deleteFile(this.produto.imgProduto)
+    this.escondeBotao = true;
+    this.produto.imgProduto ='assets/produto-sem-imagem.png';
+    this.nameFile = false;
   }
 
+  uploadAll(){
+    for(let i=0; i < this.files.length; i++){
+      this.filesService.upload(this.files[i], this.produto.categoria);
+    }
+    this.escondeBotao = false;
+    
+    setTimeout(() => {
+      this.produto.imgProduto = this.filesService.urlfotoProd;
+    }, 2000)
+  }
 
 }

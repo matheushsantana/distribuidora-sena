@@ -58,6 +58,7 @@ export class AppComponent {
         this.router.navigate(['/admin/menu'])
       }
     })
+    //this.localizacao();
   }
 
   logout() {
@@ -82,5 +83,20 @@ export class AppComponent {
   atualizaEndereco(){
     this.router.navigate(['/cadastro/cliente'])
   }
+
+  /*localizacao(){
+    if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(this.showPosition);
+    }
+    else{
+      console.log('navegador não suporta!')
+    }
+  }
+
+  showPosition(position){
+    console.log('loc',"Latitude: " + position.coords.latitude + " " +
+    "Longitude: " + position.coords.longitude)
+  }*/
 
 }

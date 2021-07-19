@@ -7,7 +7,7 @@
     <div class="scrollProdutos">
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
             [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'vodka'">
-            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgPequena" class="card-img-top" alt="...">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
                 <p class="text"><strong>R${{ produto.valor }}</strong></p>
@@ -19,7 +19,7 @@
     <div class="scrollProdutos">
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
             [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'whisky'">
-            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgPequena" class="card-img-top" alt="...">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
                 <p class="text"><strong>R${{ produto.valor }}</strong></p>
@@ -31,7 +31,7 @@
     <div class="scrollProdutos">
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
             [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'destilado gin'">
-            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgPequena" class="card-img-top" alt="...">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
                 <p class="text"><strong>R${{ produto.valor }}</strong></p>

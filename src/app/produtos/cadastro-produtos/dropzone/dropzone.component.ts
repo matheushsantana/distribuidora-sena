@@ -1,6 +1,4 @@
-import { Output } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-dropzone',
@@ -10,6 +8,7 @@ import { EventEmitter } from '@angular/core';
 export class DropzoneComponent implements OnInit {
 
   isDragginOver = false;
+
 
   @Output() droppedfiles = new EventEmitter<FileList>();
   constructor() { }
@@ -28,6 +27,7 @@ export class DropzoneComponent implements OnInit {
   }
 
   onDropEvent(event: DragEvent){
+    console.log('entrou dropzone.ts')
     event.preventDefault();
     this.droppedfiles.emit(event.dataTransfer.files)
   }

@@ -43,6 +43,61 @@
                     <option value="tabacaria">Tabacaria</option>
                 </select>
             </div><br>
+            <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end" id="btn-submit">
+             <button class="btn btn-warning" type="button" (click)="trocaImgProd()">Trocar Foto</button>
+            </div>
+            <br>
+
+            <div class="card" *ngIf="!trocaFoto">
+                <img src="{{ produto.imgProduto }}" class="card-img-top" alt="...">
+            </div>
+
+            <div class="box-app" fxLayout="column" fxLayoutAlign="space-around stretch" *ngIf="trocaFoto">
+                <div fxLayout="row" fxLayoutAlign="center center" *ngIf="escondeBotao">
+                    <app-dropzone fxFlex="80" (droppedfiles)="onDropFiles($event)"></app-dropzone>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center" *ngIf="nameFile">
+                    <div fxFlex="70" fxLayout="column" *ngIf="files.length">
+                        <h3>Foto: </h3>
+                        <mat-card class="item-file" *ngFor="let f of files; let i=index" fxLayout="row"
+                            fxLayoutAlign="space-between center">
+                            <span *ngIf="nameFile">
+                                {{f.file.name}}
+                            </span>
+                            <div *ngIf="f.task == null; else uploading" fxFlex="60" fxLayoutAlign="end center">
+                                <button class="btn btn-danger" (click)="removeFileFromList(i)">Remover Foto</button>
+                            </div>
+                            <ng-template #uploading>
+                                <div fxLayout="row" fxLayoutAlign="end center" fxFlex="40">
+                                    <ng-container *ngIf="!(f.finished | async) && !((f.error | async) || (f.canceled | async))">
+                                        <span style="font-style: italic; margin-right: 10px">{{f.bytesuploaded | async }}
+                                            bytes</span>
+                                        <mat-progress-bar mode="determinate" [value]="f.percentage | async"
+                                            style="max-width: 200px;"></mat-progress-bar>
+                                        <button mat-icon-button color="accent" *ngIf="f.uploading | async"
+                                            (click)="f.task.cancel()">
+                                            <mat-icon>cancel</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="warn" *ngIf="f.uploading | async" (click)="f.task.pause()">
+                                            <mat-icon>pause</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="primary" *ngIf="f.pauser | async" (click)="f.task.resume()">
+                                            <mat-icon>play_arrow</mat-icon>
+                                        </button>
+                                    </ng-container>
+                                    <mat-icon *ngIf="(f.error | async) || (f.canceled | async)" color="warn">error</mat-icon>
+                                    <mat-icon color="primary" *ngIf="f.finished | async">Enviado</mat-icon>
+                                </div>
+                                <img src="{{ produto.imgProduto }}" *ngIf="!escondeBotao" width="200px">
+                                <button class="btn btn-danger" *ngIf="!escondeBotao" (click)="deletarFoto()">Deletar Foto</button>
+                            </ng-template>
+                        </mat-card>
+                        <div *ngIf="escondeBotao">
+                            <button class="btn btn-primary" type="button" (click)="uploadAll()">Enviar Foto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             
             <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end" id="btn-submit">
