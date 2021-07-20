@@ -27,7 +27,7 @@
             <div class="col-12">
                 <label for="categoriaProduto" class="form-label"><strong>Tipo do Produto</strong></label>
                 <select class="form-select" name="categoriaProduto" [(ngModel)]="produto.categoria">
-                    <option value="Cerveja">Cerveja</option>
+                    <option value="cerveja">Cerveja</option>
                     <option value="vinho seco">Vinho Seco</option>
                     <option value="vinho suave">Vinho Suave</option>
                     <option value="mercearia">Mercearia</option>
@@ -35,12 +35,16 @@
                     <option value="vodka">Vodka</option>
                     <option value="cachaca">Cachaça</option>
                     <option value="destilado gin">Gin</option>
-                    <option value="refrigerante">refrigerante</option>
+                    <option value="destilado">Destilado</option>
+                    <option value="cigarro">Cigarro</option>
+                    <option value="refrigerante">Refrigerante</option>
                     <option value="agua mineral">Água</option>
                     <option value="suco">Suco</option>
                     <option value="cerveja sem alcool">Cerveja sem Alcool</option>
                     <option value="energetio">Energetico</option>
                     <option value="tabacaria">Tabacaria</option>
+                    <option value="lanche">Lanche</option>
+                    <option value="churrasco">Churrasco</option>
                 </select>
             </div><br>
             <div class="col-12 d-grid gap-2 d-md-flex justify-content-md-end" id="btn-submit">
@@ -49,7 +53,7 @@
             <br>
 
             <div class="card" *ngIf="!trocaFoto">
-                <img src="{{ produto.imgProduto }}" class="card-img-top" alt="...">
+                <img src="{{ produto.imgProduto }}" class="card-img-top" id="img-prod">
             </div>
 
             <div class="box-app" fxLayout="column" fxLayoutAlign="space-around stretch" *ngIf="trocaFoto">

@@ -16,7 +16,7 @@ export class VisualizarComponent implements OnInit {
 
   pedido: Pedido;
   produtosPedido: Observable<any>;
-  opcoesBtn = ['Aceitar Pedido', 'pedido Preparado', 'Pedido Entregue']
+  opcoesBtn = ['Aceitar Pedido', 'Pedido Preparado', 'Pedido Entregue']
   estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 'Pedido saiu para entrega...', 'Pedido finalizado...'];
   btn: string;
   mostraBtn: boolean = true;

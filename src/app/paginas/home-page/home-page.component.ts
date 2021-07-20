@@ -16,12 +16,21 @@ export class HomePageComponent implements OnInit {
 
   produtos: Observable<Produto[]>;
   imgPadrao = 'assets/pre-carregamento-prod.gif';
+  aux: number;
+  windowWidth = window.innerWidth;
 
   constructor(private produtoService: ProdutoService, private produtoDataService: ProdutoDataService, private clienteVerificaCadastro: ClienteVerificaCadastro,
     private router: Router) { }
 
   ngOnInit(): void {
     this.produtos = this.produtoService.getAllProduto();
+
+    if(this.windowWidth > 500){
+      this.aux = 10
+    } else {
+      this.aux = 5
+    }
+
   }
 
   buscaEspecifica(chave: string) {

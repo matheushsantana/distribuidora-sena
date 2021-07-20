@@ -28,7 +28,7 @@
                 <label for="categoriaProduto" class="form-label"><strong>Tipo do Produto</strong></label>
                 <select class="form-select" name="categoriaProduto" [(ngModel)]="produto.categoria">
                     <option selected>Selecione...</option>
-                    <option value="Cerveja">Cerveja</option>
+                    <option value="cerveja">Cerveja</option>
                     <option value="vinho seco">Vinho Seco</option>
                     <option value="vinho suave">Vinho Suave</option>
                     <option value="mercearia">Mercearia</option>
@@ -36,7 +36,7 @@
                     <option value="vodka">Vodka</option>
                     <option value="cachaca">Cachaça</option>
                     <option value="destilado gin">Gin</option>
-                    <option value="refrigerante">refrigerante</option>
+                    <option value="refrigerante">Refrigerante</option>
                     <option value="agua mineral">Água</option>
                     <option value="suco">Suco</option>
                     <option value="cerveja sem alcool">Cerveja sem Alcool</option>
@@ -83,7 +83,7 @@
                                     <mat-icon color="primary" *ngIf="f.finished | async">Enviado</mat-icon>
                                 </div>
                                 <div class="card">
-                                    <img src="{{ produto.imgProduto }}" class="card-img-top" alt="...">
+                                    <img src="{{ produto.imgProduto }}" class="card-img-top" style="width: 200px;">
                                 </div>
                                 <br>
                                 <button class="btn btn-danger" *ngIf="!escondeBotao" (click)="deletarFoto()">Deletar Foto</button>

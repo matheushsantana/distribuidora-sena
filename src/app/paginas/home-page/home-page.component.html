@@ -45,7 +45,7 @@
         <p id="titu"><strong>CERVEJAS</strong></p>
         <div class="scrollProdutos">
             <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
-                *ngFor="let produto of produtos | async | filter:'cerveja' | slice:0:5">
+                *ngFor="let produto of produtos | async | filter:'cerveja' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
@@ -61,7 +61,7 @@
         <p id="titu"><strong>DESTILADOS</strong></p>
         <div class="scrollProdutos">
             <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
-                *ngFor="let produto of produtos | async | filter:'destilado' | slice:0:5">
+                *ngFor="let produto of produtos | async | filter:'destilado' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
@@ -77,7 +77,7 @@
         <p id="titu"><strong>VINHOS</strong></p>
         <div class="scrollProdutos">
             <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
-                *ngFor="let produto of produtos | async | filter:'vinho' | slice:0:5">
+                *ngFor="let produto of produtos | async | filter:'vinho' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
@@ -93,7 +93,7 @@
         <p id="titu"><strong>SEM ÁLCOOL</strong></p>
         <div class="scrollProdutos">
             <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
-                *ngFor="let produto of produtos | async | filter:'sem-alcool' | slice:0:5">
+                *ngFor="let produto of produtos | async | filter:'sem-alcool' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
@@ -109,7 +109,7 @@
         <p id="titu"><strong>TABACARIA</strong></p>
         <div class="scrollProdutos">
             <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
-                *ngFor="let produto of produtos | async | filter:'tabacaria' | slice:0:5">
+                *ngFor="let produto of produtos | async | filter:'tabacaria' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
@@ -125,7 +125,7 @@
         <p id="titu"><strong>MERCEARIA</strong></p>
         <div class="scrollProdutos">
             <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
-                *ngFor="let produto of produtos | async | filter:'mercearia' | slice:0:5">
+                *ngFor="let produto of produtos | async | filter:'mercearia' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>

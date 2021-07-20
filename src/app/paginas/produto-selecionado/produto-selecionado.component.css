@@ -9,6 +9,15 @@
     filter: contrast(1%);
     margin-right: 5px;
 }
+.card{
+    padding-bottom: 10px;
+}
+
+.card-img-top{
+    width: 50%;
+    position: relative;
+    left: 25%;
+}
 
 .voltar{
     padding: 7px;
@@ -68,4 +77,84 @@
 #total-a{
     position: relative;
     right: -20%;
- }
+}
+
+@media(max-width: 500px){
+    #add{
+        border: rgb(116, 116, 116) 1px solid;
+        border-radius: 6px;
+        
+    }
+    
+    #btn-voltar{
+        width: 30px;
+        filter: contrast(1%);
+        margin-right: 5px;
+    }
+
+    .card-img-top{
+        width: 100%;
+        position: relative;
+        left: 0%;
+    }
+    
+    .voltar{
+        padding: 7px;
+    }
+    
+    .voltar a{
+        font-weight: bold;
+        font-size: 17px;
+        color: rgba(0, 0, 0, 0.507);
+        text-decoration: none;
+    }
+    
+    #button-addon1{
+        color: darkorange;
+        font-size: 24px;
+        padding-top: 0%;
+        padding-bottom: 0%;
+        border: none;
+    }
+    
+    #button-addon2{
+        color: darkorange;
+        font-size: 24px;
+        padding-top: 0%;
+        padding-bottom: 0%;
+        border: none;
+    }
+    
+    #quantidade{
+        border: none;
+        background-color: white;
+        text-align: center;
+    }
+    
+    #addMaior button{
+        border: rgb(116, 116, 116) 1px solid;
+        width: 30%;
+    }
+    
+    #addMaior{
+        padding-bottom: 15px;
+    }
+    
+    #btn-adicionar{
+        background-color: rgb(253, 160, 46);
+        font-weight: bold;
+        font-size: 16px;
+        border-radius: 5px;
+        width: 100%;
+    }
+    
+    #adicionar-a{
+       position: relative;
+       left: -20%;
+    }
+    
+    #total-a{
+        position: relative;
+        right: -20%;
+    }
+}

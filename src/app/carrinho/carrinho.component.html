@@ -13,10 +13,10 @@
             </div>
             <a id="carregando">Carregando...</a>
         </div>
-        <div class="card mb-3" style="height: 105px;" *ngFor="let produto of carrinho | async">
+        <div class="card mb-3" *ngFor="let produto of carrinho | async">
             <div class="row g-0">
                 <div class="col-4">
-                    <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.linkImg" width="100px">
+                    <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.linkImg">
                 </div>
                 <div class="col-8">
                     <div class="card-body" style="padding-top: 2%; padding-bottom: 2%;">
