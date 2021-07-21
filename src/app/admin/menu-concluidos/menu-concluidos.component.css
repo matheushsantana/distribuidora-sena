@@ -50,3 +50,8 @@
 #qtd{
     text-align: end;
 }
+
+#name{
+    text-align: center;
+    margin-top: 5px;
+}

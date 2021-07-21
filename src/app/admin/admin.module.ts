@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AdminRoutingModule } from './menu/admin.routing.module';
 import { MenuComponent } from './menu/menu.component';
 import { MenuClientesComponent } from './menu-clientes/menu-clientes.component';
 import { MenuProdutosComponent } from './menu-produtos/menu-produtos.component';
@@ -11,6 +10,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { VisualizarComponent } from './menu-pedidos/visualizar/visualizar.component';
+import { AdminRoutingModule } from './admin.routing.module';
 
 @NgModule({
   imports: [

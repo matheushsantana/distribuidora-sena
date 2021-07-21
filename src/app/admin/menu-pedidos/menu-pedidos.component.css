@@ -4,6 +4,10 @@
     border-bottom: 1px solid black;
 }
 
+.nav{
+    margin-top: 5px;
+}
+
 .nav-item a{
     color: black;
     font-weight: 500;
