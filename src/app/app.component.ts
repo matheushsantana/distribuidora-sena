@@ -27,6 +27,9 @@ export class AppComponent {
   endereco: string = 'carregando';
   ativaNav: boolean = true;
   admAutenticated: boolean = false;
+  
+  latitude: any;
+  longitude: any;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado, 
     private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard) {
@@ -85,9 +88,23 @@ export class AppComponent {
   }
 
   /*localizacao(){
+    const options = {
+        enableHighAccuracy: true,
+        maximumAge: 15000
+    };
+    navigator.geolocation.watchPosition(position => {
+          this.latitude = position.coords.latitude,
+          console.log('latitude: ', this.latitude)
+          this.longitude = position.coords.longitude
+          console.log('longitude: ', this.longitude)
+          console.log('tempo: ', position.timestamp)
+          console.log(position)
+      },null, options);
+
+      
     if (navigator.geolocation)
     {
-    navigator.geolocation.getCurrentPosition(this.showPosition);
+    navigator.geolocation.watchPosition(this.showPosition);
     }
     else{
       console.log('navegador não suporta!')
@@ -96,7 +113,7 @@ export class AppComponent {
 
   showPosition(position){
     console.log('loc',"Latitude: " + position.coords.latitude + " " +
-    "Longitude: " + position.coords.longitude)
+    "Longitude: " + position.coords.longitude + " " + position.coords.accuracy)
   }*/
 
 }

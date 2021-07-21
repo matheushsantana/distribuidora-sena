@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MapsComponent } from './maps/maps.component';
 import { HomePageComponent } from "./paginas/home-page/home-page.component";
 import { ProdutoSelecionadoComponent } from "./paginas/produto-selecionado/produto-selecionado.component";
 import { ResultadoPesquisaComponent } from "./paginas/resultado-pesquisa/resultado-pesquisa.component";
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
   { path: 'carrinho/:id', component: CarrinhoComponent, canActivate: [AuthGuard] },
   { path: 'pedido/:id', component: PedidoComponent, canActivate: [AuthGuard] },
   { path: 'cadastro/cliente', component: ClienteComponent, canActivate: [AuthGuard] },
+  { path: 'maps', component: MapsComponent }
   
 ];
 

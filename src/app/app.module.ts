@@ -18,6 +18,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { NgxMaskModule } from 'ngx-mask';
+import { MapsComponent } from './maps/maps.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { NgxMaskModule } from 'ngx-mask';
     CarrinhoComponent,
     PedidoComponent,
     ClienteComponent,
+    MapsComponent,
     
   ],
   imports: [
