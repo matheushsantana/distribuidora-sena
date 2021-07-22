@@ -19,6 +19,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { NgxMaskModule } from 'ngx-mask';
 import { MapsComponent } from './maps/maps.component';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { MapsComponent } from './maps/maps.component';
     HttpClientModule,
     LazyLoadImageModule,
     NgxMaskModule.forRoot(),
+    GoogleMapsModule,
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

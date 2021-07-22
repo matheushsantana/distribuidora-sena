@@ -9,6 +9,7 @@ import { CarrinhoService } from './shared/carrinho.service';
 import { Contador } from './shared/contador';
 import { ClienteVerificaCadastro } from '../cliente/clienteVefificaCadastro.service';
 import { Router } from '@angular/router';
+import { CalculaFrete } from './calculaFrete.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -24,7 +25,7 @@ export class CarrinhoComponent implements OnInit {
   qtd: number;
   total: number;
   totalFinal: number;
-  frete: number = 4.99;
+  frete: number = 0;
   quantidade: number = 1;
   recebeContador: Contador;
   contador: Contador;
@@ -34,6 +35,7 @@ export class CarrinhoComponent implements OnInit {
   contadorProd: Contador;
   enderecoCliente: string;
   instrucoes: string;
+  endereco: any;
 
   data = new Date();
 
@@ -41,13 +43,14 @@ export class CarrinhoComponent implements OnInit {
 
   constructor(private carrinhoService: CarrinhoService, private pedidoService: PedidoService,
     private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro,
-    private router: Router) {
+    private router: Router, private calculaFrete: CalculaFrete) {
   }
 
   ngOnInit(): void {
     this.carrinho = this.carrinhoService.getAllProdCarrinho();
     this.carregando = true;
-    this.totalPedido()
+    this.totalPedido();
+    this.frete = this.calculaFrete.calculaFrete();
     this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
