@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
+import { CalculaFrete } from './carrinho/calculaFrete.service';
+import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
@@ -11,7 +13,7 @@ import { AuthGuard } from './guards/auth.guard';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
 
@@ -27,12 +29,9 @@ export class AppComponent {
   endereco: string = 'carregando';
   ativaNav: boolean = true;
   admAutenticated: boolean = false;
-  
-  latitude: any;
-  longitude: any;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado, 
-    private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard) {
+    private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard, private calculaFrete: CalculaFrete) {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
     var inicializadora = this.authGuard.aux;
@@ -54,14 +53,14 @@ export class AppComponent {
             this.endereco = 'Adicionar Endereço...'
           }
           this.ativaNav = true
-        }, 2000);
+          this.calculaFrete.calculaFrete();
+        }, 1000);
       } else if(this.cliente.tipo === 'admin'){
         this.ativaNav = false;
         this.admAutenticated = true;
         this.router.navigate(['/admin/menu'])
       }
     })
-    //this.localizacao();
   }
 
   logout() {
@@ -86,34 +85,5 @@ export class AppComponent {
   atualizaEndereco(){
     this.router.navigate(['/cadastro/cliente'])
   }
-
-  /*localizacao(){
-    const options = {
-        enableHighAccuracy: true,
-        maximumAge: 15000
-    };
-    navigator.geolocation.watchPosition(position => {
-          this.latitude = position.coords.latitude,
-          console.log('latitude: ', this.latitude)
-          this.longitude = position.coords.longitude
-          console.log('longitude: ', this.longitude)
-          console.log('tempo: ', position.timestamp)
-          console.log(position)
-      },null, options);
-
-      
-    if (navigator.geolocation)
-    {
-    navigator.geolocation.watchPosition(this.showPosition);
-    }
-    else{
-      console.log('navegador não suporta!')
-    }
-  }
-
-  showPosition(position){
-    console.log('loc',"Latitude: " + position.coords.latitude + " " +
-    "Longitude: " + position.coords.longitude + " " + position.coords.accuracy)
-  }*/
 
 }

@@ -46,11 +46,13 @@ export class CarrinhoComponent implements OnInit {
     private router: Router, private calculaFrete: CalculaFrete) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.carrinho = this.carrinhoService.getAllProdCarrinho();
     this.carregando = true;
-    this.totalPedido();
-    this.frete = this.calculaFrete.calculaFrete();
+    setTimeout(() => {
+      this.totalPedido();
+      this.frete = this.calculaFrete.precoFrente;
+    }, 500)
     this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
@@ -62,6 +64,9 @@ export class CarrinhoComponent implements OnInit {
 
   atualizaEndereco() {
     this.router.navigate(['/cadastro/cliente'])
+    setInterval(() => {
+      this.totalPedido();
+    }, 5000)
   }
 
   quantidadeAltera(valor: number, key: number) {
@@ -114,8 +119,8 @@ export class CarrinhoComponent implements OnInit {
   totalPedido() {
     this.pegaProduros();
     this.carrinho.subscribe(dados => {
+      console.log('entrou')
       this.produtos = dados
-
       var i: number = 0;
       var a: number = 0;
       var j: number = 0
@@ -123,7 +128,7 @@ export class CarrinhoComponent implements OnInit {
       this.total = 0.00;
       this.qtd = 0;
       this.quantidadeProd = 0;
-      this.totalFinal = this.frete;
+      this.totalFinal = this.calculaFrete.precoFrente;
       var qtdAux = (Object.keys(this.produtos).length)
       while (a < qtdAux) {
         if (this.produtos[j] != null) {

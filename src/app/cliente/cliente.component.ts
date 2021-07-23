@@ -5,6 +5,7 @@ import { ClienteVerificaCadastro } from './clienteVefificaCadastro.service';
 import { Cliente } from './shared/cliente';
 import { ClienteService } from './shared/cliente.service';
 import { Location } from '@angular/common';
+import { CarrinhoComponent } from '../carrinho/carrinho.component';
 
 @Component({
   selector: 'app-cliente',

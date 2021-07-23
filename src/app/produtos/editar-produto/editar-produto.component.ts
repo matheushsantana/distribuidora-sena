@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FilesService } from '../files.service';
 import { FileEntry } from '../models/fileentry.model';
 import { Produto } from '../shared/produto';
@@ -22,7 +23,8 @@ export class EditarProdutoComponent implements OnInit {
 
   files: FileEntry[] = [];
 
-  constructor(private produtoDataService: ProdutoDataService, private produtoService: ProdutoService, private filesService: FilesService) { }
+  constructor(private produtoDataService: ProdutoDataService, private produtoService: ProdutoService, private filesService: FilesService,
+    private router: Router) { }
 
   ngOnInit() {
     this.produto = new Produto();
@@ -43,6 +45,7 @@ export class EditarProdutoComponent implements OnInit {
       this.produtoService.updateProduto(this.produto, this.key);
     }
     this.produto = new Produto();
+    this.router.navigate(['/admin/menu/produtos']);
   }
 
   delete(key: string){
