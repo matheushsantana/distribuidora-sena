@@ -3,10 +3,34 @@
 </div>
 <div id="divisao1"></div>
 <div class="container">
-    <p id="titu"><strong>ESSENCIA</strong></p>
+    <p id="titu"><strong>ESSÊNCIA NAY</strong></p>
     <div class="scrollProdutos">
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
-            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'essencia hosh'">
+            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'tabacaria'| filter:'essência nay' ">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div id="divisao"></div>
+    <p id="titu"><strong>ESSÊNCIA ZOMO</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'tabacaria'| filter:'essência zomo'">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div id="divisao"></div>
+    <p id="titu"><strong>ESSÊNCIA ZIGGY</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'tabacaria'| filter:'essência ziggy'">
             <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
@@ -18,7 +42,31 @@
     <p id="titu"><strong>CARVÃO</strong></p>
     <div class="scrollProdutos">
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
-            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'carvao hosh'">
+            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'tabacaria'| filter:'carvão'">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div id="divisao"></div>
+    <p id="titu"><strong>ISQUEIRO</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'tabacaria'| filter:'isqueiro'">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div id="divisao"></div>
+    <p id="titu"><strong>SEDA</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'tabacaria'| filter:'seda'">
             <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>

@@ -3,10 +3,10 @@
 </div>
 <div id="divisao1"></div>
 <div class="container">
-    <p id="titu"><strong>COMIDA</strong></p>
+    <p id="titu"><strong>GERAL</strong></p>
     <div class="scrollProdutos">
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
-            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'salgadinho'">
+            [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async | filter:'mercearia'">
             <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
@@ -19,7 +19,20 @@
     <div class="scrollProdutos">
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
             [routerLink]="['/produto-selecionado']"
-            *ngFor="let produto of produtos | async | filter:'gelo'">
+            *ngFor="let produto of produtos | async | filter:'mercearia' | filter:'Gelo'">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div id="divisao"></div>
+    <p id="titu"><strong>HAMBÚRGUER</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']"
+            *ngFor="let produto of produtos | async | filter:'mercearia' | filter:'Hambúrguer'">
             <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>

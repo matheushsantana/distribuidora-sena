@@ -5,7 +5,7 @@
             name="produtoPesquisado" [(ngModel)]="produtoPesquisado">
             <button class="btn btn-success" type="button" id="btn-newProd" [routerLink]="['/produtos/cadastro']">Adicionar</button>
     </form>
-    <div class="card mb-3" *ngFor="let produto of produtos | async | filter:'#$!'"
+    <div class="card mb-3" *ngFor="let produto of produtos | async | filter:produtoPesquisado"
     [routerLink]="['/produtos/editar', produto.key]" (click)="edit(produto, produto.key)">
         <div class="row g-0">
             <div class="col-4">

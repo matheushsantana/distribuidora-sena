@@ -20,7 +20,7 @@
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
             [routerLink]="['/produto-selecionado']"
             *ngFor="let produto of produtos | async | filter:'energetico'">
-            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgPequena" class="card-img-top" alt="...">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
                 <p class="text"><strong>R${{ produto.valor }}</strong></p>
@@ -45,7 +45,33 @@
     <div class="scrollProdutos">
         <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
             [routerLink]="['/produto-selecionado']"
-            *ngFor="let produto of produtos | async | filter:'skol' |filter:'agua mineral'">
+            *ngFor="let produto of produtos | async | filter:'sem-alcool' |filter:'Água'">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div id="divisao"></div>
+    <p id="titu"><strong>GATORADE</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']"
+            *ngFor="let produto of produtos | async | filter:'sem-alcool' |filter:'Gatorade'">
+            <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
+                <p class="text"><strong>R${{ produto.valor }}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div id="divisao"></div>
+    <p id="titu"><strong>SCHWEPPES</strong></p>
+    <div class="scrollProdutos">
+        <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
+            [routerLink]="['/produto-selecionado']"
+            *ngFor="let produto of produtos | async | filter:'sem-alcool' |filter:'schweppes'">
             <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
             <div class="card-body">
                 <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
