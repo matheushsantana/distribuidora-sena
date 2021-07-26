@@ -29,7 +29,7 @@ export class AppComponent {
   ativaNav: boolean = true;
   admAutenticated: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado, 
+  constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
     private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard, private calculaFrete: CalculaFrete) {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
@@ -42,7 +42,7 @@ export class AppComponent {
       this.cliente.nome = dados.firsname;
       this.cliente.tipo = dados.tipo;
       this.clienteLogado.recebeDados(this.cliente);
-      if(this.cliente.tipo === 'cliente'){
+      if (this.cliente.tipo === 'cliente') {
         this.clienteVerificaCadastro.verifica()
         setTimeout(() => {
           this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
@@ -53,13 +53,25 @@ export class AppComponent {
           }
           this.ativaNav = true
           this.calculaFrete.calculaFrete();
+          console.log('entrou cliente')
+          this.carregaPagina();
         }, 1500);
-      } else if(this.cliente.tipo === 'admin'){
+      } else if (this.cliente.tipo === 'admin') {
         this.ativaNav = false;
         this.admAutenticated = true;
         this.router.navigate(['/admin/menu'])
+        console.log('entrou admin')
+        this.carregaPagina();
       }
     })
+    setTimeout(() => {
+      if(this.cliente.id == null){
+        this.carregaPagina();
+      }
+    }, 500)
+  }
+
+  carregaPagina() {
     setTimeout(() => {
       var site = document.getElementById('site').style
       site.display = 'block';
@@ -87,7 +99,7 @@ export class AppComponent {
     console.log('funcionou')
   }
 
-  atualizaEndereco(){
+  atualizaEndereco() {
     this.router.navigate(['/cadastro/cliente'])
   }
 
