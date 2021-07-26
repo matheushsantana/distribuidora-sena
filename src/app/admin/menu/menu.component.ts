@@ -12,6 +12,7 @@ export class MenuComponent implements OnInit {
   selecionado: string = 'BEM VINDO AO MENU ADMIN';
   component= [false, false, false, false,]
   nomes = ['clientes', 'produtos', 'pedidos', 'relatorio']
+  esconde = true;
 
   constructor(private router: Router) { }
 
@@ -21,6 +22,7 @@ export class MenuComponent implements OnInit {
   mudaComponent(aux: number){
     for(var i = 0; i < 4; i++){
       if(i == aux){
+        this.esconde = false
         var id = document.getElementById(this.nomes[i]).style;
         id.backgroundColor = 'white';
         id.color = '#211F20';

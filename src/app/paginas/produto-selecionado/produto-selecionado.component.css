@@ -4,6 +4,18 @@
     
 }
 
+#esgotado{
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    transform: rotate(-45deg);
+    background-color: red;
+    color: white;
+    font-size: 30px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
 #btn-voltar{
     width: 30px;
     filter: contrast(1%);
@@ -77,6 +89,20 @@
 #total-a{
     position: relative;
     right: -20%;
+}
+
+#rodape{
+    background-color: #211F20;
+}
+
+#rodape p{
+    color: white;
+    font-size: 14px;
+}
+
+#rodape div{
+    color: white;
+    font-size: 12px;
 }
 
 @media(max-width: 500px){

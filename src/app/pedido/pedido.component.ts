@@ -17,6 +17,7 @@ export class PedidoComponent implements OnInit {
   carregando: boolean;
   produtos: Produto[];
   listaProduto: any;
+  loop: any;
 
   estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 'Pedido saiu para entrega...', 'Pedido finalizado...', 'Seu pedido foi cancelado...']
 
@@ -34,7 +35,8 @@ export class PedidoComponent implements OnInit {
     });
 
     setTimeout(() => {
-      setInterval(() => {
+      this.loop = setInterval(() => {
+        console.log('entrou loop')
         this.barraStatus();
       }, 10000)
       this.barraStatus();

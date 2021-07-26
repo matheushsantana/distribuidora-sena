@@ -11,3 +11,14 @@
     margin-top: 10px;
     padding-bottom: 5px;
 }
+
+#texto{
+    text-align: center;
+    font-size: 23px;
+    font-weight: 500;
+    height: 100vh;
+}
+
+.componentes{
+    margin-bottom: 10px;
+}

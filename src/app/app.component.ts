@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
 import { CalculaFrete } from './carrinho/calculaFrete.service';
-import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
@@ -54,13 +53,19 @@ export class AppComponent {
           }
           this.ativaNav = true
           this.calculaFrete.calculaFrete();
-        }, 1000);
+        }, 1500);
       } else if(this.cliente.tipo === 'admin'){
         this.ativaNav = false;
         this.admAutenticated = true;
         this.router.navigate(['/admin/menu'])
       }
     })
+    setTimeout(() => {
+      var site = document.getElementById('site').style
+      site.display = 'block';
+      var carregamento = document.getElementById('carregamento')
+      carregamento.classList.add("hide")
+    }, 1500)
   }
 
   logout() {

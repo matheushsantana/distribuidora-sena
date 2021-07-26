@@ -56,3 +56,17 @@
     color: black;
     padding-left: 10px;
 }
+
+#rodape{
+    background-color: #211F20;
+}
+
+#rodape p{
+    color: white;
+    font-size: 14px;
+}
+
+#rodape div{
+    color: white;
+    font-size: 12px;
+}

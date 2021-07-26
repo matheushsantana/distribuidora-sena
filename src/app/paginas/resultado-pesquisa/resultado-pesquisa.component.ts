@@ -23,7 +23,17 @@ export class ResultadoPesquisaComponent implements OnInit {
 
   ngOnInit(): void {
     this.produtos = this.produtoService.getAllProduto();
-    this.route.params.subscribe(params => this.term = params['produto']);
+    if(this.route.params['_value'].produto == 'undefined'){
+      this.term = ''
+    }else {
+      this.route.params.subscribe(params => this.term = params['produto']);
+    }
+    setTimeout(() => {
+      var site = document.getElementById('component').style
+      site.display = 'block';
+      var carregamento = document.getElementById('carregando')
+      carregamento.classList.add("hide")
+    }, 1000)
   }
 
   selecionaProduto(produto: Produto, key: string) {

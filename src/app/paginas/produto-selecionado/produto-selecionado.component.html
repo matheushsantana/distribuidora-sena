@@ -3,6 +3,7 @@
  </div>
 <div class="card mb-3">
     <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
+    <p *ngIf="produto.categoria == 'esgotado'" id="esgotado">PRODUTO ESGOTADO!</p>
     <div class="container">
         <div class="card-body">
             <p class="card-title">{{ produto.nome }}</p>
@@ -25,5 +26,13 @@
         <button class="btn" id="btn-adicionar" (click)="adicionar(quantidade, total)">
             <a id="adicionar-a">ADICIONAR({{ quantidade }})</a> <a id="total-a">R${{ total | number : "1.2" }}</a></button>
     </div>
+
 </div>
+
+<nav class="navbar justify-content-center" id="rodape">
+    <p class="navbar-brand">Todos os direitos Reservados a Luas Tecnologia LTDA</p>
+    <div>Ícones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+      <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a>
+  </div>
+</nav>
 

@@ -1,20 +1,34 @@
-<div class="voltar">
-    <a (click)="voltaPagina()"><img id="btn-voltar" src="assets/btn-voltar.png">Voltar</a>
- </div>
- <div id="divisao1"></div>
-<div class="container">
-    <div class="card mb-3" style="max-width: 540px;" *ngFor="let produto of produtos | async | filter:term"
-     (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']">
-        <div class="row g-0">
-            <div class="col-4">
-                <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " width="100px">
-            </div>
-            <div class="col-8">
-                <div class="card-body">
-                    <h5 class="card-title">{{ produto.nome }}</h5>
-                    <p class="card-text">R${{ produto.valor }}</p>
+<div id="carregando">
+    <img src="logo-sena.png" id="logo-carregando">
+    <h1>Carregando...</h1>
+</div>
+
+<body id="component">
+    <div class="voltar">
+        <a (click)="voltaPagina()"><img id="btn-voltar" src="assets/btn-voltar.png">Voltar</a>
+    </div>
+    <div id="divisao1"></div>
+    <div class="container">
+        <div class="card mb-3" style="max-width: 540px;" *ngFor="let produto of produtos | async | filter:term"
+            (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']">
+            <div class="row g-0">
+                <div class="col-4">
+                    <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " width="100px">
+                </div>
+                <div class="col-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produto.nome }}</h5>
+                        <p class="card-text">R${{ produto.valor }}</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <nav class="navbar justify-content-center" id="rodape">
+        <p class="navbar-brand">Todos os direitos Reservados a Luas Tecnologia LTDA</p>
+        <div>Ícones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+            <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a>
+        </div>
+    </nav>
+</body>

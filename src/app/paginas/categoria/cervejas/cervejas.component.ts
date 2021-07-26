@@ -19,13 +19,19 @@ export class CervejasComponent implements OnInit {
 
   ngOnInit(): void {
     this.produtos = this.produtoService.getAllProduto();
+    setTimeout(() => {
+      var site = document.getElementById('component').style
+      site.display = 'block';
+      var carregamento = document.getElementById('carregando')
+      carregamento.classList.add("hide")
+    }, 1000)
   }
 
   selecionaProduto(produto: Produto, key: string) {
     this.produtoDataService.changeProduto(produto, key);
   }
 
-  voltaPagina(){
+  voltaPagina() {
     this.location.back();
   }
 

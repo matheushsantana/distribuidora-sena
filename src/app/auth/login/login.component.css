@@ -7,6 +7,20 @@
     top: 50px;
 }
 
+#rodape{
+    background-color: #211F20;
+}
+
+#rodape p{
+    color: white;
+    font-size: 14px;
+}
+
+#rodape div{
+    color: white;
+    font-size: 12px;
+}
+
 .card{
     border: none;
     background: transparent;

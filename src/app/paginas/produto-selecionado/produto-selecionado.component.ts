@@ -97,17 +97,12 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   pegaContador() {
     this.carrinhoService.getContadorCarrinho().subscribe(dados => {
-      console.log('dados Contador: ', dados)
-      console.log('entrou 1')
       if (dados[0] == undefined || dados[0] == null) {
-        console.log('entrou 2')
         this.recebeContador = new Contador();
         this.recebeContador.valor = 0;
-        console.log('valor recebido1', this.recebeContador)
       } else {
         this.contador.valor = dados[0].valor
         this.recebeContador = this.contador;
-        console.log('valor recebido2', this.recebeContador.valor)
       }
     }, err => {
       console.log('Erro ao listar contador', err);
@@ -116,42 +111,44 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   adicionar(quantidade: number, total: number) {
 
-    if (this.clienteLogado.cliente != null) {
-      this.carrinhoService.getAllPedido().subscribe(dados => {
-        this.pedido = dados[1]
-        console.log('dados 1: ', dados)
-        console.log('dados 2: ', dados[1])
-        if (this.pedido == undefined || this.pedido.key != 'pedido' ||
-          this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
-          this.clienteVerificaCadastro.pedido = null;
-          if (this.produtoExiste != true) {
-            this.pedidoService.deletePedido();
-            this.contador = new Contador();
-            this.contador = this.recebeContador;
+    if(this.produto.categoria != 'esgotado'){
+      if (this.clienteLogado.cliente != null) {
+        this.carrinhoService.getAllPedido().subscribe(dados => {
+          this.pedido = dados[1]
+          if (this.pedido == undefined || this.pedido.key != 'pedido' ||
+            this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
+            this.clienteVerificaCadastro.pedido = null;
+            if (this.produtoExiste != true) {
+              this.pedidoService.deletePedido();
+              this.contador = new Contador();
+              this.contador = this.recebeContador;
 
-            this.carrinho.nome = this.produto.nome;
-            this.carrinho.valor = this.produto.valor;
-            this.carrinho.quantidade = quantidade;
-            this.carrinho.total = total;
-            this.carrinho.linkImg = this.produto.imgProduto;
+              this.carrinho.nome = this.produto.nome;
+              this.carrinho.valor = this.produto.valor;
+              this.carrinho.quantidade = quantidade;
+              this.carrinho.total = total;
+              this.carrinho.linkImg = this.produto.imgProduto;
 
-            this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
-            this.produto = new Produto();
+              this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
+              this.produto = new Produto();
+            } else {
+              this.produto = new Produto();
+              alert('Esse produto ja esta adicionado em seu carrinho, confira a quantidade desejada!')
+              this.router.navigate(['/carrinho/' + this.clienteLogado.cliente.id])
+            }
+
           } else {
-            this.produto = new Produto();
-            alert('Esse produto ja esta adicionado em seu carrinho, confira a quantidade desejada!')
-            this.router.navigate(['/carrinho/' + this.clienteLogado.cliente.id])
+            alert('Espere a entrega do pedido feito para adiconar novos produtos!')
+            this.router.navigate(['/pedido/' + this.clienteLogado.cliente.id])
           }
-
-        } else {
-          alert('Espere a entrega do pedido feito para adiconar novos produtos!')
-          this.router.navigate(['/pedido/' + this.clienteLogado.cliente.id])
-        }
-      })
+        })
+      } else {
+        alert('Faça o Login para adicionar produtos ao carrinho!')
+        this.router.navigate(['/auth/login'])
+      }
     } else {
-      alert('Faça o Login para adicionar produtos ao carrinho!')
-      this.router.navigate(['/auth/login'])
+      alert('Desculpe, Produto Esgotado...')
+      this.router.navigate(['/'])
     }
-
   }
 }

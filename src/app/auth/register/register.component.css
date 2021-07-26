@@ -27,3 +27,17 @@
     background: rgba(255, 255, 255, 0.900);
     height: 45px;
 }
+
+#rodape{
+    background-color: #211F20;
+}
+
+#rodape p{
+    color: white;
+    font-size: 14px;
+}
+
+#rodape div{
+    color: white;
+    font-size: 12px;
+}
