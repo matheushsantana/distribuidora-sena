@@ -18,6 +18,7 @@ export class MerceariaComponent implements OnInit {
   constructor(private produtoService: ProdutoService, private produtoDataService: ProdutoDataService, private location: Location) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0)
     this.produtos = this.produtoService.getAllProduto();
     setTimeout(() => {
       var site = document.getElementById('component').style

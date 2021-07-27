@@ -22,6 +22,7 @@ export class ResultadoPesquisaComponent implements OnInit {
      private location: Location) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0)
     this.produtos = this.produtoService.getAllProduto();
     if(this.route.params['_value'].produto == 'undefined'){
       this.term = ''

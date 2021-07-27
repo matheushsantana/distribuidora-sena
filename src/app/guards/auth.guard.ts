@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
   
 
     if(this.aux != null){
-      console.log('permitiu')
       return true;
     }
 

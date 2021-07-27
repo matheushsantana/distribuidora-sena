@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
 import { CalculaFrete } from './carrinho/calculaFrete.service';
+import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
@@ -68,7 +69,7 @@ export class AppComponent {
       if(this.cliente.id == null){
         this.carregaPagina();
       }
-    }, 500)
+    }, 1500)
   }
 
   carregaPagina() {
@@ -77,12 +78,14 @@ export class AppComponent {
       site.display = 'block';
       var carregamento = document.getElementById('carregamento')
       carregamento.classList.add("hide")
-    }, 1500)
+    }, 500)
   }
 
   logout() {
     this.authService.logout();
-    window.location.href = '/'
+    setTimeout(() => {
+      window.location.href = '/'
+    }, 500);
   }
 
   verifica() {

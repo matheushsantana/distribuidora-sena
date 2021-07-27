@@ -24,6 +24,7 @@ export class PedidoComponent implements OnInit {
   constructor(private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0)
     this.carregando = false;
     this.pedidoService.getAllPedido().subscribe(dados => {
       this.pedido = dados[1]
@@ -36,7 +37,6 @@ export class PedidoComponent implements OnInit {
 
     setTimeout(() => {
       this.loop = setInterval(() => {
-        console.log('entrou loop')
         this.barraStatus();
       }, 10000)
       this.barraStatus();

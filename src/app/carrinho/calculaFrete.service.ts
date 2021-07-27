@@ -26,8 +26,8 @@ import { ClienteVerificaCadastro } from "../cliente/clienteVefificaCadastro.serv
           this.endereco = new google.maps.LatLng(dados['results'][0].geometry['location'])
           this.distancia = google.maps.geometry.spherical.computeDistanceBetween(distribuidaora, this.endereco);
           this.precoFrente = parseInt(((this.distancia / 1000) * 2.2).toFixed(0))
-          if(this.precoFrente < 4 || this.precoFrente == 0){
-            this.precoFrente = 4
+          if(this.precoFrente < 5 || this.precoFrente == 0){
+            this.precoFrente = 5
           }
         });
       }

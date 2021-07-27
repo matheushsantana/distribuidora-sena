@@ -47,12 +47,13 @@ export class CarrinhoComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0)
     this.carrinho = this.carrinhoService.getAllProdCarrinho();
     this.carregando = true;
     setTimeout(() => {
       this.totalPedido();
       this.frete = this.calculaFrete.precoFrente;
-    }, 500)
+    }, 1700)
     this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
@@ -64,9 +65,6 @@ export class CarrinhoComponent implements OnInit {
 
   atualizaEndereco() {
     this.router.navigate(['/cadastro/cliente'])
-    setInterval(() => {
-      this.totalPedido();
-    }, 5000)
   }
 
   quantidadeAltera(valor: number, key: number) {
@@ -119,7 +117,6 @@ export class CarrinhoComponent implements OnInit {
   totalPedido() {
     this.pegaProduros();
     this.carrinho.subscribe(dados => {
-      console.log('entrou')
       this.produtos = dados
       var i: number = 0;
       var a: number = 0;
@@ -172,7 +169,6 @@ export class CarrinhoComponent implements OnInit {
   fazerPedido() {
     if (this.clienteVerificaCadastro.aux != null) {
       if (this.qtd != 0) {
-        console.log('test', this.carrinho)
         if (this.metodoPagamento != 'Selecione a forma de pagamento') {
           this.carrinhoService.getContadorPedido().subscribe(contador => {
             this.pedido = new Pedido();

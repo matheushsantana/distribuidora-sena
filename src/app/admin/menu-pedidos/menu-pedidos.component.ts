@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { observable, Observable } from 'rxjs';
 import { ClienteService } from 'src/app/cliente/shared/cliente.service';
 import { Pedido } from 'src/app/pedido/shared/pedido';
 import { PedidoDataService } from 'src/app/pedido/shared/pedido-data.service';
@@ -23,11 +23,20 @@ export class MenuPedidosComponent implements OnInit {
   mostraDetalhes: boolean = false;
   term: string = 'Aguardando a Distribuidora aceitar'
 
+  aux: Observable<any>;
+
   constructor(private clienteService: ClienteService, private pedidoDataService: PedidoDataService) { }
 
   ngOnInit(): void {
     this.mudaComponent(0)
     this.clientes = this.clienteService.getAllCliente();
+  }
+
+  notificacao(){
+    let audio = new Audio();
+    audio.src = "assets/audio/notificacao-pedido.mp3";
+    audio.load();
+    audio.play();
   }
 
   mudaComponent(aux: number){
