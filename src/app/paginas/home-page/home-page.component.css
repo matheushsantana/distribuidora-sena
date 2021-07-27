@@ -1,6 +1,5 @@
 #carouselExampleIndicators{
-    padding-top: 10px;
-    padding-bottom: 10px;
+    display: none;
 }
 
 #divisao{
@@ -113,6 +112,7 @@ html {
 
 @media(max-width: 500px){
     #carouselExampleIndicators{
+        display: block;
         padding-top: 10px;
         padding-bottom: 10px;
     }
