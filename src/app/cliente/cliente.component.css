@@ -6,3 +6,12 @@
     font-size: 25px;
     border-bottom: 0.5px solid rgb(133, 132, 132);
 }
+
+.ng-invalid.ng-touched:not(form){
+    border: 1px solid red;
+}
+
+.alerta{
+    color: rgb(221, 1, 1);
+    padding-left: 5px;
+}

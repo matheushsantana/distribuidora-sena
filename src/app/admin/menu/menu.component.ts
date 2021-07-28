@@ -8,33 +8,40 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-  opcoes = ['LISTA DE CLIENTES','LISTA DE PRODUTOS','','RELATORIO DE VENDAS']
+  opcoes = ['LISTA DE CLIENTES', 'LISTA DE PRODUTOS', '', 'RELATORIO DE VENDAS']
   selecionado: string = 'BEM VINDO AO MENU ADMIN';
-  component= [false, false, false, false,]
+  component = [false, false, false, false,]
   nomes = ['clientes', 'produtos', 'pedidos', 'relatorio']
   esconde = true;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    router.events.subscribe(dados => this.mudaComponent())
+   }
 
   ngOnInit(): void {
+    this.mudaComponent();
   }
 
-  mudaComponent(aux: number){
-    for(var i = 0; i < 4; i++){
-      if(i == aux){
-        this.esconde = false
-        var id = document.getElementById(this.nomes[i]).style;
-        id.backgroundColor = 'white';
-        id.color = '#211F20';
-        for(var j = 0; j < 4; j++ ){
-          if(j != aux){
-            var id = document.getElementById(this.nomes[j]).style;
-          id.backgroundColor = '#211F20';
-          id.color = 'white';
+  mudaComponent() {
+    setTimeout(() => {
+      var aux = window.location.href.split("/")
+      for (var i = 0; i < 4; i++) {
+        if (this.nomes[i] == aux[5]) {
+          this.esconde = false
+          var id = document.getElementById(this.nomes[i]).style;
+          id.backgroundColor = 'white';
+          id.color = '#211F20';
+          for (var j = 0; j < 4; j++) {
+            if (this.nomes[j] != aux[5]) {
+              var id = document.getElementById(this.nomes[j]).style;
+              id.backgroundColor = '#211F20';
+              id.color = 'white';
+            }
           }
         }
       }
-    }
+    }, 100)
+
   }
 
 }

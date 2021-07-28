@@ -27,7 +27,6 @@ export class DropzoneComponent implements OnInit {
   }
 
   onDropEvent(event: DragEvent){
-    console.log('entrou dropzone.ts')
     event.preventDefault();
     this.droppedfiles.emit(event.dataTransfer.files)
   }

@@ -24,8 +24,6 @@ export class AuthGuard implements CanActivate {
     if(this.aux != null){
       return true;
     }
-
-    console.log('negou')
     this.router.navigate(['/'])
     return false;
   }

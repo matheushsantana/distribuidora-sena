@@ -14,6 +14,9 @@ export class ClienteService {
 
   insertCliente(cliente: Cliente){
     this.db.list('cliente/'+ this.clienteLogado.cliente.id).update('dados', cliente)
+    .catch((error: any) =>{
+      console.error(error);
+    });
     this.location.back();
   }
 

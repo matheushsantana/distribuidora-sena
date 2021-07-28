@@ -1,89 +1,98 @@
-<div class="voltar">
-    <a (click)="voltaPagina()"><img id="btn-voltar" src="assets/btn-voltar.png"></a><a id="text">CARRINHO</a>
+<div id="carregando">
+    <img src="logo-sena.png" id="logo-carregando">
+    <h1>Carregando...</h1>
 </div>
-<div id="divisao1"></div>
-<div class="container">
-    <div class="alert alert-primary" role="alert" style="text-align: center; margin-top: 10px; padding: 7px;">
-        Suas bebida já vão geladinhas!
+
+<body id="component">
+    <div class="voltar">
+        <a (click)="voltaPagina()"><img id="btn-voltar" src="assets/btn-voltar.png"></a><a id="text">CARRINHO</a>
     </div>
-    <div class="produtos">
-        <div class="d-flex justify-content-center" *ngIf="carregando != true">
-            <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <a id="carregando">Carregando...</a>
+    <div id="divisao1"></div>
+    <div class="container">
+        <div class="alert alert-primary" role="alert" style="text-align: center; margin-top: 10px; padding: 7px;">
+            Suas bebida já vão geladinhas!
         </div>
-        <div class="card mb-3" *ngFor="let produto of carrinho | async">
-            <div class="row g-0">
-                <div class="col-4">
-                    <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.linkImg">
+        <div class="produtos">
+            <div class="d-flex justify-content-center" *ngIf="carregando != true">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
                 </div>
-                <div class="col-8">
-                    <div class="card-body" style="padding-top: 2%; padding-bottom: 2%;">
-                        <img id="lixeira" (click)="apagarProduto(produto.key)" src="assets/lixeira.png">
-                        <p class="card-title">{{ produto.nome }}</p>
-                        <p class="card-text">R${{ produto.valor }}</p>
+                <a id="carregando">Carregando...</a>
+            </div>
+            <div class="card mb-3" *ngFor="let produto of carrinho | async">
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.linkImg">
                     </div>
-                    <div class="input-group mb-3" id="add">
-                        <button class="btn btn" type="button" id="button-addon1"
-                            (click)="quantidadeAltera(0, produto.key)"><strong>-</strong></button>
-                        <input type="text" class="form-control" aria-label="Example text with button addon"
-                            id="quantidade" aria-describedby="button-addon1" disabled [(ngModel)]="produto.quantidade">
-                        <button class="btn btn" type="button" id="button-addon2"
-                            (click)="quantidadeAltera(1, produto.key)"><strong>+</strong></button>
+                    <div class="col-8">
+                        <div class="card-body" style="padding-top: 2%; padding-bottom: 2%;">
+                            <img id="lixeira" (click)="apagarProduto(produto.key)" src="assets/lixeira.png">
+                            <p class="card-title">{{ produto.nome }}</p>
+                            <p class="card-text">R${{ produto.valor }}</p>
+                        </div>
+                        <div class="input-group mb-3" id="add">
+                            <button class="btn btn" type="button" id="button-addon1"
+                                (click)="quantidadeAltera(0, produto.key)"><strong>-</strong></button>
+                            <input type="text" class="form-control" aria-label="Example text with button addon"
+                                id="quantidade" aria-describedby="button-addon1" disabled
+                                [(ngModel)]="produto.quantidade">
+                            <button class="btn btn" type="button" id="button-addon2"
+                                (click)="quantidadeAltera(1, produto.key)"><strong>+</strong></button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <p id="adicionar" [routerLink]="[ '/' ]">Adicionar mais produtos</p>
         </div>
-        <p id="adicionar" [routerLink]="[ '/' ]">Adicionar mais produtos</p>
     </div>
-</div>
-<div class="divisao"></div>
-<div class="container">
-    <p id="receber"><img id="receber-img" src="assets/local.png"> Receber agora em</p>
-    <p id="endereco">{{ enderecoCliente }}</p>
-    <p id="info" (click)="atualizaEndereco()">Não está nesse endereço?</p>
-</div>
-<div class="divisao"></div>
-<div class="container">
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label" style="color:rgb(128, 128, 128)"><img id="chat"
-                src="assets/chat.png"><strong>Instruções para a Distribuidora? <br> (Máximo de 150 caracteres)</strong></label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="150" [(ngModel)]="instrucoes"
-            placeholder="Ex. Se possivel entrar tudo em temperatura ambiente, o interfone esta quebrado favor ligar quando chegar."
-            rows="3"></textarea>
+    <div class="divisao"></div>
+    <div class="container">
+        <p id="receber"><img id="receber-img" src="assets/local.png"> Receber agora em</p>
+        <p id="endereco">{{ enderecoCliente }}</p>
+        <p id="info" (click)="atualizaEndereco()">Não está nesse endereço?</p>
     </div>
-</div>
-<div class="divisao"></div>
-<div class="container">
-    <select class="form-select" id="select" [(ngModel)]="metodoPagamento">
-        <option selected>Selecione a forma de pagamento</option>
-        <option value="Dinheiro">Dinheiro</option>
-        <option value="Cartão">Cartão</option>
-    </select>
-</div>
-<div class="divisao"></div>
-<div class="container">
-    <div class="conta">
-        <div id="prodValor">
-            <p>{{ quantidadeProd }} Produtos</p>
-            <p id="valor">R${{ total | number : "1.2" }}</p>
+    <div class="divisao"></div>
+    <div class="container">
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label" style="color:rgb(128, 128, 128)"><img id="chat"
+                    src="assets/chat.png"><strong>Instruções para a Distribuidora? <br> (Máximo de 150
+                    caracteres)</strong></label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" maxlength="150" [(ngModel)]="instrucoes"
+                placeholder="Ex. Se possivel entrar tudo em temperatura ambiente, o interfone esta quebrado favor ligar quando chegar."
+                rows="3"></textarea>
         </div>
-        <div id="prodValor">
-            <p>Entrega</p>
-            <p id="valor">R${{ frete | number : "1.2" }}</p>
-        </div>
-        <div id="prodValor">
-            <p>Total a Pagar</p>
-            <p id="valor">R${{ totalFinal | number : "1.2" }}</p>
-        </div>
-        <button class="btn" id="btn-adicionar" (click)="fazerPedido()">Fazer Pedido</button>
     </div>
-</div>
-<br>
-<nav class="navbar justify-content-center" id="rodape">
-    <p class="navbar-brand">Todos os direitos Reservados a Luas Tecnologia LTDA</p>
-    <div>Ícones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
-      <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a>
-  </div>
-</nav>
+    <div class="divisao"></div>
+    <div class="container">
+        <select class="form-select" id="select" [(ngModel)]="metodoPagamento">
+            <option selected>Selecione a forma de pagamento</option>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão">Cartão</option>
+        </select>
+    </div>
+    <div class="divisao"></div>
+    <div class="container">
+        <div class="conta">
+            <div id="prodValor">
+                <p>{{ quantidadeProd }} Produtos</p>
+                <p id="valor">R${{ total | number : "1.2" }}</p>
+            </div>
+            <div id="prodValor">
+                <p>Entrega</p>
+                <p id="valor">R${{ frete | number : "1.2" }}</p>
+            </div>
+            <div id="prodValor">
+                <p>Total a Pagar</p>
+                <p id="valor">R${{ totalFinal | number : "1.2" }}</p>
+            </div>
+            <button class="btn" id="btn-adicionar" (click)="fazerPedido()">Fazer Pedido</button>
+        </div>
+    </div>
+    <br>
+    <nav class="navbar justify-content-center" id="rodape">
+        <p class="navbar-brand">Todos os direitos Reservados a Luas Tecnologia LTDA</p>
+        <div>Ícones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
+            <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a>
+        </div>
+    </nav>
+</body>

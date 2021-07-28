@@ -74,7 +74,7 @@
     left: 60px;
     top: 32px;
     margin-top: 5px;
-    max-width: 80%; /* Tamanho */
+    max-width: 80%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap
@@ -190,7 +190,7 @@
         left: 60px;
         top: 32px;
 
-        max-width: 80%; /* Tamanho */
+        max-width: 80%;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap

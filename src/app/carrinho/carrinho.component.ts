@@ -36,6 +36,7 @@ export class CarrinhoComponent implements OnInit {
   enderecoCliente: string;
   instrucoes: string;
   endereco: any;
+  entrou = false;
 
   data = new Date();
 
@@ -50,10 +51,33 @@ export class CarrinhoComponent implements OnInit {
     window.scrollTo(0, 0)
     this.carrinho = this.carrinhoService.getAllProdCarrinho();
     this.carregando = true;
-    setTimeout(() => {
-      this.totalPedido();
-      this.frete = this.calculaFrete.precoFrente;
-    }, 1700)
+    if(this.entrou == false){
+      setTimeout(() => {
+        setTimeout(() => {
+          this.totalPedido();
+          this.frete = this.calculaFrete.precoFrente;
+        }, 1500)
+  
+        var site = document.getElementById('component').style
+        site.display = 'block';
+        var carregamento = document.getElementById('carregando')
+        carregamento.classList.add("hide")
+        this.entrou = true;
+      }, 2000)
+    } else {
+      setTimeout(() => {
+        setTimeout(() => {
+          this.totalPedido();
+          this.frete = this.calculaFrete.precoFrente;
+        }, 1500)
+  
+        var site = document.getElementById('component').style
+        site.display = 'block';
+        var carregamento = document.getElementById('carregando')
+        carregamento.classList.add("hide")
+      }, 4000)
+    }
+    
     this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
@@ -124,7 +148,7 @@ export class CarrinhoComponent implements OnInit {
       var aux: number = 0;
       this.total = 0.00;
       this.qtd = 0;
-      this.quantidadeProd = 0;
+      this.quantidadeProd = 0;  
       this.totalFinal = this.calculaFrete.precoFrente;
       var qtdAux = (Object.keys(this.produtos).length)
       while (a < qtdAux) {

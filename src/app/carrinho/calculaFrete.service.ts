@@ -12,6 +12,7 @@ import { ClienteVerificaCadastro } from "../cliente/clienteVefificaCadastro.serv
     distancia: number;
     precoFrente: number = 0;
     dadosCliente: any;
+    semEndereco = false;
 
     constructor(private http: HttpClient, private clienteVerificaCadastro: ClienteVerificaCadastro){}
 
@@ -21,8 +22,12 @@ import { ClienteVerificaCadastro } from "../cliente/clienteVefificaCadastro.serv
           this.enderecoEstenco = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ' ' 
           + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ' ' 
           + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
+        } else {
+          this.precoFrente = 5;
+          this.semEndereco = true;
         }
-        this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=${this.enderecoEstenco}&key=AIzaSyAPzJUkWa3xc7cgGN840g00qlBLYTpJLjY`).subscribe(dados => {
+        if(this.semEndereco == false){
+          this.http.get(`https://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=${this.enderecoEstenco}&key=AIzaSyAPzJUkWa3xc7cgGN840g00qlBLYTpJLjY`).subscribe(dados => {
           this.endereco = new google.maps.LatLng(dados['results'][0].geometry['location'])
           this.distancia = google.maps.geometry.spherical.computeDistanceBetween(distribuidaora, this.endereco);
           this.precoFrente = parseInt(((this.distancia / 1000) * 2.2).toFixed(0))
@@ -30,5 +35,7 @@ import { ClienteVerificaCadastro } from "../cliente/clienteVefificaCadastro.serv
             this.precoFrente = 5
           }
         });
+        }
+        
       }
   }

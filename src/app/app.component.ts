@@ -54,14 +54,12 @@ export class AppComponent {
           }
           this.ativaNav = true
           this.calculaFrete.calculaFrete();
-          console.log('entrou cliente')
           this.carregaPagina();
         }, 1500);
       } else if (this.cliente.tipo === 'admin') {
         this.ativaNav = false;
         this.admAutenticated = true;
         this.router.navigate(['/admin/menu'])
-        console.log('entrou admin')
         this.carregaPagina();
       }
     })

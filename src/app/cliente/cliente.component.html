@@ -3,31 +3,41 @@
     <form class="row g-3" #f="ngForm" (ngSubmit)="onSubmit()">
         <div class="col-md-6">
             <label for="inputNome" class="form-label">Nome</label>
-            <input type="inputNome" class="form-control" name="nome"
-            [(ngModel)]="cliente.nome">
+            <input type="inputNome" class="form-control" name="nome" id="nome"
+            [(ngModel)]="cliente.nome" required #nome="ngModel">
+            <div *ngIf="!nome.valid && nome.touched" class="alerta">
+                Telefone é Obrigatorio!</div>
         </div>
         <div class="col-12">
             <label for="inputTelefone" class="form-label">Telefone</label>
             <input type="text" class="form-control" placeholder="(00)00000-0000"
-            name="inputTelefone" [(ngModel)]="cliente.telefone" mask="(00)00000-0000">
+            name="inputTelefone" id="inputTelefone" [(ngModel)]="cliente.telefone" mask="(00)00000-0000" required #inputTelefone="ngModel">
+            <div *ngIf="!inputTelefone.valid && inputTelefone.touched" class="alerta">
+                Telefone é Obrigatorio!</div>
         </div>
         <div class="col-12">
             <label for="inputEndereco" class="form-label">Endereço</label>
             <input type="text" class="form-control" placeholder="Ex. Rua marechal, quadra 3"
-            name="inputEndereco" [(ngModel)]="cliente.enderecoRua">
+            name="inputEndereco" id="inputEndereco" [(ngModel)]="cliente.enderecoRua" required #inputEndereco="ngModel">
+            <div *ngIf="!inputEndereco.valid && inputEndereco.touched" class="alerta">
+                Endereço é Obrigatorio!</div>
         </div>
         <div class="col-12">
             <label for="inputNumero" class="form-label">Número</label>
             <input type="number" class="form-control" placeholder="Ex. 341"
-            name="inputNumero" [(ngModel)]="cliente.enderecoNumero">
+            name="inputNumero" id="inputNumero" [(ngModel)]="cliente.enderecoNumero" required #inputNumero="ngModel">
+            <div *ngIf="!inputNumero.valid && inputNumero.touched" class="alerta">
+                Numero da casa é Obrigatorio!</div>
         </div>
         <div class="col-md-6">
             <label for="inputBairro" class="form-label">Bairro</label>
             <input type="text" class="form-control" 
-            name="inputBairro" [(ngModel)]="cliente.enderecoBairro">
+            name="inputBairro" id="inputBairro" [(ngModel)]="cliente.enderecoBairro" required #inputBairro="ngModel">
+            <div *ngIf="!inputBairro.valid && inputBairro.touched" class="alerta">
+                Bairro é Obrigatorio!</div>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button type="submit" class="btn btn-primary">Atualizar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Atualizar</button>
             <button type="button" class="btn btn-danger" (click)="voltaPagina()">Cancelar</button>
         </div>
     </form>
