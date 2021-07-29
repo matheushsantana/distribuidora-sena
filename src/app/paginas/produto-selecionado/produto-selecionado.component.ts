@@ -40,6 +40,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
     private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro) { }
 
   ngOnInit(): void {
+    window.scrollTo(0, 0)
     this.produto = new Produto();
     this.produtoDataService.currentProduto.subscribe(data => {
       if(data.produto == null){

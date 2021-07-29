@@ -23,7 +23,6 @@ export class HomePageComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    window.scrollTo(0, 0)
     this.produtos = this.produtoService.getAllProduto();
 
     if(this.windowWidth > 500){

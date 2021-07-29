@@ -19,6 +19,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './guards/auth.guard';
 import { NgxMaskModule } from 'ngx-mask';
 import { GoogleMapsModule } from '@angular/google-maps'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
     LazyLoadImageModule,
     NgxMaskModule.forRoot(),
     GoogleMapsModule,
+    BrowserAnimationsModule 
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

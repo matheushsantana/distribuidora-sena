@@ -140,4 +140,160 @@ html {
         width: 0px;  /* Remove scrollbar space */
         background: transparent;  /* Optional: just make scrollbar invisible */
     }
+}#component{
+    display: none;
+}
+
+#divisao{
+    width: 100%;
+    height: 7px;
+    background-color: rgba(68, 68, 68, 0.164);
+}
+
+#divisao1{
+    width: 100%;
+    height: 2px;
+    background-color: rgba(68, 68, 68, 0.164);
+}
+
+#btn-voltar{
+    width: 30px;
+    filter: contrast(1%);
+    margin-right: 5px;
+}
+
+.voltar{
+    padding: 7px;
+}
+
+.voltar a{
+    font-weight: bold;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+}
+
+#titu{
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.507);
+    margin-top: 10px;
+}
+
+#card-prod{
+    width: 130px;
+    white-space: normal;
+    margin-left: 8px;
+    box-shadow: rgba(0, 0, 0, 0.438) 1px 1px 2px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    margin-bottom: 10px;
+}
+
+#desc-prod{
+    font-size: 14px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 42px;
+    margin-bottom: 7px;
+}
+
+#preco-prod{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
+
+div.scrollProdutos {
+    overflow: auto;
+    white-space: nowrap;
+    padding: 0%;
+  }
+  
+div.scrollProdutos #card-prod {
+    display: inline-block;
+}
+
+#seta-direita{
+    display: inline-block;
+    position: relative;
+    top: -50px;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+#img-seta-direita{
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.438) 1px 1px 5px;
+    width: 55px;
+    padding: 10px;
+}
+
+#veja-tudo{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+#rodape{
+    background-color: #211F20;
+}
+
+#rodape p{
+    color: white;
+    font-size: 14px;
+}
+
+#rodape div{
+    color: white;
+    font-size: 12px;
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+#carregando{
+    position: absolute;
+    z-index: 9999;
+    background-color: #211F20;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    opacity: 1;
+    transition: opacity .5s linear;
+    transition: all .5s linear;
+}
+
+#carregando.hide{
+    opacity: 0;
+    pointer-events: none;
+}
+
+#carregando h1{
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 180px;
+    font-size: 55px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#logo-carregando{
+    width: 250px;
+    text-align: center;
+    position: relative;
+    top: 180px;
+}
+
+@media(max-width: 500px){
+    ::-webkit-scrollbar {
+        display: none;
+        width: 0px;  /* Remove scrollbar space */
+        height: 0px;
+        background: transparent;  /* Optional: just make scrollbar invisible */
+    }
 }

@@ -38,7 +38,14 @@
 }
 
 #card-prod{
+    width: 130px;
     white-space: normal;
+    margin-left: 8px;
+    box-shadow: rgba(0, 0, 0, 0.438) 1px 1px 2px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    margin-bottom: 10px;
 }
 
 #desc-prod{
@@ -49,8 +56,13 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     height: 42px;
+    margin-bottom: 7px;
 }
 
+#preco-prod{
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
 
 div.scrollProdutos {
     overflow: auto;
@@ -137,7 +149,9 @@ html {
 
 @media(max-width: 500px){
     ::-webkit-scrollbar {
+        display: none;
         width: 0px;  /* Remove scrollbar space */
+        height: 0px;
         background: transparent;  /* Optional: just make scrollbar invisible */
     }
 }

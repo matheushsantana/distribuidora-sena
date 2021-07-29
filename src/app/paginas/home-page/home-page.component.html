@@ -44,12 +44,12 @@
         <div id="divisao"></div>
         <p id="titu"><strong>CERVEJAS</strong></p>
         <div class="scrollProdutos">
-            <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
+            <div class="card" id="card-prod"  (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
                 *ngFor="let produto of produtos | async | filter:'cerveja' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
-                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                    <p class="text" id="preco-prod"><strong>R${{ produto.valor }}</strong></p>
                 </div>
             </div>
             <div class="seta" id="seta-direita" [routerLink]="['/categoria/cervejas']">
@@ -60,12 +60,12 @@
         <div id="divisao"></div>
         <p id="titu"><strong>DESTILADOS</strong></p>
         <div class="scrollProdutos">
-            <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
+            <div class="card" id="card-prod" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
                 *ngFor="let produto of produtos | async | filter:'destilado' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
-                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                    <p class="text" id="preco-prod"><strong>R${{ produto.valor }}</strong></p>
                 </div>
             </div>
             <div class="seta" id="seta-direita" [routerLink]="['/categoria/destilados']">
@@ -76,12 +76,12 @@
         <div id="divisao"></div>
         <p id="titu"><strong>VINHOS</strong></p>
         <div class="scrollProdutos">
-            <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
+            <div class="card" id="card-prod" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
                 *ngFor="let produto of produtos | async | filter:'vinho' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
-                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                    <p class="text" id="preco-prod"><strong>R${{ produto.valor }}</strong></p>
                 </div>
             </div>
             <div class="seta" id="seta-direita" [routerLink]="['/categoria/vinhos']">
@@ -92,15 +92,15 @@
         <div id="divisao"></div>
         <p id="titu"><strong>ENERGÉTICO</strong></p>
         <div class="scrollProdutos">
-            <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
+            <div class="card" id="card-prod" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
                 *ngFor="let produto of produtos | async | filter:'energetico' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
-                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                    <p class="text" id="preco-prod"><strong>R${{ produto.valor }}</strong></p>
                 </div>
             </div>
-            <div class="seta" id="seta-direita" [routerLink]="['/categoria/vinhos']">
+            <div class="seta" id="seta-direita" [routerLink]="['/categoria/sem-alcool']">
                 <img src="assets/seta-direita.png" id="img-seta-direita">
                 <p class="text-muted" id="veja-tudo">Veja tudo</p>
             </div>
@@ -108,12 +108,12 @@
         <div id="divisao"></div>
         <p id="titu"><strong>SEM ÁLCOOL</strong></p>
         <div class="scrollProdutos">
-            <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
+            <div class="card" id="card-prod" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
                 *ngFor="let produto of produtos | async | filter:'sem-alcool' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
-                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                    <p class="text" id="preco-prod"><strong>R${{ produto.valor }}</strong></p>
                 </div>
             </div>
             <div class="seta" id="seta-direita" [routerLink]="['/categoria/sem-alcool']">
@@ -124,12 +124,12 @@
         <div id="divisao"></div>
         <p id="titu"><strong>TABACARIA</strong></p>
         <div class="scrollProdutos">
-            <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
+            <div class="card" id="card-prod" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
                 *ngFor="let produto of produtos | async | filter:'tabacaria' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
-                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                    <p class="text" id="preco-prod"><strong>R${{ produto.valor }}</strong></p>
                 </div>
             </div>
             <div class="seta" id="seta-direita" [routerLink]="['/categoria/tabacaria']">
@@ -140,12 +140,12 @@
         <div id="divisao"></div>
         <p id="titu"><strong>MERCEARIA</strong></p>
         <div class="scrollProdutos">
-            <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
+            <div class="card" id="card-prod" (click)="selecionaProduto(produto, produto.key)" [routerLink]="['/produto-selecionado']"
                 *ngFor="let produto of produtos | async | filter:'mercearia' | slice:0:aux">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto " class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>
-                    <p class="text"><strong>R${{ produto.valor }}</strong></p>
+                    <p class="text" id="preco-prod"><strong>R${{ produto.valor }}</strong></p>
                 </div>
             </div>
             <div class="seta" id="seta-direita" [routerLink]="['/categoria/mercearia']">
@@ -155,7 +155,7 @@
         </div>
     </div>
     <nav class="navbar justify-content-center" id="rodape">
-        <p class="navbar-brand">Todos os direitos Reservados a Luas Tecnologia LTDA</p>
+        <p class="navbar-brand">Todos os Direitos Reservados a Luas Tecnologia ©2021</p>
         <div>Ícones feitos por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from
           <a href="https://www.flaticon.com/br/" title="Flaticon">www.flaticon.com</a>
       </div>

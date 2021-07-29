@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
+import { slideInAnimation } from './animations';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
 import { CalculaFrete } from './carrinho/calculaFrete.service';
-import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
@@ -14,6 +14,7 @@ import { AuthGuard } from './guards/auth.guard';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [ slideInAnimation ]
 })
 export class AppComponent {
 
@@ -37,6 +38,7 @@ export class AppComponent {
     var inicializadora = this.authGuard.aux;
   }
   ngOnInit() {
+    window.scrollTo(0, 0)
     this.user$.subscribe(dados => {
       this.cliente = new Cliente();
       this.cliente.id = dados.id;
@@ -68,6 +70,10 @@ export class AppComponent {
         this.carregaPagina();
       }
     }, 1500)
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
   carregaPagina() {
