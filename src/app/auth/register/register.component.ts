@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
 states = ['MT', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
 
 constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+entrou = false;
 
 ngOnInit(): void {
 }
@@ -55,6 +56,15 @@ onSubmit(){
       alert('Erro ao Cadastrar!')
     }
   );
+  this.escondeTela();
+}
+
+escondeTela(){
+  var site = document.getElementById('component').style
+      site.display = 'none';
+      var carregamento = document.getElementById('carregando')
+      carregamento.classList.add("hide")
+      this.entrou = true;
 }
 
 }

@@ -7,4 +7,5 @@ export class Cliente{
     enderecoBairro: string;
     telefone: string;
     tipo: string;
+    coordenadas: google.maps.LatLng;
 }

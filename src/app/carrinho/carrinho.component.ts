@@ -48,6 +48,12 @@ export class CarrinhoComponent implements OnInit {
   }
 
   ngOnInit() {
+    if(this.calculaFrete.freteCarregado == 1){
+      this.calculaFrete.calculaFrete()
+    } else if(this.calculaFrete.freteCarregado == 3){
+      this.calculaFrete.calculaFrete()
+    }
+    
     window.scrollTo(0, 0)
     this.carrinho = this.carrinhoService.getAllProdCarrinho();
     this.carregando = true;

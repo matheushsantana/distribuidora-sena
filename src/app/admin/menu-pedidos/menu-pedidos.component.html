@@ -17,6 +17,9 @@
     <div *ngIf="mostraDetalhes != true ">
         <div class="card mb-3" *ngFor="let cliente of clientes | async | filter : term "
             (click)="visualizar(cliente.pedido, 'pedido')">
+            <audio autoplay="autoplay" *ngIf="cliente.pedido.estado == 'Aguardando a Distribuidora aceitar...'">
+                <source src="assets/audio/notificacao-pedido.mp3" type="audio/mp3" />
+            </audio>
             <div class="row g-0">
                 <div class="col-md-12" id="dados">
                     <a><strong>Nome:</strong> {{ cliente.pedido.clienteNome }}</a><br>

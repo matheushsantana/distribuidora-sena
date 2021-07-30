@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { CalculaFrete } from '../carrinho/calculaFrete.service';
 import { Produto } from '../produtos/shared/produto';
 import { Pedido } from './shared/pedido';
 import { PedidoService } from './shared/pedido.service';
@@ -18,10 +19,11 @@ export class PedidoComponent implements OnInit {
   produtos: Produto[];
   listaProduto: any;
   loop: any;
+  tempoEntrega: string = ''
 
   estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 'Pedido saiu para entrega...', 'Pedido finalizado...', 'Seu pedido foi cancelado...']
 
-  constructor(private pedidoService: PedidoService) { }
+  constructor(private pedidoService: PedidoService, private calculaFrete: CalculaFrete) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0)
@@ -54,17 +56,20 @@ export class PedidoComponent implements OnInit {
     }
     if (String(this.statuspedido) == this.estado[2]) {
       barra.style.width = '70%'
+      this.tempoEntrega = ' Tempo Estimado ' + (this.calculaFrete.precoFrente * 1.5) + ' minutos'
     }
     if (String(this.statuspedido) == this.estado[3]) {
-      barra.style.width = '100%'
-      barra.className = 'progress-bar progress-bar-striped bg-success'
+      barra.style.width = '100%',
+      barra.className = 'progress-bar progress-bar-striped bg-success',
+      this.tempoEntrega = ''
       setTimeout(() => {
         window.location.href = "/"
       }, 2500)
     }
     if (String(this.statuspedido) == this.estado[4]) {
-      barra.style.width = '100%'
-      barra.className = 'progress-bar progress-bar-striped bg-danger'
+      barra.style.width = '100%',
+      barra.className = 'progress-bar progress-bar-striped bg-danger',
+      this.tempoEntrega = ''
       setTimeout(() => {
         window.location.href = "/"
       }, 2500)

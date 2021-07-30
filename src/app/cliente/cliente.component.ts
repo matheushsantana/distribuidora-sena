@@ -30,10 +30,12 @@ export class ClienteComponent implements OnInit {
   }
 
   onSubmit() {
-    this.calculaFrete.semEndereco = false;
+    this.calculaFrete.freteCarregado = 3;
     this.clienteService.insertCliente(this.cliente);
-    this.cliente = new Cliente();
+    this.calculaFrete.pegaCoordenadas(this.cliente)
+    this.location.back();
     this.appComponent.ngOnInit();
+    this.cliente = new Cliente();
   }
 
   voltaPagina() {

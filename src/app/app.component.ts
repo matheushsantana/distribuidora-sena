@@ -39,37 +39,39 @@ export class AppComponent {
   }
   ngOnInit() {
     window.scrollTo(0, 0)
-    this.user$.subscribe(dados => {
-      this.cliente = new Cliente();
-      this.cliente.id = dados.id;
-      this.cliente.nome = dados.firsname;
-      this.cliente.tipo = dados.tipo;
-      this.clienteLogado.recebeDados(this.cliente);
-      if (this.cliente.tipo === 'cliente') {
-        this.clienteVerificaCadastro.verifica()
-        setTimeout(() => {
-          this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
-          if (this.dadosCliente.enderecoRua != null || this.dadosCliente.enderecoRua != undefined) {
-            this.endereco = this.dadosCliente.enderecoRua + ', ' + this.dadosCliente.enderecoNumero + ', ' + this.dadosCliente.enderecoBairro
-          } else {
-            this.endereco = 'Adicionar Endereço...'
-          }
-          this.ativaNav = true
-          this.calculaFrete.calculaFrete();
-          this.carregaPagina();
-        }, 1500);
-      } else if (this.cliente.tipo === 'admin') {
-        this.ativaNav = false;
-        this.admAutenticated = true;
-        this.router.navigate(['/admin/menu'])
-        this.carregaPagina();
-      }
-    })
     setTimeout(() => {
-      if(this.cliente.id == null){
-        this.carregaPagina();
-      }
-    }, 1500)
+      this.user$.subscribe(dados => {
+        this.cliente = new Cliente();
+        this.cliente.id = dados.id;
+        this.cliente.nome = dados.firsname;
+        this.cliente.tipo = dados.tipo;
+        this.clienteLogado.recebeDados(this.cliente);
+        if (this.cliente.tipo === 'cliente') {
+          this.clienteVerificaCadastro.verifica()
+          setTimeout(() => {
+            this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
+            if (this.dadosCliente.enderecoRua != null || this.dadosCliente.enderecoRua != undefined) {
+              this.endereco = this.dadosCliente.enderecoRua + ', ' + this.dadosCliente.enderecoNumero + ', ' + this.dadosCliente.enderecoBairro
+            } else {
+              this.endereco = 'Adicionar Endereço...'
+            }
+            this.ativaNav = true
+            //this.calculaFrete.calculaFrete();
+            this.carregaPagina();
+          }, 1500);
+        } else if (this.cliente.tipo === 'admin') {
+          this.ativaNav = false;
+          this.admAutenticated = true;
+          this.router.navigate(['/admin/menu'])
+          this.carregaPagina();
+        }
+      })
+      setTimeout(() => {
+        if(this.cliente.id == null){
+          this.carregaPagina();
+        }
+      }, 1500)
+    }, 500)
   }
 
   prepareRoute(outlet: RouterOutlet) {

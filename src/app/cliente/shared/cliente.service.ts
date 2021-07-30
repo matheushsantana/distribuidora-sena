@@ -17,7 +17,6 @@ export class ClienteService {
     .catch((error: any) =>{
       console.error(error);
     });
-    this.location.back();
   }
 
   getAllCliente(){

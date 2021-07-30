@@ -17,10 +17,12 @@ export class LoginComponent implements OnInit {
   })
 
   loading: boolean = false;
+  entrou = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    
   }
 
   private loginOkNotification(u: User){
@@ -47,10 +49,20 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
+      this.escondeTela();
+  }
+
+  escondeTela(){
+    var site = document.getElementById('component').style
+        site.display = 'none';
+        var carregamento = document.getElementById('carregando')
+        carregamento.classList.add("hide")
+        this.entrou = true;
   }
 
   loginGoogle(){
     this.loading = true;
+    this.escondeTela();
     this.authService.loginGoogle()
       .subscribe(
         (u)=> {
