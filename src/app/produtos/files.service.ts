@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { from, of } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { FileEntry } from './models/fileentry.model';
 
 @Injectable({
@@ -13,7 +12,7 @@ import { FileEntry } from './models/fileentry.model';
 
     urlfotoProd: string;
   
-    constructor(private storage: AngularFireStorage, private afs: AngularFirestore) {}
+    constructor(private storage: AngularFireStorage) {}
   
     uploadFile(f: File) {
       let path = `myfiles/${f.name}`;

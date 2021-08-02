@@ -22,10 +22,8 @@ export class CalculaFrete {
     private clienteService: ClienteService) { }
 
   calculaFrete() {
-    console.log('entrou calcula')
     const distribuidaora = new google.maps.LatLng(-15.5834112, -56.0756531);
     if(this.freteCarregado == 1){
-      console.log('entrou calcula 1')
       if (this.clienteVerificaCadastro.dadosCliente.enderecoBairro != null || this.clienteVerificaCadastro.dadosCliente.enderecoBairro != undefined) {
         this.endereco = new google.maps.LatLng(this.clienteVerificaCadastro.dadosCliente.coordenadas)
         this.distancia = google.maps.geometry.spherical.computeDistanceBetween(distribuidaora, this.endereco)
@@ -38,7 +36,6 @@ export class CalculaFrete {
         this.precoFrente = 5;
       }
     } else if(this.freteCarregado == 3){
-      console.log('entrou calcula 2')
       if (this.clienteVerificaCadastro.dadosCliente.enderecoBairro != null || this.clienteVerificaCadastro.dadosCliente.enderecoBairro != undefined) {
         this.enderecoEstenco = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ' ' 
         + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ' ' 

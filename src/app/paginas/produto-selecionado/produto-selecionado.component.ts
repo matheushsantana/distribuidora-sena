@@ -8,7 +8,6 @@ import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
 import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { Router } from '@angular/router';
 import { PedidoService } from 'src/app/pedido/shared/pedido.service';
-import { AppComponent } from 'src/app/app.component';
 import { ClienteVerificaCadastro } from 'src/app/cliente/clienteVefificaCadastro.service';
 
 @Component({

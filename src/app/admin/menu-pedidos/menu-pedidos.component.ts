@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { observable, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ClienteService } from 'src/app/cliente/shared/cliente.service';
 import { Pedido } from 'src/app/pedido/shared/pedido';
 import { PedidoDataService } from 'src/app/pedido/shared/pedido-data.service';

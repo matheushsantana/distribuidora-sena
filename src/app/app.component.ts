@@ -4,11 +4,9 @@ import { Observable } from 'rxjs';
 import { slideInAnimation } from './animations';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
-import { CalculaFrete } from './carrinho/calculaFrete.service';
 import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
-import { AuthGuard } from './guards/auth.guard';
 
 @Component({
   selector: 'app-root',
@@ -32,10 +30,9 @@ export class AppComponent {
   admAutenticated: boolean = false;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
-    private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard, private calculaFrete: CalculaFrete) {
+    private clienteVerificaCadastro: ClienteVerificaCadastro) {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
-    var inicializadora = this.authGuard.aux;
   }
   ngOnInit() {
     window.scrollTo(0, 0)
@@ -56,7 +53,6 @@ export class AppComponent {
               this.endereco = 'Adicionar Endereço...'
             }
             this.ativaNav = true
-            //this.calculaFrete.calculaFrete();
             this.carregaPagina();
           }, 1500);
         } else if (this.cliente.tipo === 'admin') {

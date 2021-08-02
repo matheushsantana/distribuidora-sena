@@ -27,6 +27,7 @@ export class PedidoComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0)
+    this.calculaFrete.calculaFrete();
     this.carregando = false;
     this.pedidoService.getAllPedido().subscribe(dados => {
       this.pedido = dados[1]
@@ -56,7 +57,7 @@ export class PedidoComponent implements OnInit {
     }
     if (String(this.statuspedido) == this.estado[2]) {
       barra.style.width = '70%'
-      this.tempoEntrega = ' Tempo Estimado ' + (this.calculaFrete.precoFrente * 1.5) + ' minutos'
+      this.tempoEntrega = ' Tempo Estimado: ' + (this.calculaFrete.precoFrente * 2) + ' minutos'
     }
     if (String(this.statuspedido) == this.estado[3]) {
       barra.style.width = '100%',
