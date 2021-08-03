@@ -22,7 +22,6 @@ export class AppComponent {
   idCliente: string;
   valor: string;
   cliente: Cliente;
-  verificaPedido: boolean;
   test: Observable<any>;
   dadosCliente: any;
   endereco: string = 'carregando';
@@ -92,16 +91,10 @@ export class AppComponent {
 
   verifica() {
     if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
-      this.verificaPedido = true;
       this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
     } else {
-      this.verificaPedido = false;
       this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
     }
-  }
-
-  mudaCor() {
-    console.log('funcionou')
   }
 
   atualizaEndereco() {

@@ -100,6 +100,7 @@ export class CarrinhoComponent implements OnInit {
   quantidadeAltera(valor: number, key: number) {
 
     for (var i = 0; i < this.qtd; i++) {
+      console.log('entrou for')
       if (valor >= 1) {
         if (this.produtos[i].key == key) {
           this.produtos[i].quantidade = Number(this.produtos[i].quantidade) + 1;
@@ -118,20 +119,22 @@ export class CarrinhoComponent implements OnInit {
         }
 
       } else if (valor === 0) {
-        if (this.produtos[key].quantidade >= 2) {
-          this.produtos[key].quantidade = Number(this.produtos[key].quantidade) - 1;
-          this.produtos[key].total = Number(this.produtos[key].total) - Number(this.produtos[key].valor);
-          this.total = Number(this.total) - Number(this.produtos[key].valor);
-          this.totalFinal = Number(this.totalFinal) - Number(this.produtos[key].valor);
-          this.quantidadeProd = this.quantidadeProd - 1;
+        if (this.produtos[i].key == key) {
+          if (this.produtos[key].quantidade >= 2) {
+            this.produtos[key].quantidade = Number(this.produtos[key].quantidade) - 1;
+            this.produtos[key].total = Number(this.produtos[key].total) - Number(this.produtos[key].valor);
+            this.total = Number(this.total) - Number(this.produtos[key].valor);
+            this.totalFinal = Number(this.totalFinal) - Number(this.produtos[key].valor);
+            this.quantidadeProd = this.quantidadeProd - 1;
 
-          this.produto = new Carrinho();
-          this.produto.nome = this.produtos[key].nome,
-            this.produto.linkImg = this.produtos[key].linkImg,
-            this.produto.quantidade = this.produtos[key].quantidade,
-            this.produto.total = this.produtos[key].total,
-            this.produto.valor = this.produtos[key].valor,
-            this.carrinhoService.atualizaCarrinho(key, this.produto)
+            this.produto = new Carrinho();
+            this.produto.nome = this.produtos[key].nome,
+              this.produto.linkImg = this.produtos[key].linkImg,
+              this.produto.quantidade = this.produtos[key].quantidade,
+              this.produto.total = this.produtos[key].total,
+              this.produto.valor = this.produtos[key].valor,
+              this.carrinhoService.atualizaCarrinho(key, this.produto)
+          }
         }
       }
     }

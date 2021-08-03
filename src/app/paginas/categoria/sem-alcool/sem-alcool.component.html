@@ -38,7 +38,7 @@
         <p id="titu"><strong>SUCO</strong></p>
         <div class="scrollProdutos">
             <div class="card" id="card-prod" style="width: 8.5rem;" (click)="selecionaProduto(produto, produto.key)"
-                [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async |filter:'suco'">
+                [routerLink]="['/produto-selecionado']" *ngFor="let produto of produtos | async |filter:'suco prat'">
                 <img [defaultImage]="imgPadrao" [lazyLoad]=" produto.imgProduto" class="card-img-top" alt="...">
                 <div class="card-body">
                     <p class="text-muted" id="desc-prod">{{ produto.nome }}</p>

@@ -98,7 +98,7 @@ export class EditarProdutoComponent implements OnInit {
 
     setTimeout(() => {
       this.produto.imgProduto = this.filesService.urlfotoProd;
-    }, 2000)
+    }, 3000)
   }
 
 }
