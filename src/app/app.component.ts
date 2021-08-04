@@ -43,17 +43,11 @@ export class AppComponent {
         this.cliente.tipo = dados.tipo;
         this.clienteLogado.recebeDados(this.cliente);
         if (this.cliente.tipo === 'cliente') {
-          this.clienteVerificaCadastro.verifica()
+          this.clienteVerificaCadastro.verifica(this.pegaEndereco)
           setTimeout(() => {
-            this.dadosCliente = this.clienteVerificaCadastro.dadosCliente
-            if (this.dadosCliente.enderecoRua != null || this.dadosCliente.enderecoRua != undefined) {
-              this.endereco = this.dadosCliente.enderecoRua + ', ' + this.dadosCliente.enderecoNumero + ', ' + this.dadosCliente.enderecoBairro
-            } else {
-              this.endereco = 'Adicionar Endereço...'
-            }
-            this.ativaNav = true
-            this.carregaPagina();
-          }, 1500);
+            console.log(this.clienteVerificaCadastro.dadosCliente)
+          }, 1500)
+
         } else if (this.cliente.tipo === 'admin') {
           this.ativaNav = false;
           this.admAutenticated = true;
@@ -71,6 +65,19 @@ export class AppComponent {
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  }
+
+  pegaEndereco(dados){
+    console.log('entrou 2')
+    console.log('tem algo? 3', dados)
+    if (dados.enderecoRua != null || dados.enderecoRua != undefined) {
+      console.log('entrou aqui 1')
+      this.endereco = dados.enderecoRua + ', ' + dados.enderecoNumero + ', ' + dados.enderecoBairro
+    } else {
+      this.endereco = 'Adicionar Endereço...'
+    }
+    this.ativaNav = true
+    this.carregaPagina();
   }
 
   carregaPagina() {

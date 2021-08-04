@@ -17,9 +17,10 @@ export class ClienteVerificaCadastro {
     carrinho: Carrinho;
     pedido: Pedido;
 
-    constructor(private clienteLogado: ClienteLogado, private db: AngularFireDatabase) { }
+    constructor(private clienteLogado: ClienteLogado, private db: AngularFireDatabase) {}
 
-    verifica() {
+    verifica(callBack){
+        console.log('entrou 1')
         this.buscaCliente().subscribe(dados => {
             this.dadosCliente = new Cliente();
             if (dados.length > 1) {
@@ -27,26 +28,37 @@ export class ClienteVerificaCadastro {
                     this.aux = dados[1]
                     this.carrinho = dados[0]
                     this.dadosCliente = this.aux
+                    console.log('if 1')
                 }
                 if (dados[0].key == 'dados' && dados[1].key == 'carrinho') {
                     this.aux = dados[0]
                     this.carrinho = dados[1]
                     this.dadosCliente = this.aux
+                    console.log('if 2')
                 }
                 if (dados[0].key == 'dados' && dados[1].key == 'pedido') {
                     this.aux = dados[0]
                     this.pedido = dados[1]
                     this.dadosCliente = this.aux
+                    console.log('if 3')
                 }
             } else {
                 if (dados[0].key == 'carrinho') {
                     this.carrinho = dados[0]
+                    console.log('if 4')
                 } else {
                     this.aux = dados[0]
                     this.dadosCliente = this.aux
+                    console.log('if 5')
                 }
             }
-        })
+            console.log('saiu 1')
+            console.log('tem algo? 1', this.dadosCliente)
+            setTimeout(() =>{
+                console.log('tem algo? 2', this.dadosCliente)
+                callBack(this.dadosCliente)
+            }, 2500)
+        });
     }
 
     buscaCliente() {
