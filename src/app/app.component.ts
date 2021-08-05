@@ -23,7 +23,7 @@ export class AppComponent {
   valor: string;
   cliente: Cliente;
   test: Observable<any>;
-  dadosCliente: any;
+  //dadosCliente: any;
   endereco: string = 'carregando';
   ativaNav: boolean = true;
   admAutenticated: boolean = false;
@@ -43,16 +43,12 @@ export class AppComponent {
         this.cliente.tipo = dados.tipo;
         this.clienteLogado.recebeDados(this.cliente);
         if (this.cliente.tipo === 'cliente') {
-          this.clienteVerificaCadastro.verifica(this.pegaEndereco)
-          setTimeout(() => {
-            console.log(this.clienteVerificaCadastro.dadosCliente)
-          }, 1500)
-
+          this.clienteVerificaCadastro.verifica(this, this.pegaEndereco)
         } else if (this.cliente.tipo === 'admin') {
           this.ativaNav = false;
           this.admAutenticated = true;
-          this.router.navigate(['/admin/menu'])
           this.carregaPagina();
+          this.router.navigate(['/admin/menu'])
         }
       })
       setTimeout(() => {
@@ -67,26 +63,21 @@ export class AppComponent {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
-  pegaEndereco(dados){
-    console.log('entrou 2')
-    console.log('tem algo? 3', dados)
+  pegaEndereco(appComponent, dados){
     if (dados.enderecoRua != null || dados.enderecoRua != undefined) {
-      console.log('entrou aqui 1')
-      this.endereco = dados.enderecoRua + ', ' + dados.enderecoNumero + ', ' + dados.enderecoBairro
+      appComponent.endereco = dados.enderecoRua + ', ' + dados.enderecoNumero + ', ' + dados.enderecoBairro
     } else {
-      this.endereco = 'Adicionar Endereço...'
+      appComponent.endereco = 'Adicionar Endereço...'
     }
-    this.ativaNav = true
-    this.carregaPagina();
+    appComponent.ativaNav = true
+    appComponent.carregaPagina();
   }
 
   carregaPagina() {
-    setTimeout(() => {
-      var site = document.getElementById('site').style
-      site.display = 'block';
-      var carregamento = document.getElementById('carregamento')
-      carregamento.classList.add("hide")
-    }, 500)
+    var site = document.getElementById('site').style
+    site.display = 'block';
+    var carregamento = document.getElementById('carregamento')
+    carregamento.classList.add("hide")
   }
 
   logout() {

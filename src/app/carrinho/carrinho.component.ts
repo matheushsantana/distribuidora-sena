@@ -45,48 +45,35 @@ export class CarrinhoComponent implements OnInit {
   constructor(private carrinhoService: CarrinhoService, private pedidoService: PedidoService,
     private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro,
     private router: Router, private calculaFrete: CalculaFrete) {
+      this.carrinho = this.carrinhoService.getAllProdCarrinho();
+      this.carregando = true;
   }
 
   ngOnInit() {
-    if(this.calculaFrete.freteCarregado == 1){
-      this.calculaFrete.calculaFrete()
-    } else if(this.calculaFrete.freteCarregado == 3){
-      this.calculaFrete.calculaFrete()
-    }
-    
     window.scrollTo(0, 0)
-    this.carrinho = this.carrinhoService.getAllProdCarrinho();
-    this.carregando = true;
-    if(this.entrou == false){
-      setTimeout(() => {
-        setTimeout(() => {
-          this.totalPedido();
-          this.frete = this.calculaFrete.precoFrente;
-        }, 1500)
-  
-        var site = document.getElementById('component').style
-        site.display = 'block';
-        var carregamento = document.getElementById('carregando')
-        carregamento.classList.add("hide")
-        this.entrou = true;
-      }, 2000)
-    } else {
-      setTimeout(() => {
-        setTimeout(() => {
-          this.totalPedido();
-          this.frete = this.calculaFrete.precoFrente;
-        }, 1500)
-  
-        var site = document.getElementById('component').style
-        site.display = 'block';
-        var carregamento = document.getElementById('carregando')
-        carregamento.classList.add("hide")
-      }, 4000)
-    }
     
     this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
+
+     this.chamaCalculaFrete();
+    
+  }
+
+
+  chamaCalculaFrete(){
+    if(this.calculaFrete.freteCarregado == 1 || this.calculaFrete.freteCarregado == 3){
+      this.calculaFrete.calculaFrete(this, this.totalPedido)
+    }else if(this.calculaFrete.freteCarregado == 2){
+      this.totalPedido2()
+    }
+  }
+
+  escondeTransicao(){
+    var site = document.getElementById('component').style
+    site.display = 'block';
+    var carregamento = document.getElementById('carregando')
+    carregamento.classList.add("hide")
   }
 
   voltaPagina() {
@@ -100,7 +87,6 @@ export class CarrinhoComponent implements OnInit {
   quantidadeAltera(valor: number, key: number) {
 
     for (var i = 0; i < this.qtd; i++) {
-      console.log('entrou for')
       if (valor >= 1) {
         if (this.produtos[i].key == key) {
           this.produtos[i].quantidade = Number(this.produtos[i].quantidade) + 1;
@@ -147,8 +133,49 @@ export class CarrinhoComponent implements OnInit {
     })
   }
 
-  totalPedido() {
+  totalPedido(comp, precoFrete) {
+    comp.escondeTransicao()
+    comp.pegaProduros();
+    comp.frete = precoFrete
+    comp.carrinho.subscribe(dados => {
+      comp.produtos = dados
+      var i: number = 0;
+      var a: number = 0;
+      var j: number = 0
+      var aux: number = 0;
+      comp.total = 0.00;
+      comp.qtd = 0;
+      comp.quantidadeProd = 0;  
+      comp.totalFinal = precoFrete;
+      var qtdAux = (Object.keys(comp.produtos).length)
+      while (a < qtdAux) {
+        if (comp.produtos[j] != null) {
+          comp.qtd++
+          a++
+          j++
+        } else {
+          a++
+          j++
+        }
+      }
+      while (aux < comp.qtd) {
+        if (comp.produtos[i] != null) {
+          comp.total = Number(comp.total) + Number(comp.produtos[i].total);
+          comp.quantidadeProd = comp.quantidadeProd + comp.produtos[i].quantidade;
+          comp.totalFinal = Number(comp.totalFinal) + Number(comp.produtos[i].total);
+          aux++
+          i++
+        } else {
+          i++
+        }
+      }
+    })
+  }
+
+  totalPedido2() {
+    this.escondeTransicao()
     this.pegaProduros();
+    this.frete = this.calculaFrete.precoFrente
     this.carrinho.subscribe(dados => {
       this.produtos = dados
       var i: number = 0;
@@ -189,12 +216,12 @@ export class CarrinhoComponent implements OnInit {
     if (this.qtd > 1) {
       this.carrinhoService.deleteProdCarrinho(key, 0);
       setTimeout(() => {
-        this.totalPedido()
+        this.totalPedido(this, this.frete)
       }, 1000);
     } else {
       this.carrinhoService.deleteProdCarrinho(key, 1);
       setTimeout(() => {
-        this.totalPedido()
+        this.totalPedido(this, this.frete)
       }, 1000);
     }
   }

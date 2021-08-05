@@ -41,7 +41,6 @@ export class VisualizarComponent implements OnInit {
         this.pedido.clienteId = data.pedido.clienteId,
         this.pedido.instrucoes = data.pedido.instrucoes
       this.produtosPedido = this.getAllProdPedido();
-      console.log(this.pedido)
       this.mudaBotao();
     })
   }

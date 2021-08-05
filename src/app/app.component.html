@@ -3,7 +3,7 @@
   <h1>Bem vindo(a)!</h1>
 </div>
 
-<body id="site">
+<div id="site">
   <nav class="navbar justify-content-center" id="navbar">
     <div class="container-fluid">
       <ng-container *ngIf="!(authenticated$ | async)">
@@ -56,4 +56,4 @@
   <div [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
-</body>
+</div>

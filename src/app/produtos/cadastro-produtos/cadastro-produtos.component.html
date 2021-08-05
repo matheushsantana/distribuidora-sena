@@ -1,119 +1,110 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distribuidora Sena - Cadastro Produtos</title>
-</head>
-
-<body>
-    <h4 id="titulo">CADASTRO DE PRODUTOS</h4>
-    <div class="container">
-        <form #f="ngForm" (ngSubmit)="onSubmit()">
-            <div class="row g-2">
-                <div class="col-6">
-                    <label for="nomeProduto" class="form-label"><strong>Nome Produto</strong></label>
-                    <input type="text" class="form-control" placeholder="Digite o nome do Produto" name="nomeProduto"
-                        [(ngModel)]="produto.nome">
-                </div>
-                <div class="col-6">
-                    <label for="valorVenda" class="form-label"><strong>Valor de Venda</strong></label>
-                    <input type="text" class="form-control" placeholder="Valor de Venda do Produto" name="valorVenda"
-                        [(ngModel)]="produto.valor">
-                </div>
+<h4 id="titulo">CADASTRO DE PRODUTOS</h4>
+<div class="container">
+    <form #f="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row g-2">
+            <div class="col-6">
+                <label for="nomeProduto" class="form-label"><strong>Nome Produto</strong></label>
+                <input type="text" class="form-control" placeholder="Digite o nome do Produto" name="nomeProduto"
+                    [(ngModel)]="produto.nome">
             </div>
-            <div class="col-12">
-                <label for="categoriaProduto" class="form-label"><strong>Tipo do Produto</strong></label>
-                <select class="form-select" name="categoriaProduto" [(ngModel)]="produto.categoria">
-                    <option selected>Selecione...</option>
-                    <option value="cerveja">Cerveja</option>
-                    <option value="vinho seco">Vinho Seco</option>
-                    <option value="vinho suave">Vinho Suave</option>
-                    <option value="mercearia">Mercearia</option>
-                    <option value="whisky">Whisky</option>
-                    <option value="vodka">Vodka</option>
-                    <option value="cachaca">Cachaça</option>
-                    <option value="destilado gin">Gin</option>
-                    <option value="destilado">Destilado</option>
-                    <option value="cigarro">Cigarro</option>
-                    <option value="refrigerante">Refrigerante</option>
-                    <option value="sem-alcool">Sem Alcool</option>
-                    <option value="suco">Suco</option>
-                    <option value="comida">Comida</option>
-                    <option value="salgadinho">Salgadinho</option>
-                    <option value="bala/chiclete">bala/chiclete</option>
-                    <option value="higiene">Higiene</option>
-                    <option value="chocolate">Chocolate</option>
-                    <option value="tempero">Tempero</option>
-                    <option value="hamburguer">Hamburguer</option>
-                    <option value="cerveja sem alcool">Cerveja sem Alcool</option>
-                    <option value="energetico">Energetico</option>
-                    <option value="tabacaria">Tabacaria</option>
-                    <option value="lanche">Lanche</option>
-                    <option value="churrasco">Churrasco</option>
-                    <option value="outro">Outros</option>
-                </select>
+            <div class="col-6">
+                <label for="valorVenda" class="form-label"><strong>Valor de Venda</strong></label>
+                <input type="text" class="form-control" placeholder="Valor de Venda do Produto" name="valorVenda"
+                    [(ngModel)]="produto.valor">
             </div>
+        </div>
+        <div class="col-12">
+            <label for="categoriaProduto" class="form-label"><strong>Tipo do Produto</strong></label>
+            <select class="form-select" name="categoriaProduto" [(ngModel)]="produto.categoria">
+                <option selected>Selecione...</option>
+                <option value="cerveja">Cerveja</option>
+                <option value="vinho seco">Vinho Seco</option>
+                <option value="vinho suave">Vinho Suave</option>
+                <option value="mercearia">Mercearia</option>
+                <option value="whisky">Whisky</option>
+                <option value="vodka">Vodka</option>
+                <option value="cachaca">Cachaça</option>
+                <option value="destilado gin">Gin</option>
+                <option value="destilado">Destilado</option>
+                <option value="cigarro">Cigarro</option>
+                <option value="refrigerante">Refrigerante</option>
+                <option value="sem-alcool">Sem Alcool</option>
+                <option value="suco">Suco</option>
+                <option value="comida">Comida</option>
+                <option value="salgadinho">Salgadinho</option>
+                <option value="bala/chiclete">bala/chiclete</option>
+                <option value="higiene">Higiene</option>
+                <option value="chocolate">Chocolate</option>
+                <option value="tempero">Tempero</option>
+                <option value="hamburguer">Hamburguer</option>
+                <option value="cerveja sem alcool">Cerveja sem Alcool</option>
+                <option value="energetico">Energetico</option>
+                <option value="tabacaria">Tabacaria</option>
+                <option value="lanche">Lanche</option>
+                <option value="churrasco">Churrasco</option>
+                <option value="outro">Outros</option>
+            </select>
+        </div>
 
 
-            <div class="box-app" fxLayout="column" fxLayoutAlign="space-around stretch">
-                <div fxLayout="row" fxLayoutAlign="center center" *ngIf="escondeBotao">
-                    <app-dropzone fxFlex="80" (droppedfiles)="onDropFiles($event)"></app-dropzone>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="center center" *ngIf="nameFile">
-                    <div fxFlex="70" fxLayout="column" *ngIf="files.length">
-                        <mat-card class="item-file" *ngFor="let f of files; let i=index" fxLayout="row"
-                            fxLayoutAlign="space-between center">
-                            <span *ngIf="nameFile">
-                                <h3>Foto: </h3>{{f.file.name}}
-                            </span>
-                            <div *ngIf="f.task == null; else uploading" fxFlex="60" fxLayoutAlign="end center">
-                                <button class="btn btn-danger" (click)="removeFileFromList(i)">Remover Foto</button>
-                            </div>
-                            <ng-template #uploading>
-                                <div fxLayout="row" fxLayoutAlign="end center" fxFlex="40">
-                                    <ng-container *ngIf="!(f.finished | async) && !((f.error | async) || (f.canceled | async))">
-                                        <span style="font-style: italic; margin-right: 10px">{{f.bytesuploaded | async }}
-                                            bytes</span>
-                                        <mat-progress-bar mode="determinate" [value]="f.percentage | async"
-                                            style="max-width: 200px;"></mat-progress-bar>
-                                        <button mat-icon-button color="accent" *ngIf="f.uploading | async"
-                                            (click)="f.task.cancel()">
-                                            <mat-icon>cancel</mat-icon>
-                                        </button>
-                                        <button mat-icon-button color="warn" *ngIf="f.uploading | async" (click)="f.task.pause()">
-                                            <mat-icon>pause</mat-icon>
-                                        </button>
-                                        <button mat-icon-button color="primary" *ngIf="f.pauser | async" (click)="f.task.resume()">
-                                            <mat-icon>play_arrow</mat-icon>
-                                        </button>
-                                    </ng-container>
-                                    <mat-icon *ngIf="(f.error | async) || (f.canceled | async)" color="warn">error</mat-icon>
-                                    <mat-icon color="primary" *ngIf="f.finished | async">Enviado</mat-icon>
-                                </div>
-                                <div class="card">
-                                    <img src="{{ produto.imgProduto }}" class="card-img-top" style="width: 200px;">
-                                </div>
-                                <br>
-                                <button class="btn btn-danger" *ngIf="!escondeBotao" (click)="deletarFoto()">Deletar Foto</button>
-                            </ng-template>
-                        </mat-card>
-                        <div *ngIf="escondeBotao">
-                            <button class="btn btn-primary" type="button" (click)="uploadAll()">Enviar Foto</button>
+        <div class="box-app" fxLayout="column" fxLayoutAlign="space-around stretch">
+            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="escondeBotao">
+                <app-dropzone fxFlex="80" (droppedfiles)="onDropFiles($event)"></app-dropzone>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="nameFile">
+                <div fxFlex="70" fxLayout="column" *ngIf="files.length">
+                    <mat-card class="item-file" *ngFor="let f of files; let i=index" fxLayout="row"
+                        fxLayoutAlign="space-between center">
+                        <span *ngIf="nameFile">
+                            <h3>Foto: </h3>{{f.file.name}}
+                        </span>
+                        <div *ngIf="f.task == null; else uploading" fxFlex="60" fxLayoutAlign="end center">
+                            <button class="btn btn-danger" (click)="removeFileFromList(i)">Remover Foto</button>
                         </div>
+                        <ng-template #uploading>
+                            <div fxLayout="row" fxLayoutAlign="end center" fxFlex="40">
+                                <ng-container
+                                    *ngIf="!(f.finished | async) && !((f.error | async) || (f.canceled | async))">
+                                    <span style="font-style: italic; margin-right: 10px">{{f.bytesuploaded | async }}
+                                        bytes</span>
+                                    <mat-progress-bar mode="determinate" [value]="f.percentage | async"
+                                        style="max-width: 200px;"></mat-progress-bar>
+                                    <button mat-icon-button color="accent" *ngIf="f.uploading | async"
+                                        (click)="f.task.cancel()">
+                                        <mat-icon>cancel</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" *ngIf="f.uploading | async"
+                                        (click)="f.task.pause()">
+                                        <mat-icon>pause</mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="primary" *ngIf="f.pauser | async"
+                                        (click)="f.task.resume()">
+                                        <mat-icon>play_arrow</mat-icon>
+                                    </button>
+                                </ng-container>
+                                <mat-icon *ngIf="(f.error | async) || (f.canceled | async)" color="warn">error
+                                </mat-icon>
+                                <mat-icon color="primary" *ngIf="f.finished | async">Enviado</mat-icon>
+                            </div>
+                            <div class="card">
+                                <img src="{{ produto.imgProduto }}" class="card-img-top" style="width: 200px;">
+                            </div>
+                            <br>
+                            <button class="btn btn-danger" *ngIf="!escondeBotao" (click)="deletarFoto()">Deletar
+                                Foto</button>
+                        </ng-template>
+                    </mat-card>
+                    <div *ngIf="escondeBotao">
+                        <button class="btn btn-primary" type="button" (click)="uploadAll()">Enviar Foto</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-            
-            <div class="col-12 d-grid gap-2" id="btn-submit">
-                <button type="submit" class="btn btn-success">Cadastrar</button>
-                <button type="button" class="btn btn-danger" [routerLink]="['/admin/menu']">Voltar</button>
-            </div>
-        </form>
-    </div>
-</body>
 
-</html>
+        <div class="col-12 d-grid gap-2" id="btn-submit">
+            <button type="submit" class="btn btn-success">Cadastrar</button>
+            <button type="button" class="btn btn-danger" [routerLink]="['/admin/menu']">Voltar</button>
+        </div>
+    </form>
+</div>

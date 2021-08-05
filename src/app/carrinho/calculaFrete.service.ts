@@ -21,7 +21,7 @@ export class CalculaFrete {
   constructor(private http: HttpClient, private clienteVerificaCadastro: ClienteVerificaCadastro, private clienteLogado: ClienteLogado,
     private clienteService: ClienteService) { }
 
-  calculaFrete() {
+  calculaFrete(carrinhoComponent, callBack) {
     const distribuidaora = new google.maps.LatLng(-15.5834112, -56.0756531);
     if(this.freteCarregado == 1){
       if (this.clienteVerificaCadastro.dadosCliente.enderecoBairro != null || this.clienteVerificaCadastro.dadosCliente.enderecoBairro != undefined) {
@@ -31,9 +31,13 @@ export class CalculaFrete {
         this.freteCarregado = 2;
         if(this.precoFrente < 5 || this.precoFrente == 0){
           this.precoFrente = 5
+          callBack(carrinhoComponent, this.precoFrente)
+        }else{
+          callBack(carrinhoComponent, this.precoFrente)
         }
       } else {
         this.precoFrente = 5;
+        callBack(carrinhoComponent, this.precoFrente)
       }
     } else if(this.freteCarregado == 3){
       if (this.clienteVerificaCadastro.dadosCliente.enderecoBairro != null || this.clienteVerificaCadastro.dadosCliente.enderecoBairro != undefined) {
@@ -47,12 +51,16 @@ export class CalculaFrete {
           this.precoFrente = parseInt(((this.distancia / 1000) * 2.2).toFixed(0))
           if(this.precoFrente < 5 || this.precoFrente == 0){
             this.precoFrente = 5
+            callBack(carrinhoComponent, this.precoFrente)
+          }else {
+            callBack(carrinhoComponent, this.precoFrente)
           }
         });
         this.freteCarregado = 2;
       } else {
         this.precoFrente = 5;
         this.semEndereco = true;
+        callBack(carrinhoComponent, this.precoFrente)
       }
     }
   }

@@ -34,7 +34,7 @@ export class ResultadoPesquisaComponent implements OnInit {
       site.display = 'block';
       var carregamento = document.getElementById('carregando')
       carregamento.classList.add("hide")
-    }, 1000)
+    }, 500)
   }
 
   selecionaProduto(produto: Produto, key: string) {

@@ -27,23 +27,26 @@ export class PedidoComponent implements OnInit {
 
   ngOnInit(): void {
     window.scrollTo(0, 0)
-    this.calculaFrete.calculaFrete();
+    this.calculaFrete.calculaFrete(this, this.pegaPedido);
     this.carregando = false;
-    this.pedidoService.getAllPedido().subscribe(dados => {
-      this.pedido = dados[1]
-      this.infoPedido = dados[1]
-      this.carregando = true;
-    })
-    this.pedidoService.getAllPedidoProdutos().subscribe(dados => {
-      this.produtos = dados
-    });
-
+  
     setTimeout(() => {
       this.loop = setInterval(() => {
         this.barraStatus();
       }, 10000)
       this.barraStatus();
     }, 500)
+  }
+
+  pegaPedido(comp, aux){
+    comp.pedidoService.getAllPedido().subscribe(dados => {
+      comp.pedido = dados[1]
+      comp.infoPedido = dados[1]
+      comp.carregando = true;
+    })
+    comp.pedidoService.getAllPedidoProdutos().subscribe(dados => {
+      comp.produtos = dados
+    });
   }
 
   barraStatus() {
@@ -65,7 +68,7 @@ export class PedidoComponent implements OnInit {
       this.tempoEntrega = ''
       setTimeout(() => {
         window.location.href = "/"
-      }, 2500)
+      }, 3000)
     }
     if (String(this.statuspedido) == this.estado[4]) {
       barra.style.width = '100%',
@@ -73,7 +76,7 @@ export class PedidoComponent implements OnInit {
       this.tempoEntrega = ''
       setTimeout(() => {
         window.location.href = "/"
-      }, 2500)
+      }, 3000)
     }
   }
 

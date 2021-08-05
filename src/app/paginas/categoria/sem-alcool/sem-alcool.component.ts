@@ -25,7 +25,7 @@ export class SemAlcoolComponent implements OnInit {
       var carregamento = document.getElementById('carregando')
       carregamento.classList.add("hide")
       window.scrollTo(0, 0)
-    }, 1000)
+    }, 500)
   }
 
   selecionaProduto(produto: Produto, key: string) {
