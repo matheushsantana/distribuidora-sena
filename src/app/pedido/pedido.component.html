@@ -6,7 +6,7 @@
 </div>
 <div class="container" *ngIf="carregando != false">
     <div class="status-do-pedido">
-        <p id="titulo">{{ statuspedido }} {{ tempoEntrega }}</p>
+        <p id="titulo">{{ infoPedido['estado'] }} {{ tempoEntrega }}</p>
         <div class="progress">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
                 aria-valuemax="100" id="progressBar"></div>

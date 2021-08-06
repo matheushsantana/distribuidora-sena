@@ -18,12 +18,7 @@ export class AppComponent {
 
   user$: Observable<User> = null;
   authenticated$: Observable<boolean>;
-  auxLogin: boolean = false
-  idCliente: string;
-  valor: string;
   cliente: Cliente;
-  test: Observable<any>;
-  //dadosCliente: any;
   endereco: string = 'carregando';
   ativaNav: boolean = true;
   admAutenticated: boolean = false;

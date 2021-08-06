@@ -23,8 +23,6 @@ export class MenuPedidosComponent implements OnInit {
   mostraDetalhes: boolean = false;
   term: string = 'Aguardando a Distribuidora aceitar'
 
-  aux: Observable<any>;
-
   constructor(private clienteService: ClienteService, private pedidoDataService: PedidoDataService) { }
 
   ngOnInit(): void {

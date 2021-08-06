@@ -28,9 +28,6 @@ export class MenuConcluidosComponent implements OnInit {
   totalVendido: number[] = [];
   totalVendidoCartao: number[] = [];
   totalVendidoDinheiro: number[] = [];
-  maisVendidosNome: any = [];
-  maisVendidosQtd: any = [];
-
   maisVendido = [];
 
   constructor(private db: AngularFireDatabase) { }

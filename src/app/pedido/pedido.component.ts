@@ -19,29 +19,23 @@ export class PedidoComponent implements OnInit {
   produtos: Produto[];
   listaProduto: any;
   loop: any;
-  tempoEntrega: string = ''
+  tempoEntrega: string = '';
 
-  estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 'Pedido saiu para entrega...', 'Pedido finalizado...', 'Seu pedido foi cancelado...']
-
-  constructor(private pedidoService: PedidoService, private calculaFrete: CalculaFrete) { }
+  constructor(private calculaFrete: CalculaFrete, private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
+    console.log('entrou 1')
     window.scrollTo(0, 0)
     this.calculaFrete.calculaFrete(this, this.pegaPedido);
     this.carregando = false;
-  
-    setTimeout(() => {
-      this.loop = setInterval(() => {
-        this.barraStatus();
-      }, 10000)
-      this.barraStatus();
-    }, 500)
   }
 
-  pegaPedido(comp, aux){
+  pegaPedido(comp, aux) {
     comp.pedidoService.getAllPedido().subscribe(dados => {
+      console.log('entrou 2')
       comp.pedido = dados[1]
       comp.infoPedido = dados[1]
+      comp.barraStatus();
       comp.carregando = true;
     })
     comp.pedidoService.getAllPedidoProdutos().subscribe(dados => {
@@ -50,34 +44,41 @@ export class PedidoComponent implements OnInit {
   }
 
   barraStatus() {
-    this.statuspedido = this.infoPedido['estado']
-    var barra = document.getElementById('progressBar') as HTMLElement
-    if (String(this.statuspedido) == this.estado[0]) {
-      barra.style.width = '20%'
-    }
-    if (String(this.statuspedido) == this.estado[1]) {
-      barra.style.width = '40%'
-    }
-    if (String(this.statuspedido) == this.estado[2]) {
-      barra.style.width = '70%'
-      this.tempoEntrega = ' Tempo Estimado: ' + (this.calculaFrete.precoFrente * 2) + ' minutos'
-    }
-    if (String(this.statuspedido) == this.estado[3]) {
-      barra.style.width = '100%',
-      barra.className = 'progress-bar progress-bar-striped bg-success',
-      this.tempoEntrega = ''
-      setTimeout(() => {
-        window.location.href = "/"
-      }, 3000)
-    }
-    if (String(this.statuspedido) == this.estado[4]) {
-      barra.style.width = '100%',
-      barra.className = 'progress-bar progress-bar-striped bg-danger',
-      this.tempoEntrega = ''
-      setTimeout(() => {
-        window.location.href = "/"
-      }, 3000)
-    }
+    this.carregando = true;
+    const estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 
+    'Pedido saiu para entrega...', 'Pedido finalizado...', 'Seu pedido foi cancelado...']
+
+    setTimeout(() => {
+      var barra = document.getElementById('progressBar') as HTMLElement
+      if (String(this.infoPedido['estado']) == estado[0]) {
+        barra.style.width = '20%'
+        this.tempoEntrega = ''
+      }
+      if (String(this.infoPedido['estado']) == estado[1]) {
+        barra.style.width = '40%'
+        this.tempoEntrega = ''
+      }
+      if (String(this.infoPedido['estado']) == estado[2]) {
+        barra.style.width = '70%'
+        this.tempoEntrega = ' Tempo Estimado: ' + (this.calculaFrete.precoFrente * 2) + ' minutos'
+      }
+      if (String(this.infoPedido['estado']) == estado[3]) {
+        barra.style.width = '100%',
+          barra.className = 'progress-bar progress-bar-striped bg-success',
+          this.tempoEntrega = ''
+        setTimeout(() => {
+          window.location.href = "/"
+        }, 3000)
+      }
+      if (String(this.infoPedido['estado']) == estado[4]) {
+        barra.style.width = '100%',
+          barra.className = 'progress-bar progress-bar-striped bg-danger',
+          this.tempoEntrega = ''
+        setTimeout(() => {
+          window.location.href = "/"
+        }, 3000)
+      }
+    }, 500)
   }
 
 }

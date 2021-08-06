@@ -13,7 +13,6 @@ export class CalculaFrete {
   endereco: any;
   distancia: number;
   precoFrente: number = 0;
-  dadosCliente: any;
   enderecoEstenco: string;
   freteCarregado: number = 1;
   semEndereco = false;
@@ -62,6 +61,9 @@ export class CalculaFrete {
         this.semEndereco = true;
         callBack(carrinhoComponent, this.precoFrente)
       }
+    }
+    if(this.freteCarregado == 2){
+      callBack(carrinhoComponent, this.precoFrente)
     }
   }
 

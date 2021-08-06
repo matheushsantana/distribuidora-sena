@@ -26,17 +26,12 @@ export class CarrinhoComponent implements OnInit {
   total: number;
   totalFinal: number;
   frete: number = 0;
-  quantidade: number = 1;
-  recebeContador: Contador;
-  contador: Contador;
   quantidadeProd: number;
   pedido: any;
   metodoPagamento: string = 'Selecione a forma de pagamento';
   contadorProd: Contador;
   enderecoCliente: string;
   instrucoes: string;
-  endereco: any;
-  entrou = false;
 
   data = new Date();
 

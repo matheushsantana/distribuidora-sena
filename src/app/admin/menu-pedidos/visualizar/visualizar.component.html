@@ -2,8 +2,7 @@
     <h5 class="card-header">Pedido: {{ pedido.pedidoId }} // Data: {{ pedido.data }}</h5>
     <div class="card-body">
         <h5 class="card-title">Cliente: {{ pedido.clienteNome }}</h5>
-        <p class="card-text"><strong>Endereço:</strong> {{ pedido.clienteEnderecoRua }}, {{ pedido.clienteEnderecoNumero
-            }}, {{ pedido.clienteEnderecoBairro }}</p>
+        <p class="card-text"><strong>Endereço:</strong> {{ pedido.clienteEnderecoRua }}, {{ pedido.clienteEnderecoNumero}}, {{ pedido.clienteEnderecoBairro }}</p>
         <p class="card-text"><strong>Telefone:</strong> {{ pedido.clienteNumero | mask: '(00) 00000-0000' }}</p>
         <p class="card-text"><strong>Metodo de pagamento:</strong> {{ pedido.metodoPag }}</p>
         <p class="card-text"><strong>Valor:</strong> R${{ pedido.valor | number : "1.2" }}</p>

@@ -8,9 +8,6 @@ import { Router } from '@angular/router';
 })
 export class MenuComponent implements OnInit {
 
-  opcoes = ['LISTA DE CLIENTES', 'LISTA DE PRODUTOS', '', 'RELATORIO DE VENDAS']
-  selecionado: string = 'BEM VINDO AO MENU ADMIN';
-  component = [false, false, false, false,]
   nomes = ['clientes', 'produtos', 'pedidos', 'relatorio']
   esconde = true;
 
