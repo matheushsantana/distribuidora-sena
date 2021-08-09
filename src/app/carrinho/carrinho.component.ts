@@ -10,6 +10,8 @@ import { Contador } from './shared/contador';
 import { ClienteVerificaCadastro } from '../cliente/clienteVefificaCadastro.service';
 import { Router } from '@angular/router';
 import { CalculaFrete } from './calculaFrete.service';
+import { Cupom } from '../cupom/cupom';
+import { CupomService } from '../cupom/cupom.service';
 
 @Component({
   selector: 'app-carrinho',
@@ -32,14 +34,17 @@ export class CarrinhoComponent implements OnInit {
   contadorProd: Contador;
   enderecoCliente: string;
   instrucoes: string;
+  descontoCupom: number = 0;
 
   data = new Date();
+
+  chave: string;
 
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
   constructor(private carrinhoService: CarrinhoService, private pedidoService: PedidoService,
     private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro,
-    private router: Router, private calculaFrete: CalculaFrete) {
+    private router: Router, private calculaFrete: CalculaFrete, private cupomService: CupomService) {
       this.carrinho = this.carrinhoService.getAllProdCarrinho();
       this.carregando = true;
   }
@@ -51,10 +56,39 @@ export class CarrinhoComponent implements OnInit {
       + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
 
-     this.chamaCalculaFrete();
+     //this.chamaCalculaFrete();
+     this.totalPedido(this, 0);
     
   }
+  
+  verificaCupom(){
+    var invalido = document.getElementById('cupom-invalido').style
+    var valido = document.getElementById('cupom-valido').style
+    this.cupomService.getAllCupom(this.chave).subscribe(dados => {
+      console.log('desconto: ', dados[1])
+      if(dados.length < 3){
+        invalido.display = 'block';
+        valido.display = 'none';
+      }else{
+        invalido.display = 'none';
+        valido.display = 'block';
 
+        if(dados[2] == 'porcentagem'){
+         this.descontoCupom = parseFloat((this.totalFinal * (dados[1] / 100)).toFixed(2))
+         this.totalPedido2();
+         var aux = document.getElementById('desconto').style
+         aux.display = 'block'
+        }
+        if(dados[2] == 'inteiro'){
+
+        }
+        if(dados[2] == 'entrega'){
+
+        }
+      }
+    })
+    
+  }
 
   chamaCalculaFrete(){
     if(this.calculaFrete.freteCarregado == 1 || this.calculaFrete.freteCarregado == 3){
@@ -142,6 +176,7 @@ export class CarrinhoComponent implements OnInit {
       comp.qtd = 0;
       comp.quantidadeProd = 0;  
       comp.totalFinal = precoFrete;
+      comp.totalFinal -= comp.descontoCupom;
       var qtdAux = (Object.keys(comp.produtos).length)
       while (a < qtdAux) {
         if (comp.produtos[j] != null) {
@@ -179,8 +214,12 @@ export class CarrinhoComponent implements OnInit {
       var aux: number = 0;
       this.total = 0.00;
       this.qtd = 0;
-      this.quantidadeProd = 0;  
+      this.quantidadeProd = 0;
       this.totalFinal = this.calculaFrete.precoFrente;
+      console.log('total final 1 ', this.totalFinal)
+      console.log('cupom ', this.descontoCupom)
+      this.totalFinal -= this.descontoCupom;
+      console.log('total final 2 ', this.totalFinal)
       var qtdAux = (Object.keys(this.produtos).length)
       while (a < qtdAux) {
         if (this.produtos[j] != null) {

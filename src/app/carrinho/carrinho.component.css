@@ -26,10 +26,27 @@
     background-color: rgb(231, 231, 231);;
 }
 
+#cupom-invalido{
+    color: red;
+    font-weight: 500;
+    display: none;
+}
+
+#cupom-valido{
+    color: rgb(0, 151, 0);
+    font-weight: 500;
+    display: none;
+}
+
 #carregando{
     font-weight: 500;
     font-size: 20px;
     margin-left: 5px;
+}
+
+#cupom{
+    color: rgb(128, 128, 128);
+    font-weight: 500;
 }
 
 #add{
@@ -68,7 +85,9 @@
 }
 
 #select{
-    border: none;
+    border: 0px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 
@@ -131,6 +150,27 @@
     margin-right: 12px;
 }
 
+#form-cupom{
+    height: 45px;
+}
+
+#inputCupom1{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+
+#img-cupom{
+    filter: contrast(1%);
+    width: 30px;
+    margin-top: 5px;
+}
+
+#form-cupom{
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
 .conta{
     margin-top: 15px;
     font-weight: 400;
@@ -150,12 +190,26 @@
     width: 100%;
 }
 
+#desconto{
+    position: relative;
+    width: 100%;
+    display: none;
+}
+
 #valor{
     position: absolute;
     right: 0%;
     top: 0%;
     font-weight: 600;
     color: black;
+}
+
+#valorDesconto{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    font-weight: 600;
+    color: rgb(0, 151, 0);
 }
 
 #endereco{

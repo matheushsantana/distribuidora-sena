@@ -72,10 +72,35 @@
     </div>
     <div class="divisao"></div>
     <div class="container">
+        <div class="row">
+            <div class="col-1">
+                <img src="assets/cupom.png" id="img-cupom">
+            </div>
+            <div class="col-11" id="form-cupom">
+                <div class="input-group mb-3" id="inputCupom1">
+                    <input type="text" class="form-control" 
+                        placeholder="Digite o cupom de desconto" [(ngModel)]="chave" aria-describedby="btn-cupom" id="inputCupom2">
+                    <button class="btn btn-primary" type="button" id="btn-cupom" (click)="verificaCupom()">Ativar</button>
+                </div>
+            </div>
+        </div>
+        <div class="cupom-invalido" id="cupom-invalido">
+            CUPOM INVALIDO!
+        </div>
+        <div class="cupom-valido" id="cupom-valido">
+            CUPOM ADICIONADO!
+        </div>
+    </div>
+    <div class="divisao"></div>
+    <div class="container">
         <div class="conta">
             <div id="prodValor">
                 <p>{{ quantidadeProd }} Produtos</p>
                 <p id="valor">R${{ total | number : "1.2" }}</p>
+            </div>
+            <div id="desconto">
+                <p>Desconto</p>
+                <p id="valorDesconto">-R${{ descontoCupom | number : "1.2" }}</p>
             </div>
             <div id="prodValor">
                 <p>Entrega</p>

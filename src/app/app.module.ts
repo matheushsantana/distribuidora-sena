@@ -20,6 +20,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { NgxMaskModule } from 'ngx-mask';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CupomComponent } from './admin/cupom/cupom.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CarrinhoComponent,
     PedidoComponent,
     ClienteComponent,
+    CupomComponent,
     
   ],
   imports: [

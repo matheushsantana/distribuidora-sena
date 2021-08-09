@@ -11,6 +11,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { VisualizarComponent } from './menu-pedidos/visualizar/visualizar.component';
 import { AdminRoutingModule } from './admin.routing.module';
+import { CadastroCupomComponent } from './cupom/cadastro-cupom/cadastro-cupom.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { AdminRoutingModule } from './admin.routing.module';
     MenuProdutosComponent,
     MenuPedidosComponent,
     MenuConcluidosComponent,
-    VisualizarComponent
+    VisualizarComponent,
+    CadastroCupomComponent,
   ],
   schemas: [],
   providers: [],

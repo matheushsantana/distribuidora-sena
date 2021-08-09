@@ -1,0 +1,19 @@
+<div class="container">
+    <h3 id="name">LISTA DE CUPONS</h3>
+    <form class="d-flex" id="superior">
+        <input type="search" class="form-control me-2" placeholder="Pesquise um cupom" id="cupomPesquisado"
+            name="cupomPesquisado" [(ngModel)]="cupomPesquisado">
+            <button class="btn btn-success" type="button" id="btn-newProd" [routerLink]="['/admin/menu/cupom/cadastro']">Adicionar</button>
+    </form>
+    <div class="card mb-3" *ngFor="let cupom of cupons | async | filter: cupomPesquisado">
+        <div class="row g-0">
+            <div class="col-md-12" id="dados">
+                <a><strong>Chave:</strong> {{ cupom.chave }}</a><br>
+                <a><strong>Valor:</strong> {{ cupom.desconto }}</a><br>
+                <a><strong>Tipo:</strong> {{ cupom.tipo }}</a>
+            </div>
+            
+        </div>
+        <button class="btn btn-danger" (click)="deletarCupom(cupom.key)">Deletar</button>
+    </div>
+</div>
