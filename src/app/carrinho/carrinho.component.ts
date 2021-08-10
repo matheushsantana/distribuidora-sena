@@ -35,70 +35,96 @@ export class CarrinhoComponent implements OnInit {
   enderecoCliente: string;
   instrucoes: string;
   descontoCupom: number = 0;
+  cupomAdd: boolean = false;
+  tipoDescon: string = 'Sem desconto...';
 
   data = new Date();
 
-  chave: string;
+  chave: string = '';
 
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
   constructor(private carrinhoService: CarrinhoService, private pedidoService: PedidoService,
     private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro,
     private router: Router, private calculaFrete: CalculaFrete, private cupomService: CupomService) {
-      this.carrinho = this.carrinhoService.getAllProdCarrinho();
-      this.carregando = true;
+    this.carrinho = this.carrinhoService.getAllProdCarrinho();
+    this.carregando = true;
   }
 
   ngOnInit() {
     window.scrollTo(0, 0)
-    
+
     this.enderecoCliente = this.clienteVerificaCadastro.dadosCliente.enderecoRua + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoNumero + ', '
       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
 
-     //this.chamaCalculaFrete();
-     this.totalPedido(this, 0);
-    
+    this.chamaCalculaFrete();
+
   }
-  
-  verificaCupom(){
-    var invalido = document.getElementById('cupom-invalido').style
-    var valido = document.getElementById('cupom-valido').style
-    this.cupomService.getAllCupom(this.chave).subscribe(dados => {
-      console.log('desconto: ', dados[1])
-      if(dados.length < 3){
-        invalido.display = 'block';
-        valido.display = 'none';
-      }else{
+
+  verificaCupom() {
+    if (this.chave != '') {
+      var invalido = document.getElementById('cupom-invalido').style
+      var valido = document.getElementById('cupom-valido').style
+      var aux = document.getElementById('desconto').style
+      var entrega = document.getElementById('valorEntrega').style
+      if (this.cupomAdd != true) {
+        this.cupomService.getAllCupom(this.chave).subscribe(dados => {
+          if (dados.length < 2) {
+            invalido.display = 'block';
+            valido.display = 'none';
+            aux.display = 'none'
+            entrega.color = 'black'
+            this.descontoCupom = 0;
+            this.totalPedido2(0, this.validaValor)
+          } else {
+            invalido.display = 'none';
+            valido.display = 'block';
+            this.cupomAdd = true;
+            if (dados[2] == 'porcentagem') {
+              this.descontoCupom = parseFloat(((this.totalFinal - this.frete) * (dados[1] / 100)).toFixed(2))
+              this.totalPedido2(0, this.validaValor);
+              aux.display = 'block'
+              this.tipoDescon = 'Porcentagem'
+            }
+            if (dados[2] == 'inteiro') {
+              this.descontoCupom = parseFloat((dados[1]))
+              this.totalPedido2(0, this.validaValor);
+              aux.display = 'block'
+              this.tipoDescon = 'Valor'
+            }
+            if (dados[1] == 'entrega') {
+              this.descontoCupom = this.calculaFrete.precoFrente
+              console.log(this.descontoCupom);
+              this.totalPedido2(1, this.validaValor);
+              entrega.color = 'rgb(0, 151, 0)';
+              this.tipoDescon = 'Frete Gratis'
+            }
+          }
+        })
+      } else {
         invalido.display = 'none';
-        valido.display = 'block';
-
-        if(dados[2] == 'porcentagem'){
-         this.descontoCupom = parseFloat((this.totalFinal * (dados[1] / 100)).toFixed(2))
-         this.totalPedido2();
-         var aux = document.getElementById('desconto').style
-         aux.display = 'block'
-        }
-        if(dados[2] == 'inteiro'){
-
-        }
-        if(dados[2] == 'entrega'){
-
-        }
+        valido.display = 'none';
+        aux.display = 'none'
+        entrega.color = 'black'
+        this.chave = '';
+        this.descontoCupom = 0;
+        this.totalPedido2(0, this.validaValor)
+        this.cupomAdd = false;
+        this.tipoDescon = 'Sem desconto...'
       }
-    })
-    
-  }
-
-  chamaCalculaFrete(){
-    if(this.calculaFrete.freteCarregado == 1 || this.calculaFrete.freteCarregado == 3){
-      this.calculaFrete.calculaFrete(this, this.totalPedido)
-    }else if(this.calculaFrete.freteCarregado == 2){
-      this.totalPedido2()
     }
   }
 
-  escondeTransicao(){
+  chamaCalculaFrete() {
+    if (this.calculaFrete.freteCarregado == 1 || this.calculaFrete.freteCarregado == 3) {
+      this.calculaFrete.calculaFrete(this, this.totalPedido)
+    } else if (this.calculaFrete.freteCarregado == 2) {
+      this.totalPedido2(0, this.validaValor)
+    }
+  }
+
+  escondeTransicao() {
     var site = document.getElementById('component').style
     site.display = 'block';
     var carregamento = document.getElementById('carregando')
@@ -130,7 +156,9 @@ export class CarrinhoComponent implements OnInit {
             this.produto.quantidade = this.produtos[i].quantidade,
             this.produto.total = this.produtos[i].total,
             this.produto.valor = this.produtos[i].valor,
-            this.carrinhoService.atualizaCarrinho(i, this.produto)
+            this.carrinhoService.atualizaCarrinho(i, this.produto);
+            this.cupomAdd = false;
+            this.verificaCupom();
         }
 
       } else if (valor === 0) {
@@ -148,7 +176,9 @@ export class CarrinhoComponent implements OnInit {
               this.produto.quantidade = this.produtos[key].quantidade,
               this.produto.total = this.produtos[key].total,
               this.produto.valor = this.produtos[key].valor,
-              this.carrinhoService.atualizaCarrinho(key, this.produto)
+              this.carrinhoService.atualizaCarrinho(key, this.produto);
+              this.cupomAdd = false;
+              this.verificaCupom();
           }
         }
       }
@@ -174,7 +204,7 @@ export class CarrinhoComponent implements OnInit {
       var aux: number = 0;
       comp.total = 0.00;
       comp.qtd = 0;
-      comp.quantidadeProd = 0;  
+      comp.quantidadeProd = 0;
       comp.totalFinal = precoFrete;
       comp.totalFinal -= comp.descontoCupom;
       var qtdAux = (Object.keys(comp.produtos).length)
@@ -202,10 +232,14 @@ export class CarrinhoComponent implements OnInit {
     })
   }
 
-  totalPedido2() {
+  totalPedido2(aux, callBack) {
     this.escondeTransicao()
     this.pegaProduros();
-    this.frete = this.calculaFrete.precoFrente
+    if(aux == 1){
+      this.frete = 0
+    }else{
+      this.frete = this.calculaFrete.precoFrente
+    }
     this.carrinho.subscribe(dados => {
       this.produtos = dados
       var i: number = 0;
@@ -216,10 +250,7 @@ export class CarrinhoComponent implements OnInit {
       this.qtd = 0;
       this.quantidadeProd = 0;
       this.totalFinal = this.calculaFrete.precoFrente;
-      console.log('total final 1 ', this.totalFinal)
-      console.log('cupom ', this.descontoCupom)
       this.totalFinal -= this.descontoCupom;
-      console.log('total final 2 ', this.totalFinal)
       var qtdAux = (Object.keys(this.produtos).length)
       while (a < qtdAux) {
         if (this.produtos[j] != null) {
@@ -243,7 +274,14 @@ export class CarrinhoComponent implements OnInit {
           i++
         }
       }
+      callBack(this)
     })
+  }
+
+  validaValor(comp){
+    if(comp.totalFinal < 0){
+      comp.totalFinal = 0
+    }
   }
 
   apagarProduto(key: string) {
@@ -274,17 +312,19 @@ export class CarrinhoComponent implements OnInit {
             this.pedido.clienteNumero = this.clienteVerificaCadastro.dadosCliente.telefone;
             this.pedido.data = this.data.getDate() + '/' + (this.data.getMonth() + 1) + '/' + this.data.getFullYear() + ' - ' + this.data.getHours() + ':' + this.data.getMinutes();
             this.pedido.metodoPag = this.metodoPagamento;
-            if(this.instrucoes == undefined || this.instrucoes == null){
+            if (this.instrucoes == undefined || this.instrucoes == null) {
               this.pedido.instrucoes = 'Sem instruções...';
             } else {
               this.pedido.instrucoes = this.instrucoes;
             }
+            this.pedido.tipoDesconto = this.tipoDescon;
+            this.pedido.desconto = this.descontoCupom;
             this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
             this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
             this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;
             this.pedido.estado = 'Aguardando a Distribuidora aceitar...'
             this.pedido.produtos = this.produtos;
-            this.pedido.valor = this.total;
+            this.pedido.valor = this.totalFinal;
 
             this.pedidoService.insertPedido(this.pedido);
             this.carrinhoService.atualizarContadorPedido(this.contadorProd);

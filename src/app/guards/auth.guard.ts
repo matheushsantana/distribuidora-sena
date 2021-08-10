@@ -22,9 +22,11 @@ export class AuthGuard implements CanActivate {
   
 
     if(this.aux != null){
+      console.log('verifica')
       return true;
+    }else {
+      this.router.navigate(['/'])
+      return false;
     }
-    this.router.navigate(['/'])
-    return false;
   }
 }

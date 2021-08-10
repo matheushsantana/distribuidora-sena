@@ -204,6 +204,14 @@
     color: black;
 }
 
+#valorEntrega{
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    font-weight: 600;
+    color: black;
+}
+
 #valorDesconto{
     position: absolute;
     right: 0%;

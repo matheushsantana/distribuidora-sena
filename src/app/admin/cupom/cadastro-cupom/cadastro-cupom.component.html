@@ -2,22 +2,23 @@
 <div class="container">
     <form #f="ngForm" (ngSubmit)="onSubmit()">
         <div class="row g-2">
-            <div class="col-6">
-                <label for="chaveCupom" class="form-label"><strong>Chave do Cupom</strong></label>
-                <input type="text" class="form-control" placeholder="Digite a chava do cupom" name="chaveCupom"
-                    [(ngModel)]="cupom.chave">
-            </div>
-            <div class="col-6">
-                <label for="descontoCupom" class="form-label"><strong>Valor Desconto</strong></label>
-                <input type="text" class="form-control" placeholder="Valor do Desconto" name="descontoCupom"
-                    [(ngModel)]="cupom.desconto">
-            </div>
             <div class="col-12">
                 <label for="tipoCupom" class="form-label"><strong>Tipo do Desconto</strong></label>
                 <select class="form-select" name="tipoCupom" [(ngModel)]="cupom.tipo">
                     <option value="inteiro">Valor</option>
                     <option value="porcentagem">%</option>
+                    <option value="entrega">Entrega</option>
                 </select>
+            </div>
+            <div class="col-6">
+                <label for="chaveCupom" class="form-label"><strong>Chave do Cupom</strong></label>
+                <input type="text" class="form-control" placeholder="Digite a chava do cupom" name="chaveCupom"
+                    [(ngModel)]="cupom.chave">
+            </div>
+            <div class="col-6" *ngIf="cupom.tipo != 'entrega'">
+                <label for="descontoCupom" class="form-label"><strong>Valor Desconto</strong></label>
+                <input type="text" class="form-control" placeholder="Valor do Desconto" name="descontoCupom"
+                    [(ngModel)]="cupom.desconto">
             </div>
         </div>
         <div class="col-12 d-grid gap-2" id="btn-submit">

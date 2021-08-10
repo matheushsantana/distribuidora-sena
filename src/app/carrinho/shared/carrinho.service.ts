@@ -36,7 +36,7 @@ export class CarrinhoService {
       });
     this.atualziaContador(contador);
     alert("Produto Adicionado");
-    this.router.navigate(['/carrinho', this.clienteLogado.cliente.id])
+    this.router.navigate(['/opcao'])
   }
 
   atualziaContador(contador: Contador) {

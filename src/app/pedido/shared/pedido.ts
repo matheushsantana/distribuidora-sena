@@ -16,4 +16,7 @@ export class Pedido {
     produtos: Carrinho[];
     estado: string;
     instrucoes: string;
+    tipoDesconto: string;
+    desconto: number = 0;
+
 }

@@ -7,6 +7,7 @@ import { User } from './auth/user';
 import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
+import { AuthGuard } from './guards/auth.guard';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,7 @@ export class AppComponent {
   admAutenticated: boolean = false;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
-    private clienteVerificaCadastro: ClienteVerificaCadastro) {
+    private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard) {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
   }
@@ -39,6 +40,7 @@ export class AppComponent {
         this.clienteLogado.recebeDados(this.cliente);
         if (this.cliente.tipo === 'cliente') {
           this.clienteVerificaCadastro.verifica(this, this.pegaEndereco)
+          this.authGuard.canActivate;
         } else if (this.cliente.tipo === 'admin') {
           this.ativaNav = false;
           this.admAutenticated = true;

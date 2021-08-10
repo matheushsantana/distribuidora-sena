@@ -21,6 +21,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { GoogleMapsModule } from '@angular/google-maps'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CupomComponent } from './admin/cupom/cupom.component';
+import { IrCarrinhoComponent } from './paginas/ir-carrinho/ir-carrinho.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { CupomComponent } from './admin/cupom/cupom.component';
     PedidoComponent,
     ClienteComponent,
     CupomComponent,
+    IrCarrinhoComponent,
     
   ],
   imports: [
