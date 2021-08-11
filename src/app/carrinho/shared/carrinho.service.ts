@@ -28,7 +28,6 @@ export class CarrinhoService {
   }
 
   adicionaProduto(contador: Contador, carrinho: Carrinho) {
-    console.log('entrou add')
     var aux = contador.valor.toString()
     this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos').update(aux, carrinho)
       .catch((error: any) => {

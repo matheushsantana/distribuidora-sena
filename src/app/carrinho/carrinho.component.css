@@ -77,12 +77,13 @@
     left: 40%;
 }
 
-#quantidade{
+#add input{
     border: none;
     background-color: white;
     text-align: center;
     width: 40px;
 }
+
 
 #select{
     border: 0px;

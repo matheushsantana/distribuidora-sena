@@ -119,3 +119,7 @@
     position: relative;
     top: 220px;
 }
+
+#btn-buscar{
+    font-weight: 500;
+}

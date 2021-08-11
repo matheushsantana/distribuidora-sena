@@ -29,6 +29,7 @@ export class AppComponent {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
   }
+
   ngOnInit() {
     window.scrollTo(0, 0)
     setTimeout(() => {
@@ -54,6 +55,7 @@ export class AppComponent {
         }
       }, 1500)
     }, 500)
+    
   }
 
   prepareRoute(outlet: RouterOutlet) {

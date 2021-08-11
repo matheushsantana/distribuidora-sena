@@ -1,0 +1,29 @@
+.container{
+    text-align: center;
+}
+
+#img{
+    position: relative;
+    width: 300px;
+    top: 100px;
+    text-align: center;
+}
+
+.botoes{
+   position: absolute;
+   bottom: 20px;
+   width: 93%;
+}
+
+.btn{
+    background-color: rgb(255, 141, 1);
+    font-weight: 500;
+    width: 100%;
+}
+
+.botoes p{
+    color: rgb(255, 141, 1);
+    font-weight: 600;
+    text-align: center;
+    margin-top: 15px;
+}

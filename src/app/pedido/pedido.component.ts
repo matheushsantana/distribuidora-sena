@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AppComponent } from '../app.component';
 import { CalculaFrete } from '../carrinho/calculaFrete.service';
 import { Produto } from '../produtos/shared/produto';
 import { Pedido } from './shared/pedido';
@@ -21,7 +22,8 @@ export class PedidoComponent implements OnInit {
   loop: any;
   tempoEntrega: string = '';
 
-  constructor(private calculaFrete: CalculaFrete, private pedidoService: PedidoService) { }
+  constructor(private calculaFrete: CalculaFrete, private pedidoService: PedidoService, private appComponet: AppComponent) { 
+    this.appComponet.ativaNav = false; }
 
   ngOnInit(): void {
     console.log('entrou 1')

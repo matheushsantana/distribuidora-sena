@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Produto } from 'src/app/produtos/shared/produto';
 import { ProdutoDataService } from 'src/app/produtos/shared/produto-data.service';
 import { ProdutoService } from 'src/app/produtos/shared/produto.service';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class ResultadoPesquisaComponent implements OnInit {
   imgPadrao = 'assets/pre-carregamento-prod.gif'
 
   constructor(private produtoService: ProdutoService, private produtoDataService: ProdutoDataService, private route: ActivatedRoute,
-     private location: Location) { }
+     private location: Location, private appComponet: AppComponent) { 
+      this.appComponet.ativaNav = true; }
 
   ngOnInit(): void {
     window.scrollTo(0, 0)

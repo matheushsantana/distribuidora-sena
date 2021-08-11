@@ -8,10 +8,11 @@ import { Carrinho } from './shared/carrinho';
 import { CarrinhoService } from './shared/carrinho.service';
 import { Contador } from './shared/contador';
 import { ClienteVerificaCadastro } from '../cliente/clienteVefificaCadastro.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CalculaFrete } from './calculaFrete.service';
 import { Cupom } from '../cupom/cupom';
 import { CupomService } from '../cupom/cupom.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-carrinho',
@@ -46,7 +47,8 @@ export class CarrinhoComponent implements OnInit {
 
   constructor(private carrinhoService: CarrinhoService, private pedidoService: PedidoService,
     private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro,
-    private router: Router, private calculaFrete: CalculaFrete, private cupomService: CupomService) {
+    private router: Router, private calculaFrete: CalculaFrete, private cupomService: CupomService, private appComponet: AppComponent) {
+    this.appComponet.ativaNav = false;
     this.carrinho = this.carrinhoService.getAllProdCarrinho();
     this.carregando = true;
   }
@@ -59,7 +61,6 @@ export class CarrinhoComponent implements OnInit {
       + this.clienteVerificaCadastro.dadosCliente.enderecoBairro
 
     this.chamaCalculaFrete();
-
   }
 
   verificaCupom() {

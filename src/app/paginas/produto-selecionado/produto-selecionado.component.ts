@@ -9,6 +9,7 @@ import { CarrinhoService } from 'src/app/carrinho/shared/carrinho.service';
 import { Router } from '@angular/router';
 import { PedidoService } from 'src/app/pedido/shared/pedido.service';
 import { ClienteVerificaCadastro } from 'src/app/cliente/clienteVefificaCadastro.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -36,15 +37,17 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService,
     private clienteLogado: ClienteLogado, private router: Router, private pedidoService: PedidoService,
-    private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro) { }
+    private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro, private appComponet: AppComponent) { 
+      this.appComponet.ativaNav = false;
+    }
 
   ngOnInit(): void {
     window.scrollTo(0, 0)
     this.produto = new Produto();
     this.produtoDataService.currentProduto.subscribe(data => {
-      if(data.produto == null){
+      if (data.produto == null) {
         window.location.href = '/'
-      }else{
+      } else {
         this.produto = new Produto();
         this.produto.nome = data.produto.nome;
         this.produto.valor = data.produto.valor;
@@ -62,12 +65,12 @@ export class ProdutoSelecionadoComponent implements OnInit {
     this.verificaproduto();
   }
 
-  verificaproduto(){
+  verificaproduto() {
     this.carrinhoService.getAllProdCarrinho().subscribe(dados => {
       this.produtosCarrinho = dados
 
-      for(var i = 0; i < this.produtosCarrinho.length; i++){
-        if(this.produto.nome == this.produtosCarrinho[i].nome)
+      for (var i = 0; i < this.produtosCarrinho.length; i++) {
+        if (this.produto.nome == this.produtosCarrinho[i].nome)
           this.produtoExiste = true;
       }
     })
@@ -111,36 +114,10 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   adicionar(quantidade: number, total: number) {
 
-    if(this.produto.categoria != 'esgotado'){
+    if (this.produto.categoria != 'esgotado') {
       if (this.clienteLogado.cliente != null) {
         this.carrinhoService.getAllPedido().subscribe(dados => {
           this.pedido = dados[1]
-          if (this.pedido == undefined || this.pedido.key != 'pedido' ||
-            this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
-            this.clienteVerificaCadastro.pedido = null;
-            if (this.produtoExiste != true) {
-              this.pedidoService.deletePedido();
-              this.contador = new Contador();
-              this.contador = this.recebeContador;
-
-              this.carrinho.nome = this.produto.nome;
-              this.carrinho.valor = this.produto.valor;
-              this.carrinho.quantidade = quantidade;
-              this.carrinho.total = total;
-              this.carrinho.linkImg = this.produto.imgProduto;
-
-              this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
-              this.produto = new Produto();
-            } else {
-              this.produto = new Produto();
-              alert('Esse produto ja esta adicionado em seu carrinho, confira a quantidade desejada!')
-              this.router.navigate(['/carrinho/' + this.clienteLogado.cliente.id])
-            }
-
-          } else {
-            alert('Espere a entrega do pedido feito para adiconar novos produtos!')
-            this.router.navigate(['/pedido/' + this.clienteLogado.cliente.id])
-          }
         })
       } else {
         alert('Faça o Login para adicionar produtos ao carrinho!')
@@ -150,5 +127,37 @@ export class ProdutoSelecionadoComponent implements OnInit {
       alert('Desculpe, Produto Esgotado...')
       this.router.navigate(['/'])
     }
+    this.fazerPedido(quantidade, total);
   }
+
+  fazerPedido(quantidade: number, total: number) {
+    if (this.pedido == undefined || this.pedido.key != 'pedido' ||
+      this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
+      this.clienteVerificaCadastro.pedido = null;
+      if (this.produtoExiste != true) {
+        this.pedidoService.deletePedido();
+        this.contador = new Contador();
+        this.contador = this.recebeContador;
+
+        this.carrinho.nome = this.produto.nome;
+        this.carrinho.valor = this.produto.valor;
+        this.carrinho.quantidade = quantidade;
+        this.carrinho.total = total;
+        this.carrinho.linkImg = this.produto.imgProduto;
+
+        this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
+        this.produto = new Produto();
+      } else {
+        this.produto = new Produto();
+        this.produtoExiste = false;
+        alert('Esse produto ja esta adicionado em seu carrinho, confira a quantidade desejada!')
+        this.router.navigate(['/carrinho/' + this.clienteLogado.cliente.id])
+      }
+
+    } else {
+      alert('Espere a entrega do pedido feito para adiconar novos produtos!')
+      this.router.navigate(['/pedido/' + this.clienteLogado.cliente.id])
+    }
+  }
+
 }
