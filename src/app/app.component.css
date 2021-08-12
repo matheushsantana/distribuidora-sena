@@ -56,6 +56,16 @@
     right: 40px;
 }
 
+#btn-menu{
+    width: 18px;
+    position: absolute;
+    top: 25px;
+    left: 27px;
+    border-radius: 100%;
+    background-color: white;
+    padding: 2px;
+}
+
 #receber{
     text-decoration: none;
     color: white;
@@ -63,7 +73,7 @@
     font-weight: 500;
     position: absolute;
     top: 10px;
-    left: 55px;
+    left: 60px;
 }
 
 #endereco{
@@ -73,7 +83,7 @@
     font-size: 14px;
     font-weight: 500;
     position: absolute;
-    left: 60px;
+    left: 65px;
     top: 32px;
     margin-top: 5px;
     max-width: 80%;

@@ -22,6 +22,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CupomComponent } from './admin/cupom/cupom.component';
 import { IrCarrinhoComponent } from './paginas/ir-carrinho/ir-carrinho.component';
+import { MeuPerfilComponent } from './paginas/meu-perfil/meu-perfil.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { IrCarrinhoComponent } from './paginas/ir-carrinho/ir-carrinho.component
     ClienteComponent,
     CupomComponent,
     IrCarrinhoComponent,
+    MeuPerfilComponent,
     
   ],
   imports: [

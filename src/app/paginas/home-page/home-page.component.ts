@@ -22,7 +22,9 @@ export class HomePageComponent implements OnInit {
 
   constructor(private produtoService: ProdutoService, private produtoDataService: ProdutoDataService, private clienteVerificaCadastro: ClienteVerificaCadastro,
     private router: Router, private appComponet: AppComponent) { 
-      this.appComponet.ativaNav = true; }
+      this.appComponet.ativaNav = true; 
+      this.appComponet.menuPerfil = true;
+    }
 
   ngOnInit(): void {
     this.produtos = this.produtoService.getAllProduto();

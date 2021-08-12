@@ -23,6 +23,7 @@ export class AppComponent {
   endereco: string = 'carregando';
   ativaNav: boolean = true;
   admAutenticated: boolean = false;
+  menuPerfil: boolean = true;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
     private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard) {

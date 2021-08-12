@@ -60,6 +60,10 @@
     margin-bottom: 7px;
 }
 
+#card-prod img{
+    width: 128px;
+}
+
 #preco-prod{
     margin-bottom: 0px;
     padding-bottom: 0px;

@@ -8,7 +8,7 @@ import { Carrinho } from './shared/carrinho';
 import { CarrinhoService } from './shared/carrinho.service';
 import { Contador } from './shared/contador';
 import { ClienteVerificaCadastro } from '../cliente/clienteVefificaCadastro.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CalculaFrete } from './calculaFrete.service';
 import { Cupom } from '../cupom/cupom';
 import { CupomService } from '../cupom/cupom.service';
@@ -83,7 +83,7 @@ export class CarrinhoComponent implements OnInit {
             valido.display = 'block';
             this.cupomAdd = true;
             if (dados[2] == 'porcentagem') {
-              this.descontoCupom = parseFloat(((this.totalFinal - this.frete) * (dados[1] / 100)).toFixed(2))
+              this.descontoCupom = parseFloat(((this.total) * (dados[1] / 100)).toFixed(2))
               this.totalPedido2(0, this.validaValor);
               aux.display = 'block'
               this.tipoDescon = 'Porcentagem'
@@ -96,7 +96,6 @@ export class CarrinhoComponent implements OnInit {
             }
             if (dados[1] == 'entrega') {
               this.descontoCupom = this.calculaFrete.precoFrente
-              console.log(this.descontoCupom);
               this.totalPedido2(1, this.validaValor);
               entrega.color = 'rgb(0, 151, 0)';
               this.tipoDescon = 'Frete Gratis'
@@ -123,13 +122,6 @@ export class CarrinhoComponent implements OnInit {
     } else if (this.calculaFrete.freteCarregado == 2) {
       this.totalPedido2(0, this.validaValor)
     }
-  }
-
-  escondeTransicao() {
-    var site = document.getElementById('component').style
-    site.display = 'block';
-    var carregamento = document.getElementById('carregando')
-    carregamento.classList.add("hide")
   }
 
   voltaPagina() {
@@ -194,7 +186,6 @@ export class CarrinhoComponent implements OnInit {
   }
 
   totalPedido(comp, precoFrete) {
-    comp.escondeTransicao()
     comp.pegaProduros();
     comp.frete = precoFrete
     comp.carrinho.subscribe(dados => {
@@ -203,7 +194,7 @@ export class CarrinhoComponent implements OnInit {
       var a: number = 0;
       var j: number = 0
       var aux: number = 0;
-      comp.total = 0.00;
+      comp.total = 0;
       comp.qtd = 0;
       comp.quantidadeProd = 0;
       comp.totalFinal = precoFrete;
@@ -234,7 +225,6 @@ export class CarrinhoComponent implements OnInit {
   }
 
   totalPedido2(aux, callBack) {
-    this.escondeTransicao()
     this.pegaProduros();
     if(aux == 1){
       this.frete = 0
@@ -247,7 +237,7 @@ export class CarrinhoComponent implements OnInit {
       var a: number = 0;
       var j: number = 0
       var aux: number = 0;
-      this.total = 0.00;
+      this.total = 0;
       this.qtd = 0;
       this.quantidadeProd = 0;
       this.totalFinal = this.calculaFrete.precoFrente;

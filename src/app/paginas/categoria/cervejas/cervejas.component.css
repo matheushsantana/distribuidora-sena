@@ -49,6 +49,10 @@
     margin-bottom: 10px;
 }
 
+#card-prod img{
+    width: 128px;
+}
+
 #desc-prod{
     font-size: 14px;
     overflow: hidden; 

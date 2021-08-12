@@ -1,10 +1,10 @@
 <div id="carregamento">
-  <img src="logo-sena.png" id="logo-carregamento">
+  <img src="assets/logo-sena.png" id="logo-carregamento">
   <h1>Bem vindo(a)!</h1>
 </div>
 
 <div id="site">
-  <nav class="navbar justify-content-center" id="navbar">
+  <nav class="navbar justify-content-center" id="navbar"  *ngIf="menuPerfil">
     <div class="container-fluid">
       <ng-container *ngIf="!(authenticated$ | async)">
         <div class="barra-superior">
@@ -32,7 +32,8 @@
       <ng-container *ngIf="(authenticated$ | async) && (user$ | async) && admAutenticated != true">
         <div class="barra-superior">
           <div class="sub-barra">
-            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
+            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;" [routerLink]="['/meu-perfil']">
+            <img id="btn-menu" src="assets/icon-menu.png" [routerLink]="['/meu-perfil']">
             <img id="btn-home" [routerLink]="['/']" src="assets/home.png">
             <img id="btn-carrinho" (click)="verifica()" src="assets/carrinho.png">
             <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
