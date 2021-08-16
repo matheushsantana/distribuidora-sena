@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
   entrou = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private appComponet: AppComponent) { 
+    this.appComponet.ativaNav = false; }
 
   ngOnInit(): void {
     
@@ -47,6 +49,7 @@ export class LoginComponent implements OnInit {
         (err) => {
           this.loginErrorNotification(err);
           this.loading = false;
+          window.location.href = '/auth/login'
         }
       );
       this.escondeTela();
@@ -72,6 +75,7 @@ export class LoginComponent implements OnInit {
         (err) => {
           this.loginErrorNotification(err);
           this.loading = false;
+          window.location.href = '/auth/login'
         }
       );
   }

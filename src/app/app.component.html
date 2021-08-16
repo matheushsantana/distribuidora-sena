@@ -4,15 +4,12 @@
 </div>
 
 <div id="site">
-  <nav class="navbar justify-content-center" id="navbar"  *ngIf="menuPerfil">
+  <nav class="navbar justify-content-center" id="navbar" *ngIf="menuPerfil">
     <div class="container-fluid">
       <ng-container *ngIf="!(authenticated$ | async)">
         <div class="barra-superior">
           <div class="sub-barra">
             <a id="login" [routerLink]="['/auth/login']">FAÇA SEU LOGIN E APROVEITE</a>
-            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
-            <img id="btn-home2" [routerLink]="['/']" src="assets/home.png">
-            <img id="btn-sair" [routerLink]="['/auth/login']" src="assets/btn-login.png">
           </div>
         </div>
       </ng-container>
@@ -32,14 +29,10 @@
       <ng-container *ngIf="(authenticated$ | async) && (user$ | async) && admAutenticated != true">
         <div class="barra-superior">
           <div class="sub-barra">
-            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;" [routerLink]="['/meu-perfil']">
-            <img id="btn-menu" src="assets/icon-menu.png" [routerLink]="['/meu-perfil']">
-            <img id="btn-home" [routerLink]="['/']" src="assets/home.png">
-            <img id="btn-carrinho" (click)="verifica()" src="assets/carrinho.png">
-            <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
+            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
           </div>
           <a id="receber">Receber agora em</a>
-          <a id="endereco" (click)="atualizaEndereco()"> {{ endereco }}</a>
+          <a id="endereco"> {{ endereco }}</a>
         </div>
       </ng-container>
     </div>
@@ -49,7 +42,8 @@
       <div class="input-group flex-nowrap">
         <input type="text" class="form-control" [(ngModel)]="valor" placeholder="Qual a Bebida de Hoje?" id="valor"
           name="valor" [(ngModel)]="valor">
-        <button type="submit" [routerLink]="['/pesquisa', valor ]" class="btn btn-success" id="btn-buscar">Buscar</button>
+        <button type="submit" [routerLink]="['/pesquisa', valor ]" class="btn btn-success"
+          id="btn-buscar">Buscar</button>
       </div>
     </form>
   </nav>
@@ -57,4 +51,14 @@
   <div [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
+  <nav class="navbar fixed-bottom" id="menu-bottom"
+    *ngIf="admAutenticated != true">
+    <div class="container-fluid" id="btn-bottom">
+      <img id="btn-menu-bottom" [routerLink]="['/']" src="assets/home.png">
+      <img id="btn-menu-bottom" [routerLink]="['/pesquisa', '']" src="assets/busca.png">
+      <img id="btn-menu-bottom" (click)="verifica()" src="assets/carrinho.png">
+      <img id="btn-menu-bottom" src="assets/btn-info.png" alt="">
+      <img id="btn-menu-bottom" [routerLink]="['/meu-perfil']" src="assets/menu-white.png" alt="">
+    </div>
+  </nav>
 </div>

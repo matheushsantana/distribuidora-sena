@@ -39,12 +39,17 @@ export class ClienteVerificaCadastro {
                     this.dadosCliente = this.aux
                 }
             } else {
-                if (dados[0].key == 'carrinho') {
-                    this.carrinho = dados[0]
+                if(dados.length == 0){  
+
                 } else {
-                    this.aux = dados[0]
-                    this.dadosCliente = this.aux
+                    if (dados[0].key == 'carrinho') {
+                        this.carrinho = dados[0]
+                    } else {
+                        this.aux = dados[0]
+                        this.dadosCliente = this.aux
+                    }
                 }
+               
             }
             callBack(appComponent, this.dadosCliente)
         });

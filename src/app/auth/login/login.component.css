@@ -7,20 +7,6 @@
     top: 50px;
 }
 
-#rodape{
-    background-color: #211F20;
-}
-
-#rodape p{
-    color: white;
-    font-size: 14px;
-}
-
-#rodape div{
-    color: white;
-    font-size: 12px;
-}
-
 .card{
     border: none;
     background: transparent;
@@ -65,7 +51,11 @@
     background-color: rgba(255, 255, 255, 0.900);
 }
 
-.card-body #button{
+.card-body #button1{
+    width: 48%;
+}
+
+.card-body #button2{
     width: 48%;
 }
 

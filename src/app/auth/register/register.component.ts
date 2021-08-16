@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { AuthService } from '../auth.service';
 import { User } from '../user';
 
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
 
 states = ['MT', 'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
 
-constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private appComponet: AppComponent) { 
+  this.appComponet.ativaNav = false; }
 entrou = false;
 
 ngOnInit(): void {

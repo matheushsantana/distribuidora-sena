@@ -80,23 +80,12 @@ export class AppComponent {
     carregamento.classList.add("hide")
   }
 
-  logout() {
-    this.authService.logout();
-    setTimeout(() => {
-      window.location.href = '/'
-    }, 500);
-  }
-
   verifica() {
     if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
       this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
     } else {
       this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
     }
-  }
-
-  atualizaEndereco() {
-    this.router.navigate(['/cadastro/cliente'])
   }
 
 }

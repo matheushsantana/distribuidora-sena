@@ -5,6 +5,7 @@
 
 #navbar{
     background-color: #211F20;
+    height: 55px;
 }
 
 #nav2{
@@ -38,11 +39,6 @@
     right: 0px;
 }
 
-#btn-home{
-    width: 28px;
-    position: absolute;
-    right: 80px;
-}
 
 #btn-home2{
     width: 28px;
@@ -50,20 +46,12 @@
     right: 40px;
 }
 
-#btn-carrinho{
-    width: 27px;
-    position: absolute;
-    right: 40px;
+#btn-menu-bottom{
+    width: 28px;
 }
 
-#btn-menu{
-    width: 18px;
-    position: absolute;
-    top: 25px;
-    left: 27px;
-    border-radius: 100%;
-    background-color: white;
-    padding: 2px;
+#btn-bottom{
+    width: 95%;
 }
 
 #receber{
@@ -72,8 +60,8 @@
     margin-left: 5px;
     font-weight: 500;
     position: absolute;
-    top: 10px;
-    left: 60px;
+    top: 5px;
+    left: 55px;
 }
 
 #endereco{
@@ -83,8 +71,8 @@
     font-size: 14px;
     font-weight: 500;
     position: absolute;
-    left: 65px;
-    top: 32px;
+    left: 60px;
+    top: 22px;
     margin-top: 5px;
     max-width: 80%;
     overflow: hidden;
@@ -132,4 +120,8 @@
 
 #btn-buscar{
     font-weight: 500;
+}
+
+#menu-bottom{
+    background-color: #211F20;
 }

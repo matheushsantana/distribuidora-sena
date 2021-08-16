@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-10">
                     <div class="card-body">
-                        <img src="assets/editar.png" id="btn-editar">
+                        <img src="assets/editar.png" id="btn-editar" (click)="atualizaEndereco()">
                         <h5 class="card-title" id="nomeCliente">Olá, {{ (dadosCliente|async)?.firsname }}</h5>
                         <p class="card-text" id="dadosCliente">{{ (dadosCliente|async)?.email }}</p>
                         <p class="card-text" id="dadosCliente">{{ telefoneCliente | mask: '(00) 00000-0000' }}</p>
@@ -21,6 +21,7 @@
         <div class="opcoes">
             <div class="row g-0" id="opcoes">
                 <div class="col-2">
+                    <img src="assets/pedidos.png" id="btn-sair">
                 </div>
                 <div class="col-10">
                     <h5 class="card-title" id="opcoesText">Meus Pedidos(Em Breve!)</h5>
@@ -28,12 +29,13 @@
             </div>
             <div class="row g-0" id="opcoes">
                 <div class="col-2">
+                    <img src="assets/bug.png" id="btn-sair">
                 </div>
                 <div class="col-10">
                     <h5 class="card-title" id="opcoesText">Reportar Bug</h5>
                 </div>
             </div>
-            <div class="row g-0" id="opcoes">
+            <div class="row g-0" id="opcoes" (click)="logout()">
                 <div class="col-2">
                     <img src="assets/btn-sair.png" id="btn-sair">
                 </div>
