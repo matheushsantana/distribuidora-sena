@@ -1,0 +1,20 @@
+<h4 id="titu">RELATO DE BUGS</h4>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Cliente</th>
+                <th scope="col">Bug</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bug of bugs | async">
+                <td>{{ bug.nome }}</td>
+                <td>{{ bug.problema }}</td>
+                <td><button class="btn btn-danger" (click)="delete(bug.key)">Deletar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

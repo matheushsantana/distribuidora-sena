@@ -39,6 +39,18 @@
     right: 0px;
 }
 
+#btn-home{
+    width: 28px;
+    position: absolute;
+    right: 80px;
+}
+
+#btn-menu-adm{
+    width: 28px;
+    position: absolute;
+    right: 40px;
+}
+
 
 #btn-home2{
     width: 28px;

@@ -88,4 +88,11 @@ export class AppComponent {
     }
   }
 
+  logout() {
+    this.authService.logout();
+    setTimeout(() => {
+      window.location.href = '/'
+    }, 500);
+  }
+
 }

@@ -1,0 +1,24 @@
+.voltar{
+    padding: 7px;
+    background-color: white;
+}
+
+.voltar a{
+    font-weight: bold;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+#btn-voltar{
+    width: 30px;
+    filter: contrast(1%);
+    margin-right: 90px;
+}
+
+.divisao{
+    height: 4px;
+    background-color: rgb(231, 231, 231);;
+}

@@ -23,6 +23,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CupomComponent } from './admin/cupom/cupom.component';
 import { IrCarrinhoComponent } from './paginas/ir-carrinho/ir-carrinho.component';
 import { MeuPerfilComponent } from './paginas/meu-perfil/meu-perfil.component';
+import { ReportBugComponent } from './paginas/report-bug/report-bug.component';
+import { BugsComponent } from './paginas/bugs/bugs.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { MeuPerfilComponent } from './paginas/meu-perfil/meu-perfil.component';
     CupomComponent,
     IrCarrinhoComponent,
     MeuPerfilComponent,
+    ReportBugComponent,
+    BugsComponent,
     
   ],
   imports: [
