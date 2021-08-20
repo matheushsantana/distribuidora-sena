@@ -22,11 +22,11 @@ const appRoutes: Routes = [
   { path: 'carrinho/:id', component: CarrinhoComponent, canActivate: [AuthGuard], data: {animation: 'carrinho'} },
   { path: 'pedido/:id', component: PedidoComponent, canActivate: [AuthGuard], data: {animation: 'pedido'} },
   { path: 'cadastro/cliente', component: ClienteComponent, canActivate: [AuthGuard], data: {animation: 'cadastro-cliente'} },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard] },
-  { path: 'produtos', loadChildren: () => import('./produtos/produtos.module').then(m => m.ProdutosModule), data: {animation: 'produtos'} },
   { path: 'meu-perfil', component: MeuPerfilComponent, canActivate: [AuthGuard], data: {Animation: 'perfil'} },
   { path: 'report-bug', component: ReportBugComponent, data: {Animation: 'bug'} },
-  { path: 'bugs', component:BugsComponent }
+  { path: 'produtos', loadChildren: () => import('./produtos/produtos.module').then(m => m.ProdutosModule), data: {animation: 'produtos'} },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard] },
+  { path: 'bugs', component: BugsComponent }
 ];
 
 @NgModule({

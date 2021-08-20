@@ -8,6 +8,10 @@
     height: 55px;
 }
 
+#login{
+    text-decoration: none;
+}
+
 #nav2{
     padding-left: 10px;
     padding-right: 10px;

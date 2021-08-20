@@ -9,7 +9,7 @@
       <ng-container *ngIf="!(authenticated$ | async)">
         <div class="barra-superior">
           <div class="sub-barra">
-            <a id="login" [routerLink]="['/auth/login']">FAÇA SEU LOGIN E APROVEITE</a>
+            <a id="login" [routerLink]="['/auth/login']">CLICK, FAÇA SEU LOGIN E APROVEITE</a>
           </div>
         </div>
       </ng-container>
@@ -57,7 +57,7 @@
       <img id="btn-menu-bottom" [routerLink]="['/pesquisa', '']" src="assets/busca.png">
       <img id="btn-menu-bottom" (click)="verifica()" src="assets/carrinho.png">
       <img id="btn-menu-bottom" src="assets/btn-info.png" alt="">
-      <img id="btn-menu-bottom" [routerLink]="['/meu-perfil']" src="assets/menu-white.png" alt="">
+      <img id="btn-menu-bottom" [routerLink]="['/meu-perfil']" (click)="verifica2()" src="assets/menu-white.png" alt="">
     </div>
   </nav>
 </div>

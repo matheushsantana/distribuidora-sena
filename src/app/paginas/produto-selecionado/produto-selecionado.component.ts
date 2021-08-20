@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { PedidoService } from 'src/app/pedido/shared/pedido.service';
 import { ClienteVerificaCadastro } from 'src/app/cliente/clienteVefificaCadastro.service';
 import { AppComponent } from 'src/app/app.component';
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-produto-selecionado',
@@ -37,7 +38,8 @@ export class ProdutoSelecionadoComponent implements OnInit {
 
   constructor(private produtoDataService: ProdutoDataService, private carrinhoService: CarrinhoService,
     private clienteLogado: ClienteLogado, private router: Router, private pedidoService: PedidoService,
-    private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro, private appComponet: AppComponent) { 
+    private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro, private appComponet: AppComponent, 
+    private db: AngularFireDatabase) { 
       this.appComponet.ativaNav = false;
     }
 

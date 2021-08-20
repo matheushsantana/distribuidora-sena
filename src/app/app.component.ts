@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Router, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { slideInAnimation } from './animations';
@@ -85,6 +86,12 @@ export class AppComponent {
       this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
     } else {
       this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
+    }
+  }
+
+  verifica2(){
+    if(this.cliente.id == null){
+      this.router.navigate(['/auth/login'])
     }
   }
 

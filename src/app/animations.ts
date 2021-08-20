@@ -679,4 +679,3 @@ export const slideInAnimation =
     ]),
 
   ]);
-  

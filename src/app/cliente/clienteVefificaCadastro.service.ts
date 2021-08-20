@@ -16,6 +16,7 @@ export class ClienteVerificaCadastro {
     dadosMap: any;
     carrinho: Carrinho;
     pedido: Pedido;
+    quantidadeProd: number = 0;
 
     constructor(private clienteLogado: ClienteLogado, private db: AngularFireDatabase) {}
 
@@ -27,6 +28,7 @@ export class ClienteVerificaCadastro {
                     this.aux = dados[1]
                     this.carrinho = dados[0]
                     this.dadosCliente = this.aux
+                    this.quantidadeProd = dados[0].contador.valor
                 }
                 if (dados[0].key == 'dados' && dados[1].key == 'carrinho') {
                     this.aux = dados[0]
