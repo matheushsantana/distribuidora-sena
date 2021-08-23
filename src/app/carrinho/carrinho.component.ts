@@ -49,6 +49,7 @@ export class CarrinhoComponent implements OnInit {
     private clienteLogado: ClienteLogado, private location: Location, private clienteVerificaCadastro: ClienteVerificaCadastro,
     private router: Router, private calculaFrete: CalculaFrete, private cupomService: CupomService, private appComponet: AppComponent) {
     this.appComponet.ativaNav = false;
+    this.appComponet.menuPerfil = true;
     this.carrinho = this.carrinhoService.getAllProdCarrinho();
     this.carregando = true;
   }
@@ -278,11 +279,13 @@ export class CarrinhoComponent implements OnInit {
   apagarProduto(key: string) {
     if (this.qtd > 1) {
       this.carrinhoService.deleteProdCarrinho(key, 0);
+      this.carrinhoService.alteraQtdProds(this.appComponet.qtdProdutos)
       setTimeout(() => {
         this.totalPedido(this, this.frete)
       }, 1000);
     } else {
       this.carrinhoService.deleteProdCarrinho(key, 1);
+      this.carrinhoService.alteraQtdProds(this.appComponet.qtdProdutos)
       setTimeout(() => {
         this.totalPedido(this, this.frete)
       }, 1000);

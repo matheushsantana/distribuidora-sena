@@ -56,6 +56,7 @@
       <img id="btn-menu-bottom" [routerLink]="['/']" src="assets/home.png">
       <img id="btn-menu-bottom" [routerLink]="['/pesquisa', '']" src="assets/busca.png">
       <img id="btn-menu-bottom" (click)="verifica()" src="assets/carrinho.png">
+      <label id="qdtProds" (click)="verifica()" *ngIf="qtdProdutos != 0">{{ qtdProdutos }}</label>
       <img id="btn-menu-bottom" src="assets/btn-info.png" alt="">
       <img id="btn-menu-bottom" [routerLink]="['/meu-perfil']" (click)="verifica2()" src="assets/menu-white.png" alt="">
     </div>

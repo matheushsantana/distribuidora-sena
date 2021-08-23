@@ -557,7 +557,8 @@ export const slideInAnimation =
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '100%'
+          width: '100%',
+          opacity: 1
         })
       ]),
       query(':enter', [
@@ -582,7 +583,8 @@ export const slideInAnimation =
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '100%'
+          width: '100%',
+          opacity: 1
         })
       ]),
       query(':enter', [
@@ -607,7 +609,8 @@ export const slideInAnimation =
           position: 'absolute',
           top: 0,
           left: 0,
-          width: '100%'
+          width: '100%',
+          opacity: 1
         })
       ]),
       query(':enter', [
@@ -661,6 +664,57 @@ export const slideInAnimation =
           left: 0,
           width: '100%',
           opacity: 1
+        })
+      ]),
+      query(':enter', [
+        style({ opacity: '0' })
+      ]),
+      query(':leave', animateChild()),
+      group([
+        query(':leave', [
+          animate('500ms ease-out', style({ opacity: '0' }))
+        ]),
+        query(':enter', [
+          animate('500ms ease-out', style({ opacity: '1' }))
+        ])
+      ]),
+      query(':enter', animateChild()),
+    ]),
+
+    //----------------------------------------------------------------------
+
+    transition('perfil => meus-pedidos', [
+      style({ position: 'relative' }),
+      query(':enter, :leave', [
+        style({
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+        })
+      ]),
+      query(':enter', [
+        style({ opacity: '0' })
+      ]),
+      query(':leave', animateChild()),
+      group([
+        query(':leave', [
+          animate('500ms ease-out', style({ opacity: '0' }))
+        ]),
+        query(':enter', [
+          animate('500ms ease-out', style({ opacity: '1' }))
+        ])
+      ]),
+      query(':enter', animateChild()),
+    ]),
+    transition('meus-pedidos => perfil', [
+      style({ position: 'relative' }),
+      query(':enter, :leave', [
+        style({
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
         })
       ]),
       query(':enter', [

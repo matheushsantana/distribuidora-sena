@@ -7,6 +7,7 @@ import { BugsComponent } from './paginas/bugs/bugs.component';
 import { HomePageComponent } from "./paginas/home-page/home-page.component";
 import { IrCarrinhoComponent } from './paginas/ir-carrinho/ir-carrinho.component';
 import { MeuPerfilComponent } from './paginas/meu-perfil/meu-perfil.component';
+import { MeusPedidosComponent } from './paginas/meus-pedidos/meus-pedidos.component';
 import { ProdutoSelecionadoComponent } from "./paginas/produto-selecionado/produto-selecionado.component";
 import { ReportBugComponent } from './paginas/report-bug/report-bug.component';
 import { ResultadoPesquisaComponent } from "./paginas/resultado-pesquisa/resultado-pesquisa.component";
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
   { path: 'pedido/:id', component: PedidoComponent, canActivate: [AuthGuard], data: {animation: 'pedido'} },
   { path: 'cadastro/cliente', component: ClienteComponent, canActivate: [AuthGuard], data: {animation: 'cadastro-cliente'} },
   { path: 'meu-perfil', component: MeuPerfilComponent, canActivate: [AuthGuard], data: {Animation: 'perfil'} },
+  { path: 'meus-pedidos', component: MeusPedidosComponent, canActivate: [AuthGuard], data: {Animation: 'meus-pedidos'} },
   { path: 'report-bug', component: ReportBugComponent, data: {Animation: 'bug'} },
   { path: 'produtos', loadChildren: () => import('./produtos/produtos.module').then(m => m.ProdutosModule), data: {animation: 'produtos'} },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [AuthGuard] },

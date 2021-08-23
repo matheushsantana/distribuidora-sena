@@ -141,3 +141,16 @@
 #menu-bottom{
     background-color: #211F20;
 }
+
+#qdtProds{
+    color: black;
+    position: absolute;
+    background-color: rgb(228, 228, 0);
+    left: 50%;
+    border-radius: 100%;
+    width: 20px;
+    font-size: 14px;
+    text-align: center;
+    top: 3px;
+    font-weight: 600;
+}

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
 import { Router, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { slideInAnimation } from './animations';
@@ -9,6 +8,7 @@ import { ClienteLogado } from './cliente/clienteLogado.service';
 import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.service';
 import { Cliente } from './cliente/shared/cliente';
 import { AuthGuard } from './guards/auth.guard';
+import { CarrinhoService } from './carrinho/shared/carrinho.service';
 
 @Component({
   selector: 'app-root',
@@ -25,9 +25,11 @@ export class AppComponent {
   ativaNav: boolean = true;
   admAutenticated: boolean = false;
   menuPerfil: boolean = true;
+  qtdProdutos: number = 0;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
-    private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard) {
+    private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard,
+    private carrinhoService: CarrinhoService) {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
   }
@@ -42,6 +44,11 @@ export class AppComponent {
         this.cliente.tipo = dados.tipo;
         this.clienteLogado.recebeDados(this.cliente);
         if (this.cliente.tipo === 'cliente') {
+          this.carrinhoService.pegaQtdProds().subscribe(dados => {
+            if(dados.length != 0){
+              this.qtdProdutos = dados[0].valor
+            }
+          });
           this.clienteVerificaCadastro.verifica(this, this.pegaEndereco)
           this.authGuard.canActivate;
         } else if (this.cliente.tipo === 'admin') {

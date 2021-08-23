@@ -31,6 +31,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
   carrinho: Carrinho;
   produtosCarrinho: any;
   produtoExiste: boolean = false;
+  qtdProdutos: Contador;
 
   pedido: any;
 
@@ -63,6 +64,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
     this.carrinho = new Carrinho();
     this.contador = new Contador();
     this.recebeContador = new Contador();
+    this.qtdProdutos = new Contador();
     this.pegaContador();
     this.verificaproduto();
   }
@@ -147,7 +149,9 @@ export class ProdutoSelecionadoComponent implements OnInit {
         this.carrinho.total = total;
         this.carrinho.linkImg = this.produto.imgProduto;
 
-        this.carrinhoService.adicionaProduto(this.contador, this.carrinho);
+        this.qtdProdutos.valor = this.appComponet.qtdProdutos + 1
+
+        this.carrinhoService.adicionaProduto(this.contador, this.carrinho, this.qtdProdutos);
         this.produto = new Produto();
       } else {
         this.produto = new Produto();

@@ -16,10 +16,10 @@ export class MeuPerfilComponent implements OnInit {
   telefoneCliente: string;
   dadosCliente: Observable<User>;
 
-  constructor(private appComponet: AppComponent, private clienteVerificaCadastro: ClienteVerificaCadastro, private appComponent: AppComponent,
+  constructor(private appComponent: AppComponent, private clienteVerificaCadastro: ClienteVerificaCadastro,
     private authService: AuthService, private router: Router) { 
-    this.appComponet.ativaNav = false;
-    this.appComponet.menuPerfil = false
+    this.appComponent.ativaNav = false;
+    this.appComponent.menuPerfil = false
   }
 
   ngOnInit(): void {

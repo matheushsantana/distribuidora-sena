@@ -23,11 +23,11 @@ export class CarrinhoService {
       });
   }
 
-  deletarCarrinho(){
+  deletarCarrinho() {
     this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho').remove()
   }
 
-  adicionaProduto(contador: Contador, carrinho: Carrinho) {
+  adicionaProduto(contador: Contador, carrinho: Carrinho, qtdProds: Contador) {
     var aux = contador.valor.toString()
     this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho/produtos').update(aux, carrinho)
       .catch((error: any) => {
@@ -35,6 +35,7 @@ export class CarrinhoService {
       });
     this.atualziaContador(contador);
     alert("Produto Adicionado");
+    this.qtdProdutos(qtdProds)
     this.router.navigate(['/opcao'])
   }
 
@@ -45,7 +46,6 @@ export class CarrinhoService {
         console.error(error);
       });
   }
-
 
   atualziaContador2(contador: Contador) {
     this.db.list('cliente/' + this.clienteLogado.cliente.id + '/carrinho').update('contador', contador)
@@ -90,7 +90,7 @@ export class CarrinhoService {
 
     if (aux == 1) {
       var cont: Contador;
-      cont  = new Contador();
+      cont = new Contador();
       cont.valor = 0;
       this.atualziaContador2(cont)
     }
@@ -111,6 +111,32 @@ export class CarrinhoService {
       .catch((error: any) => {
         console.error(error);
       });
+  }
+
+  qtdProdutos(aux: Contador) {
+    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/qtdProdutos').update('valor', aux)
+      .catch((error: any) => {
+        console.error(error);
+      });
+  }
+
+  pegaQtdProds() {
+    return this.db.list('cliente/' + this.clienteLogado.cliente.id + '/qtdProdutos')
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
+        })
+      );
+  }
+
+  alteraQtdProds(valor: number) {
+    var aux = new Contador();
+    aux.valor = valor - 1
+    this.db.list('cliente/' + this.clienteLogado.cliente.id + '/qtdProdutos').update('valor', aux)
+    .catch((error: any) => {
+      console.error(error);
+    });
   }
 
 }

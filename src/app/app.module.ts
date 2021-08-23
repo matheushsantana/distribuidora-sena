@@ -25,6 +25,7 @@ import { IrCarrinhoComponent } from './paginas/ir-carrinho/ir-carrinho.component
 import { MeuPerfilComponent } from './paginas/meu-perfil/meu-perfil.component';
 import { ReportBugComponent } from './paginas/report-bug/report-bug.component';
 import { BugsComponent } from './paginas/bugs/bugs.component';
+import { MeusPedidosComponent } from './paginas/meus-pedidos/meus-pedidos.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { BugsComponent } from './paginas/bugs/bugs.component';
     MeuPerfilComponent,
     ReportBugComponent,
     BugsComponent,
+    MeusPedidosComponent,
     
   ],
   imports: [
