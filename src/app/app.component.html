@@ -22,14 +22,14 @@
             <img id="btn-menu-adm" [routerLink]="['/admin/menu']" src="assets/menu-white.png">
             <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
           </div>
-          <a id="receber">Bem Vindo!</a>
-          <a id="endereco"> {{(user$| async)?.firsname}}</a>
+          <a id="receber1">Bem Vindo!</a>
+          <a id="endereco1"> {{(user$| async)?.firsname}}</a>
         </div>
       </ng-container>
       <ng-container *ngIf="(authenticated$ | async) && (user$ | async) && admAutenticated != true">
         <div class="barra-superior">
           <div class="sub-barra">
-            <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
+            <!--img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;"-->
           </div>
           <a id="receber">Receber agora em</a>
           <a id="endereco"> {{ endereco }} </a>
@@ -57,8 +57,11 @@
       <img id="btn-menu-bottom" [routerLink]="['/pesquisa', '']" src="assets/busca.png">
       <img id="btn-menu-bottom" (click)="verifica()" src="assets/carrinho.png">
       <label id="qdtProds" (click)="verifica()" *ngIf="qtdProdutos != 0">{{ qtdProdutos }}</label>
-      <img id="btn-menu-bottom" src="assets/btn-info.png" alt="">
-      <img id="btn-menu-bottom" [routerLink]="['/meu-perfil']" (click)="verifica2()" src="assets/menu-white.png" alt="">
+      <img id="btn-menu-bottom" src="assets/btn-pedidos.png" [routerLink]="['/meus-pedidos']">
+      <img src="{{(user$|async)?.fotoPerfil}}" [routerLink]="['/meu-perfil']" (click)="verifica2()" style="border-radius: 50% ; width: 28px;"
+      *ngIf="(authenticated$ | async) && (user$ | async) && admAutenticated != true">
+      <img src="assets/foto-perfil-generica.png" style="border-radius: 50% ; width: 28px;" [routerLink]="['/auth/login']"
+      *ngIf="auxMenu != true">
     </div>
   </nav>
 </div>

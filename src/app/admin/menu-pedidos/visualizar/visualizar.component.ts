@@ -88,6 +88,7 @@ export class VisualizarComponent implements OnInit {
         this.pedido.estado = this.estado[i + 1];
         if (this.pedido.estado == 'Pedido finalizado...') {
           this.pedidoService.salvaPedidoFinalizado(this.pedido)
+          this.pedidoService.salvarPedidoCliente(this.pedido)
         }
         this.db.list('cliente/' + this.pedido.clienteId).update('pedido', this.pedido)
           .catch((error: any) => {

@@ -1,0 +1,80 @@
+#btn-voltar{
+    width: 30px;
+    filter: contrast(1%);
+    margin-right: 85px;
+}
+
+.voltar{
+    padding: 7px;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+.voltar a{
+    font-weight: bold;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.status-do-pedido{
+    padding-bottom: 10px;
+}
+
+#titulo{
+    font-size: 25px;
+    font-weight: 600;
+    color: rgb(104, 104, 104);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 0%;
+}
+
+.divisao{
+    height: 7px;
+    background-color: rgb(231, 231, 231);;
+}
+
+.info-pedido{
+    margin-top: 10px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 3%;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+#detalhes{
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.detalhes-pedido{
+    padding-left: 10px;
+    font-weight: 600;
+    color: rgb(104, 104, 104);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#suporte{
+    margin-top: 10px;
+}
+
+#carregando{
+    font-weight: 500;
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+#dados{
+    color: black;
+}
+
+#dados1{
+    color: black;
+    padding-left: 10px;
+}

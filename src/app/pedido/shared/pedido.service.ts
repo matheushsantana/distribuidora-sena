@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { Contador } from 'src/app/carrinho/shared/contador';
 import { ClienteLogado } from 'src/app/cliente/clienteLogado.service';
 import { Pedido } from './pedido';
 
@@ -53,5 +54,19 @@ export class PedidoService {
   salvaPedidoFinalizado(pedido: Pedido){
     var data: Date = new Date();
     this.db.list('pedidosFinalizados/' + `${data.getFullYear()}/${(data.getMonth() + 1)}`).push(pedido)
+  }
+
+  salvarPedidoCliente(pedido: Pedido){
+    this.db.list('cliente/' + pedido.clienteId + '/pedidosFinalizadosCliente').push(pedido)
+    this.qtdProdutos(pedido.clienteId)
+  }
+
+  qtdProdutos(idCliente) {
+    var aux = new Contador();
+    aux.valor = 0;
+    this.db.list('cliente/' + idCliente + '/qtdProdutos').update('valor', aux)
+      .catch((error: any) => {
+        console.error(error);
+      });
   }
 }

@@ -25,7 +25,8 @@ import { IrCarrinhoComponent } from './paginas/ir-carrinho/ir-carrinho.component
 import { MeuPerfilComponent } from './paginas/meu-perfil/meu-perfil.component';
 import { ReportBugComponent } from './paginas/report-bug/report-bug.component';
 import { BugsComponent } from './paginas/bugs/bugs.component';
-import { MeusPedidosComponent } from './paginas/meus-pedidos/meus-pedidos.component';
+import { ListaComponent, ReversePipe } from './paginas/meus-pedidos/lista/lista.component';
+import { DetalhesComponent } from './paginas/meus-pedidos/detalhes/detalhes.component';
 
 
 @NgModule({
@@ -42,7 +43,9 @@ import { MeusPedidosComponent } from './paginas/meus-pedidos/meus-pedidos.compon
     MeuPerfilComponent,
     ReportBugComponent,
     BugsComponent,
-    MeusPedidosComponent,
+    ListaComponent,
+    DetalhesComponent,
+    ReversePipe
     
   ],
   imports: [

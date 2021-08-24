@@ -26,6 +26,7 @@ export class AppComponent {
   admAutenticated: boolean = false;
   menuPerfil: boolean = true;
   qtdProdutos: number = 0;
+  auxMenu: boolean = false;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
     private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard,
@@ -44,6 +45,7 @@ export class AppComponent {
         this.cliente.tipo = dados.tipo;
         this.clienteLogado.recebeDados(this.cliente);
         if (this.cliente.tipo === 'cliente') {
+          this.auxMenu = true
           this.carrinhoService.pegaQtdProds().subscribe(dados => {
             if(dados.length != 0){
               this.qtdProdutos = dados[0].valor

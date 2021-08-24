@@ -1,0 +1,23 @@
+<div id="component">
+    <div class="voltar">
+        <a [routerLink]="['/']"><img id="btn-voltar" src="assets/btn-voltar.png">SEUS PEDIDOS</a>
+    </div>
+    <div class="container">
+        <p id="text">Pedidos Anteriores</p>
+        <div class="card mb-3" style="max-width: 540px;" *ngFor="let pedido of pedidos | async | reverse">
+            <div class="row g-0">
+                <div class="col-2">
+                    <img src="assets/logo-sena.png" width="70px" style="margin-top: 20px;">
+                </div>
+                <div class="col-10">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-size: 20px; margin-bottom: 0;"> Distribuidora Sena </h5>
+                        <p class="card-text" style="margin-bottom: 0;">itens 3 - R$ {{ pedido.valor | number : "1.2" }}</p>
+                        <p class="card-text" style="margin-top: 0; padding-top: 0;">{{ pedido.data }}</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-sm" id="btn-ver" (click)="detalhes(pedido, pedido.key)" [routerLink]="['/detalhes-pedido']">Ver</button>
+        </div>
+    </div>
+</div>

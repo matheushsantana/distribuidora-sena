@@ -1,0 +1,64 @@
+<div class="voltar">
+    <a [routerLink]="['/meus-pedidos']"><img id="btn-voltar" src="assets/btn-voltar.png">DETALHES PEDIDO</a>
+</div>
+<div class="container">
+    <div class="status-do-pedido">
+        <p id="titulo">{{ pedido.estado }}</p>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuemin="0"
+                aria-valuemax="100" style="width: 100%;" id="progressBar"></div>
+        </div>
+    </div>
+</div>
+<div class="divisao"></div>
+<div class="container">
+    <p id="detalhes">Detalhes do pedido</p>
+    <div class="info-pedido">
+        <div class="detalhes-pedido">
+            <div>
+                <p>Data:</p>
+                <p id="dados">{{ pedido.data }}</p>
+            </div>
+            <div>
+                <p>Entregar em:</p>
+                <p id="dados">{{ pedido.clienteEnderecoRua }}, {{ pedido.clienteEnderecoNumero }}, {{ pedido.clienteEnderecoBairro }}</p>
+            </div>
+            <div>
+                <p>Valor:</p>
+                <p id="dados">R$ {{ pedido.valor | number : "1.2" }}</p>
+            </div>
+            <div>
+                <p>Metodo de pagamento:</p>
+                <p id="dados">{{ pedido.metodoPag }}</p>
+            </div>
+            <div>
+                <p>Produtos:</p>
+                <p id="dados1" *ngFor="let produto of produtos">
+                    ({{ produto.quantidade }}){{ produto.nome }}</p>
+            </div>
+            <div>
+                <p>Observação:</p>
+                <p id="dados">{{ pedido.instrucoes }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="divisao"></div>
+<div class="container">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </symbol>
+    </svg>
+
+    <div class="alert alert-primary d-flex align-items-center" role="alert" id="suporte">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:">
+            <use xlink:href="#info-fill" />
+        </svg>
+        <div>
+            Fale com o Suporte: (65) 99281-4148
+        </div>
+    </div>
+</div>
+<br><br>

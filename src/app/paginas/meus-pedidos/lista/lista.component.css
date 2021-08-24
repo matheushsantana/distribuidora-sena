@@ -1,0 +1,47 @@
+#btn-voltar{
+    width: 30px;
+    filter: contrast(1%);
+    margin-right: 95px;
+}
+
+.voltar{
+    padding: 7px;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.voltar a{
+    font-weight: bold;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.card{
+    border: none;
+}
+
+.card-body{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.301);
+}
+
+#text{
+    margin-top: 15px;
+    font-weight: 600;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.801);
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+#btn-ver{
+    position: absolute;
+    background-color: rgb(212, 212, 212);
+    font-weight: 500;
+    right: 10px;
+    bottom: 25px;
+    width: 80px;
+}
