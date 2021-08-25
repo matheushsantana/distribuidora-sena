@@ -18,7 +18,9 @@ export class MenuPedidosComponent implements OnInit {
   opcoes = ['PEDIDOS A ACEITAR','PEDIDOS EM PREPARO','PEDIDOS EM ENTREGA','PEDIDOS CONCLUIDOS']
   component= [false, false, false, false,]
   nomes = ['aceitar', 'preparo', 'entrega', 'finalizado']
-  estado = ['Aguardando a Distribuidora aceitar...','Pedido em preparo pela Distribuidora...','Pedido saiu para entrega...','Pedido finalizado...']
+  estado = ['Aguardando a Distribuidora aceitar...','Pedido em preparo pela Distribuidora...','Pedido saiu para entrega...','Pedido foi finalizado...']
+
+  ativaNotificacao = 'Aguardando a Distribuidora aceitar...';
 
   mostraDetalhes: boolean = false;
   term: string = 'Aguardando a Distribuidora aceitar'

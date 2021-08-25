@@ -10,7 +10,6 @@ import { Contador } from './shared/contador';
 import { ClienteVerificaCadastro } from '../cliente/clienteVefificaCadastro.service';
 import { Router } from '@angular/router';
 import { CalculaFrete } from './calculaFrete.service';
-import { Cupom } from '../cupom/cupom';
 import { CupomService } from '../cupom/cupom.service';
 import { AppComponent } from '../app.component';
 

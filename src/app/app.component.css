@@ -62,10 +62,6 @@
     right: 40px;
 }
 
-#btn-menu-bottom{
-    width: 28px;
-}
-
 #btn-bottom{
     width: 95%;
 }
@@ -167,6 +163,8 @@
 
 #menu-bottom{
     background-color: #211F20;
+    padding-bottom: 3px;
+    padding-top: 5px;
 }
 
 #qdtProds{
@@ -175,9 +173,68 @@
     background-color: rgb(228, 228, 0);
     left: 50%;
     border-radius: 100%;
-    width: 20px;
-    font-size: 14px;
+    width: 19px;
+    font-size: 13px;
     text-align: center;
     top: 3px;
     font-weight: 600;
+}
+
+#text-inicio{
+    color: white;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.home{
+    text-align: center;
+}
+
+#btn-menu-home{
+    width: 28px;
+}
+
+.busca{
+    text-align: center;
+}
+
+#btn-menu-busca{
+    width: 28px;
+}
+
+.carrinho{
+    text-align: center;
+}
+
+.carrinho{
+    text-align: center;
+}
+
+#btn-menu-carrinho{
+    width: 28px;
+    text-align: center;
+}
+
+.pedidos{
+    text-align: center;
+}
+
+#btn-menu-pedidos{
+    width: 28px;
+    text-align: center;
+}
+
+.perfil{
+    text-align: center;
+}
+
+#acessar-pedido{
+    position: fixed;
+    bottom: 65px;
+    z-index: 9999;
+    font-weight: 600;
+    width: 94%;
 }

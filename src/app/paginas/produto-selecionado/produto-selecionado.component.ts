@@ -122,6 +122,7 @@ export class ProdutoSelecionadoComponent implements OnInit {
       if (this.clienteLogado.cliente != null) {
         this.carrinhoService.getAllPedido().subscribe(dados => {
           this.pedido = dados[1]
+          this.fazerPedido(quantidade, total);
         })
       } else {
         alert('Faça o Login para adicionar produtos ao carrinho!')
@@ -131,12 +132,13 @@ export class ProdutoSelecionadoComponent implements OnInit {
       alert('Desculpe, Produto Esgotado...')
       this.router.navigate(['/'])
     }
-    this.fazerPedido(quantidade, total);
+    
   }
 
   fazerPedido(quantidade: number, total: number) {
+    console.log(this.pedido)
     if (this.pedido == undefined || this.pedido.key != 'pedido' ||
-      this.pedido.estado == 'Pedido finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
+      this.pedido.estado == 'Pedido foi finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
       this.clienteVerificaCadastro.pedido = null;
       if (this.produtoExiste != true) {
         this.pedidoService.deletePedido();

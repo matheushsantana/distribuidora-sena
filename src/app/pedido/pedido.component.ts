@@ -5,6 +5,7 @@ import { CalculaFrete } from '../carrinho/calculaFrete.service';
 import { Produto } from '../produtos/shared/produto';
 import { Pedido } from './shared/pedido';
 import { PedidoService } from './shared/pedido.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-pedido',
@@ -22,8 +23,10 @@ export class PedidoComponent implements OnInit {
   loop: any;
   tempoEntrega: string = '';
 
-  constructor(private calculaFrete: CalculaFrete, private pedidoService: PedidoService, private appComponet: AppComponent) { 
-    this.appComponet.ativaNav = false; }
+  constructor(private calculaFrete: CalculaFrete, private pedidoService: PedidoService, private appComponet: AppComponent,
+    private location: Location) { 
+    this.appComponet.ativaNav = false;
+  this.appComponet.pedidoAtivo = false; }
 
   ngOnInit(): void {
     console.log('entrou 1')
@@ -45,10 +48,15 @@ export class PedidoComponent implements OnInit {
     });
   }
 
+  voltaPagina() {
+    this.location.back();
+  }
+
+
   barraStatus() {
     this.carregando = true;
     const estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 
-    'Pedido saiu para entrega...', 'Pedido finalizado...', 'Seu pedido foi cancelado...']
+    'Pedido saiu para entrega...', 'Pedido foi finalizado...', 'Seu pedido foi cancelado...']
 
     setTimeout(() => {
       var barra = document.getElementById('progressBar') as HTMLElement

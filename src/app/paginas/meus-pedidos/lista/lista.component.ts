@@ -33,7 +33,7 @@ export class ListaComponent implements OnInit {
 
   constructor(private db: AngularFireDatabase, private clienteLogado: ClienteLogado, private appComponent: AppComponent, 
     private meusPedidosDataService: MeusPedidosDataService) { 
-    this.appComponent.ativaNav = false;
+      this.appComponent.ativaNav = false;
   }
 
   ngOnInit(): void {

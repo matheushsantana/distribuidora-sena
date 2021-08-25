@@ -19,7 +19,6 @@ export class MeuPerfilComponent implements OnInit {
   constructor(private appComponent: AppComponent, private clienteVerificaCadastro: ClienteVerificaCadastro,
     private authService: AuthService, private router: Router) { 
     this.appComponent.ativaNav = false;
-    this.appComponent.menuPerfil = false
   }
 
   ngOnInit(): void {

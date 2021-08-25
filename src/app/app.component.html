@@ -29,7 +29,6 @@
       <ng-container *ngIf="(authenticated$ | async) && (user$ | async) && admAutenticated != true">
         <div class="barra-superior">
           <div class="sub-barra">
-            <!--img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;"-->
           </div>
           <a id="receber">Receber agora em</a>
           <a id="endereco"> {{ endereco }} </a>
@@ -47,21 +46,41 @@
       </div>
     </form>
   </nav>
-
+  <div class="container" *ngIf="pedidoAtivo != false">
+    <button class="btn btn-warning" id="acessar-pedido" type="button" (click)="verifica()">Você tem um Pedido Ativo...</button>
+  </div>
   <div [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
   <nav class="navbar fixed-bottom" id="menu-bottom" *ngIf="admAutenticated != true">
     <div class="container-fluid" id="btn-bottom">
-      <img id="btn-menu-bottom" [routerLink]="['/']" src="assets/home.png">
-      <img id="btn-menu-bottom" [routerLink]="['/pesquisa', '']" src="assets/busca.png">
-      <img id="btn-menu-bottom" (click)="verifica()" src="assets/carrinho.png">
-      <label id="qdtProds" (click)="verifica()" *ngIf="qtdProdutos != 0">{{ qtdProdutos }}</label>
-      <img id="btn-menu-bottom" src="assets/btn-pedidos.png" [routerLink]="['/meus-pedidos']">
-      <img src="{{(user$|async)?.fotoPerfil}}" [routerLink]="['/meu-perfil']" (click)="verifica2()" style="border-radius: 50% ; width: 28px;"
-      *ngIf="(authenticated$ | async) && (user$ | async) && admAutenticated != true">
-      <img src="assets/foto-perfil-generica.png" style="border-radius: 50% ; width: 28px;" [routerLink]="['/auth/login']"
-      *ngIf="auxMenu != true">
+      <div class="home" [routerLink]="['/']" (click)="scroll()">
+        <img id="btn-menu-home" src="assets/home.png">
+        <p id="text-inicio">Inicio</p>
+      </div>
+      <div class="busca" [routerLink]="['/pesquisa', '']" (click)="scroll()">
+        <img id="btn-menu-busca" src="assets/busca.png">
+        <p id="text-inicio">Procurar</p>
+      </div>
+      <div class="carrinho" (click)="verifica()" (click)="scroll()">
+        <img id="btn-menu-carrinho" src="assets/carrinho.png">
+        <label id="qdtProds" *ngIf="qtdProdutos != 0">{{ qtdProdutos }}</label>
+        <p id="text-inicio">Carrinho</p>
+      </div>
+      <div class="pedidos" [routerLink]="['/meus-pedidos']" (click)="scroll()">
+        <img id="btn-menu-pedidos" src="assets/btn-pedidos.png">
+        <p id="text-inicio">Pedidos</p>
+      </div>
+      <div class="perfil" [routerLink]="['/meu-perfil']" (click)="scroll()"
+        *ngIf="(authenticated$ | async) && (user$ | async) && admAutenticated != true">
+        <img src="{{(user$|async)?.fotoPerfil}}" (click)="verifica2()" style="border-radius: 50% ; width: 28px;">
+        <p id="text-inicio">Conta</p>
+      </div>
+      <div class="perfil" *ngIf="auxMenu != true">
+        <img src="assets/foto-perfil-generica.png" style="border-radius: 50% ; width: 28px;"
+          [routerLink]="['/auth/login']">
+        <p id="text-inicio">Conta</p>
+      </div>
     </div>
   </nav>
 </div>

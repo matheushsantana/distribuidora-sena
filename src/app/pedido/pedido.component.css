@@ -56,3 +56,24 @@
     color: black;
     padding-left: 10px;
 }
+
+#btn-voltar{
+    width: 30px;
+    filter: contrast(1%);
+    margin-right: 120px;
+}
+
+.voltar{
+    padding: 7px;
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.voltar a{
+    font-weight: bold;
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.507);
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}

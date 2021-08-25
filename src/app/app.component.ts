@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { Observable } from 'rxjs';
+import { observable, Observable } from 'rxjs';
 import { slideInAnimation } from './animations';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
@@ -27,6 +27,7 @@ export class AppComponent {
   menuPerfil: boolean = true;
   qtdProdutos: number = 0;
   auxMenu: boolean = false;
+  pedidoAtivo: boolean = false;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
     private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard,
@@ -68,6 +69,11 @@ export class AppComponent {
     }, 500)
     
   }
+  
+  mudaBarraBusca(){
+    var aux = document.createElement('nav2').style
+    aux.backgroundColor = 'blue'
+  }
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
@@ -81,6 +87,7 @@ export class AppComponent {
     }
     appComponent.ativaNav = true
     appComponent.carregaPagina();
+    appComponent.verficaPedido()
   }
 
   carregaPagina() {
@@ -93,8 +100,18 @@ export class AppComponent {
   verifica() {
     if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
       this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
+      this.pedidoAtivo = true
     } else {
       this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
+      this.pedidoAtivo = false
+    }
+  }
+
+  verficaPedido(){
+    if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
+      this.pedidoAtivo = true
+    } else {
+      this.pedidoAtivo = false
     }
   }
 
@@ -109,6 +126,10 @@ export class AppComponent {
     setTimeout(() => {
       window.location.href = '/'
     }, 500);
+  }
+
+  scroll(){
+    window.scrollTo(0, 0)
   }
 
 }
