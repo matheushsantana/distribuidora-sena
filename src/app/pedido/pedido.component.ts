@@ -29,7 +29,6 @@ export class PedidoComponent implements OnInit {
   this.appComponet.pedidoAtivo = false; }
 
   ngOnInit(): void {
-    console.log('entrou 1')
     window.scrollTo(0, 0)
     this.calculaFrete.calculaFrete(this, this.pegaPedido);
     this.carregando = false;
@@ -37,7 +36,6 @@ export class PedidoComponent implements OnInit {
 
   pegaPedido(comp, aux) {
     comp.pedidoService.getAllPedido().subscribe(dados => {
-      console.log('entrou 2')
       comp.pedido = dados[1]
       comp.infoPedido = dados[1]
       comp.barraStatus();

@@ -14,7 +14,7 @@ export class MenuConcluidosComponent implements OnInit {
   data: Date = new Date();
   dataSelecionada: any;
 
-  dataInalguracao = [8, 2021];
+  dataInalguracao = [6, 2021];
   dataAtual = [Number((this.data.getMonth() + 1)), Number(this.data.getFullYear())];
   mes = ['', 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
   opcoes: any[] = [];

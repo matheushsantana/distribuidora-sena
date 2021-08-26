@@ -31,12 +31,7 @@ export class ResultadoPesquisaComponent implements OnInit {
     }else {
       this.route.params.subscribe(params => this.term = params['produto']);
     }
-    setTimeout(() => {
-      var site = document.getElementById('component').style
-      site.display = 'block';
-      var carregamento = document.getElementById('carregando')
-      carregamento.classList.add("hide")
-    }, 500)
+    
   }
 
   selecionaProduto(produto: Produto, key: string) {

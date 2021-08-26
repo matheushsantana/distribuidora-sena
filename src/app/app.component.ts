@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { observable, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { slideInAnimation } from './animations';
 import { AuthService } from './auth/auth.service';
 import { User } from './auth/user';
@@ -68,11 +68,6 @@ export class AppComponent {
       }, 1500)
     }, 500)
     
-  }
-  
-  mudaBarraBusca(){
-    var aux = document.createElement('nav2').style
-    aux.backgroundColor = 'blue'
   }
 
   prepareRoute(outlet: RouterOutlet) {
