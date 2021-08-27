@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~11.0.5",
     "@angular/router": "~11.0.5",
     "@firebase/storage": "^0.5.6",
+    "bootstrap": "^5.1.0",
     "file-drop-element": "^1.0.1",
     "firebase": "^8.9.1",
     "ng-lazyload-image": "^9.1.0",
