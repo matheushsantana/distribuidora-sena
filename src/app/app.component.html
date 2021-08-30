@@ -18,6 +18,7 @@
         <div class="barra-superior">
           <div class="sub-barra">
             <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
+            <button id="btn-estado" type="button" class="btn btn-sm" (click)=" mudaEstado()">{{ estadoBtn }}</button>
             <img id="btn-home" [routerLink]="['/']" src="assets/home.png">
             <img id="btn-menu-adm" [routerLink]="['/admin/menu']" src="assets/menu-white.png">
             <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
@@ -83,4 +84,11 @@
       </div>
     </div>
   </nav>
+</div>
+
+<div *ngIf="estadoDistribuidora == 'Fechado'">
+  <div id="carregamento">
+    <img src="assets/logo-sena.png" id="logo-carregamento">
+    <h1>Estamos Fechados!</h1>
+  </div>
 </div>

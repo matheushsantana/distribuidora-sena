@@ -9,12 +9,14 @@ import { ClienteVerificaCadastro } from './cliente/clienteVefificaCadastro.servi
 import { Cliente } from './cliente/shared/cliente';
 import { AuthGuard } from './guards/auth.guard';
 import { CarrinhoService } from './carrinho/shared/carrinho.service';
+import { EstadoDistribuidoraGuard } from './guards/estadoDistribuidora.guard';
+import { EstadoDistribuidora } from './guards/estadoDistribuidora';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [ slideInAnimation ]
+  animations: [slideInAnimation]
 })
 export class AppComponent {
 
@@ -28,53 +30,75 @@ export class AppComponent {
   qtdProdutos: number = 0;
   auxMenu: boolean = false;
   pedidoAtivo: boolean = false;
+  estadoDistribuidora: string;
+  estadoBtn: string = '....';
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
     private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard,
-    private carrinhoService: CarrinhoService) {
+    private carrinhoService: CarrinhoService, private estadoDistribuidoraGuard: EstadoDistribuidoraGuard) {
     this.user$ = this.authService.getUser();
     this.authenticated$ = this.authService.authenticated();
   }
 
   ngOnInit() {
     window.scrollTo(0, 0)
+    this.estadoDistribuidoraGuard.verificaEstado(this, this.pegaCliente)
+  }
+
+  pegaCliente(appComponent) {
+    appComponent.user$.subscribe(dados => {
+      appComponent.cliente = new Cliente();
+      appComponent.cliente.id = dados.id;
+      appComponent.cliente.nome = dados.firsname;
+      appComponent.cliente.tipo = dados.tipo;
+      appComponent.clienteLogado.recebeDados(appComponent.cliente);
+      if (appComponent.cliente.tipo === 'cliente') {
+        appComponent.auxMenu = true
+        appComponent.carrinhoService.pegaQtdProds().subscribe(dados => {
+          if (dados.length != 0) {
+            appComponent.qtdProdutos = dados[0].valor
+          }
+          if (appComponent.estadoDistribuidoraGuard.estado == 'Aberto') {
+            appComponent.estadoDistribuidora = 'Aberto'
+          } else {
+            appComponent.estadoDistribuidora = 'fechado'
+            var carregamento = document.getElementById('carregamento')
+            carregamento.classList.add("hide")
+          }
+        });
+        appComponent.clienteVerificaCadastro.verifica(appComponent, appComponent.pegaEndereco)
+        appComponent.authGuard.canActivate;
+      } else if (appComponent.cliente.tipo === 'admin') {
+        appComponent.estadoDistribuidora = 'Aberto'
+        appComponent.ativaNav = false;
+        appComponent.admAutenticated = true;
+        appComponent.carregaPagina();
+        appComponent.router.navigate(['/admin/menu'])
+        setTimeout(() =>{
+          appComponent.mudaBotao();
+        }, 600)
+        
+      }
+    })
     setTimeout(() => {
-      this.user$.subscribe(dados => {
-        this.cliente = new Cliente();
-        this.cliente.id = dados.id;
-        this.cliente.nome = dados.firsname;
-        this.cliente.tipo = dados.tipo;
-        this.clienteLogado.recebeDados(this.cliente);
-        if (this.cliente.tipo === 'cliente') {
-          this.auxMenu = true
-          this.carrinhoService.pegaQtdProds().subscribe(dados => {
-            if(dados.length != 0){
-              this.qtdProdutos = dados[0].valor
-            }
-          });
-          this.clienteVerificaCadastro.verifica(this, this.pegaEndereco)
-          this.authGuard.canActivate;
-        } else if (this.cliente.tipo === 'admin') {
-          this.ativaNav = false;
-          this.admAutenticated = true;
-          this.carregaPagina();
-          this.router.navigate(['/admin/menu'])
+      if (appComponent.cliente.id == null) {
+        appComponent.carregaPagina();
+        if (appComponent.estadoDistribuidoraGuard.estado == 'Aberto') {
+        } else {
+          appComponent.estadoDistribuidora = 'Fechado'
+          var carregamento = document.getElementById('carregamento')
+          carregamento.classList.add("hide")
         }
-      })
-      setTimeout(() => {
-        if(this.cliente.id == null){
-          this.carregaPagina();
-        }
-      }, 1500)
-    }, 500)
-    
+      }
+    }, 1500)
+
   }
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }
 
-  pegaEndereco(appComponent, dados){
+  pegaEndereco(appComponent, dados) {
     if (dados.enderecoRua != null || dados.enderecoRua != undefined) {
       appComponent.endereco = dados.enderecoRua + ', ' + dados.enderecoNumero + ', ' + dados.enderecoBairro
     } else {
@@ -102,7 +126,7 @@ export class AppComponent {
     }
   }
 
-  verficaPedido(){
+  verficaPedido() {
     if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
       this.pedidoAtivo = true
     } else {
@@ -110,8 +134,8 @@ export class AppComponent {
     }
   }
 
-  verifica2(){
-    if(this.cliente.id == null){
+  verifica2() {
+    if (this.cliente.id == null) {
       this.router.navigate(['/auth/login'])
     }
   }
@@ -123,8 +147,35 @@ export class AppComponent {
     }, 500);
   }
 
-  scroll(){
+  scroll() {
     window.scrollTo(0, 0)
+  }
+
+  mudaEstado(){
+    var aux = new EstadoDistribuidora();
+    if(this.estadoDistribuidoraGuard.estado['chave'] == 'Aberto'){
+      aux.chave = 'Fechado'
+      this.estadoDistribuidoraGuard.mudaEstado(aux)
+      this.mudaBotao()
+    }else if(this.estadoDistribuidoraGuard.estado['chave'] == 'Fechado'){
+      aux.chave = 'Aberto'
+      this.estadoDistribuidoraGuard.mudaEstado(aux)
+      this.mudaBotao()
+    }
+  }
+
+  mudaBotao(){
+    var btnEstado = document.getElementById('btn-estado') as HTMLElement
+    if(this.estadoDistribuidoraGuard.estado['chave'] == 'Aberto'){
+      btnEstado.classList.remove('aberto')
+      btnEstado.classList.add('fechado')
+      this.estadoBtn = 'Fechar'
+    } else {
+      btnEstado.classList.remove('fechado')
+      btnEstado.classList.add('aberto')
+      this.estadoBtn = 'Abrir'
+    }
+        
   }
 
 }

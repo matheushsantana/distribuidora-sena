@@ -46,13 +46,13 @@
 #btn-home{
     width: 28px;
     position: absolute;
-    right: 80px;
+    right: 70px;
 }
 
 #btn-menu-adm{
     width: 28px;
     position: absolute;
-    right: 40px;
+    right: 35px;
 }
 
 
@@ -60,6 +60,11 @@
     width: 28px;
     position: absolute;
     right: 40px;
+}
+
+#btn-estado{
+    position: absolute;
+    right: 105px;
 }
 
 #btn-bottom{
@@ -237,4 +242,19 @@
     z-index: 9999;
     font-weight: 600;
     width: 94%;
+}
+
+#btn-estado{
+    color: white;
+    font-weight: 600;
+    background-color: #198754;
+    width: 60px;
+}
+
+#btn-estado.fechado{
+    background-color: #DC3545;
+}
+
+#btn-estado.aberto{
+    background-color: #198754;
 }
