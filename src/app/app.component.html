@@ -3,7 +3,7 @@
   <h1>Bem vindo(a)!</h1>
 </div>
 
-<div id="site">
+<div id="site" *ngIf="estadoDistribuidora != 'Fechado'">
   <nav class="navbar justify-content-center" id="navbar" *ngIf="menuPerfil">
     <div class="container-fluid">
       <ng-container *ngIf="!(authenticated$ | async)">
@@ -18,8 +18,10 @@
         <div class="barra-superior">
           <div class="sub-barra">
             <img src="{{(user$|async)?.fotoPerfil}}" style="border-radius: 50% ; width: 40px;">
-            <button id="btn-estado" type="button" class="btn btn-sm" (click)=" mudaEstado()">{{ estadoBtn }}</button>
-            <img id="btn-home" [routerLink]="['/']" src="assets/home.png">
+            <div class="form-switch" id="btn-estado">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" (click)="mudaEstado()">
+              <label class="form-check-label" for="flexSwitchCheckChecked">{{ estadoBtn }}</label>
+            </div>
             <img id="btn-menu-adm" [routerLink]="['/admin/menu']" src="assets/menu-white.png">
             <img id="btn-sair" (click)="logout()" src="assets/btn-sair.png">
           </div>
@@ -86,9 +88,9 @@
   </nav>
 </div>
 
-<div *ngIf="estadoDistribuidora == 'Fechado'">
-  <div id="carregamento">
-    <img src="assets/logo-sena.png" id="logo-carregamento">
+<div *ngIf="estadoDistribuidora != 'Aberto'">
+  <div id="fechado">
+    <img src="assets/logo-sena.png" id="logo-fechado">
     <h1>Estamos Fechados!</h1>
   </div>
 </div>

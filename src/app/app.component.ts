@@ -30,7 +30,7 @@ export class AppComponent {
   qtdProdutos: number = 0;
   auxMenu: boolean = false;
   pedidoAtivo: boolean = false;
-  estadoDistribuidora: string;
+  estadoDistribuidora: string = 'Aberto';
   estadoBtn: string = '....';
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
@@ -58,10 +58,11 @@ export class AppComponent {
           if (dados.length != 0) {
             appComponent.qtdProdutos = dados[0].valor
           }
-          if (appComponent.estadoDistribuidoraGuard.estado == 'Aberto') {
+          appComponent.carregaPagina();
+          if (appComponent.estadoDistribuidoraGuard.estado['chave'] == 'Aberto') {
             appComponent.estadoDistribuidora = 'Aberto'
           } else {
-            appComponent.estadoDistribuidora = 'fechado'
+            appComponent.estadoDistribuidora = 'Fechado'
             var carregamento = document.getElementById('carregamento')
             carregamento.classList.add("hide")
           }
@@ -74,17 +75,21 @@ export class AppComponent {
         appComponent.admAutenticated = true;
         appComponent.carregaPagina();
         appComponent.router.navigate(['/admin/menu'])
-        setTimeout(() =>{
+        setTimeout(() => {
           appComponent.mudaBotao();
         }, 600)
-        
+
       }
     })
     setTimeout(() => {
       if (appComponent.cliente.id == null) {
         appComponent.carregaPagina();
-        if (appComponent.estadoDistribuidoraGuard.estado == 'Aberto') {
+        console.log(appComponent.estadoDistribuidoraGuard.estado)
+        if (appComponent.estadoDistribuidoraGuard.estado['chave'] == 'Aberto') {
+          console.log('entrou')
+          appComponent.estadoDistribuidora = 'Aberto'
         } else {
+          console.log('entrou 2')
           appComponent.estadoDistribuidora = 'Fechado'
           var carregamento = document.getElementById('carregamento')
           carregamento.classList.add("hide")
@@ -151,31 +156,28 @@ export class AppComponent {
     window.scrollTo(0, 0)
   }
 
-  mudaEstado(){
+  mudaEstado() {
     var aux = new EstadoDistribuidora();
-    if(this.estadoDistribuidoraGuard.estado['chave'] == 'Aberto'){
+    if (this.estadoDistribuidoraGuard.estado['chave'] == 'Aberto') {
       aux.chave = 'Fechado'
       this.estadoDistribuidoraGuard.mudaEstado(aux)
       this.mudaBotao()
-    }else if(this.estadoDistribuidoraGuard.estado['chave'] == 'Fechado'){
+    } else if (this.estadoDistribuidoraGuard.estado['chave'] == 'Fechado') {
       aux.chave = 'Aberto'
       this.estadoDistribuidoraGuard.mudaEstado(aux)
       this.mudaBotao()
     }
   }
 
-  mudaBotao(){
-    var btnEstado = document.getElementById('btn-estado') as HTMLElement
-    if(this.estadoDistribuidoraGuard.estado['chave'] == 'Aberto'){
-      btnEstado.classList.remove('aberto')
-      btnEstado.classList.add('fechado')
-      this.estadoBtn = 'Fechar'
+  mudaBotao() {
+    var btnEstado = document.getElementById('flexSwitchCheckChecked') as HTMLInputElement
+    if (this.estadoDistribuidoraGuard.estado['chave'] == 'Aberto') {
+      this.estadoBtn = 'Distribuidora Aberta'
+      btnEstado.checked = true
     } else {
-      btnEstado.classList.remove('fechado')
-      btnEstado.classList.add('aberto')
-      this.estadoBtn = 'Abrir'
+      this.estadoBtn = 'Distribuidora Fechada'
+      btnEstado.checked = false
     }
-        
-  }
 
+  }
 }

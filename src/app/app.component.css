@@ -52,7 +52,7 @@
 #btn-menu-adm{
     width: 28px;
     position: absolute;
-    right: 35px;
+    right: 40px;
 }
 
 
@@ -64,7 +64,20 @@
 
 #btn-estado{
     position: absolute;
-    right: 105px;
+    right: 80px;
+    top: 0px;
+    color: white;
+    text-align: center;
+    width: 50px;
+}
+
+#btn-estado label{
+    padding-left: 0px;
+    margin-left: 0px;
+    position: absolute;
+    width: 50px;
+    top: 25px;
+    left: -30px;
 }
 
 #btn-bottom{
@@ -162,6 +175,41 @@
     top: 220px;
 }
 
+
+#fechado{
+    position: absolute;
+    z-index: 9999;
+    background-color: #211F20;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    opacity: 1;
+    transition: opacity .5s linear;
+    transition: all .5s linear;
+}
+
+#fechado.hide{
+    opacity: 0;
+    pointer-events: none;
+}
+
+#fechado h1{
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 220px;
+    font-size: 55px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#logo-fechado{
+    width: 250px;
+    text-align: center;
+    position: relative;
+    top: 220px;
+}
+
+
 #btn-buscar{
     font-weight: 500;
 }
@@ -242,19 +290,4 @@
     z-index: 9999;
     font-weight: 600;
     width: 94%;
-}
-
-#btn-estado{
-    color: white;
-    font-weight: 600;
-    background-color: #198754;
-    width: 60px;
-}
-
-#btn-estado.fechado{
-    background-color: #DC3545;
-}
-
-#btn-estado.aberto{
-    background-color: #198754;
 }

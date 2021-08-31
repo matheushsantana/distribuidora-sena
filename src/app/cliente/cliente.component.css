@@ -15,17 +15,3 @@
     color: rgb(221, 1, 1);
     padding-left: 5px;
 }
-
-#rodape{
-    background-color: #211F20;
-}
-
-#rodape p{
-    color: white;
-    font-size: 14px;
-}
-
-#rodape div{
-    color: white;
-    font-size: 12px;
-}

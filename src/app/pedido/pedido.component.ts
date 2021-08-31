@@ -87,6 +87,8 @@ export class PedidoComponent implements OnInit {
         }, 3000)
       }
     }, 500)
+    this.appComponet.ativaNav = false;
+    this.appComponet.pedidoAtivo = false
   }
 
 }
