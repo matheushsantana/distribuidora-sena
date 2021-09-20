@@ -136,7 +136,6 @@ export class ProdutoSelecionadoComponent implements OnInit {
   }
 
   fazerPedido(quantidade: number, total: number) {
-    console.log(this.pedido)
     if (this.pedido == undefined || this.pedido.key != 'pedido' ||
       this.pedido.estado == 'Pedido foi finalizado...' || this.pedido.estado == 'Seu pedido foi cancelado...') {
       this.clienteVerificaCadastro.pedido = null;

@@ -49,9 +49,6 @@
       </div>
     </form>
   </nav>
-  <div class="container" *ngIf="pedidoAtivo != false">
-    <button class="btn btn-warning" id="acessar-pedido" type="button" (click)="verifica()">Você tem um Pedido Ativo...</button>
-  </div>
   <div [@routeAnimations]="prepareRoute(outlet)">
     <router-outlet #outlet="outlet"></router-outlet>
   </div>

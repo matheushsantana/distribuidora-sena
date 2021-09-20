@@ -29,7 +29,6 @@ export class AppComponent {
   menuPerfil: boolean = true;
   qtdProdutos: number = 0;
   auxMenu: boolean = false;
-  pedidoAtivo: boolean = false;
   estadoDistribuidora: string = 'Aberto';
   estadoBtn: string = '....';
 
@@ -84,12 +83,9 @@ export class AppComponent {
     setTimeout(() => {
       if (appComponent.cliente.id == null) {
         appComponent.carregaPagina();
-        console.log(appComponent.estadoDistribuidoraGuard.estado)
         if (appComponent.estadoDistribuidoraGuard.estado['chave'] == 'Aberto') {
-          console.log('entrou')
           appComponent.estadoDistribuidora = 'Aberto'
         } else {
-          console.log('entrou 2')
           appComponent.estadoDistribuidora = 'Fechado'
           var carregamento = document.getElementById('carregamento')
           carregamento.classList.add("hide")
@@ -111,7 +107,6 @@ export class AppComponent {
     }
     appComponent.ativaNav = true
     appComponent.carregaPagina();
-    appComponent.verficaPedido()
   }
 
   carregaPagina() {
@@ -124,18 +119,8 @@ export class AppComponent {
   verifica() {
     if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
       this.router.navigate(['/pedido', this.clienteLogado.cliente.id]);
-      this.pedidoAtivo = true
     } else {
       this.router.navigate(['/carrinho', this.clienteLogado.cliente.id]);
-      this.pedidoAtivo = false
-    }
-  }
-
-  verficaPedido() {
-    if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
-      this.pedidoAtivo = true
-    } else {
-      this.pedidoAtivo = false
     }
   }
 
