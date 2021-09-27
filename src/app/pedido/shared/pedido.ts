@@ -10,6 +10,7 @@ export class Pedido {
     clienteEnderecoRua: string;
     clienteEnderecoNumero: number;
     clienteEnderecoBairro: string;
+    troco: string;
     data: string;
     valor: number;
     metodoPag: string;

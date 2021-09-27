@@ -17,9 +17,7 @@ export class ClienteComponent implements OnInit {
   cliente: Cliente;
 
   constructor(private clienteLogado: ClienteLogado, private clienteService: ClienteService, private appComponent: AppComponent,
-    private clienteVerificaCadastro: ClienteVerificaCadastro, private location: Location, private calculaFrete: CalculaFrete) { 
-      this.appComponent.pedidoAtivo = false;
-    }
+    private clienteVerificaCadastro: ClienteVerificaCadastro, private location: Location, private calculaFrete: CalculaFrete) { }
 
   ngOnInit(): void {
     this.cliente = new Cliente();

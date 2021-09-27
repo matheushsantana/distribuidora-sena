@@ -25,8 +25,7 @@ export class PedidoComponent implements OnInit {
 
   constructor(private calculaFrete: CalculaFrete, private pedidoService: PedidoService, private appComponet: AppComponent,
     private location: Location) { 
-    this.appComponet.ativaNav = false;
-  this.appComponet.pedidoAtivo = false; }
+    this.appComponet.ativaNav = false;}
 
   ngOnInit(): void {
     window.scrollTo(0, 0)
@@ -88,7 +87,6 @@ export class PedidoComponent implements OnInit {
       }
     }, 500)
     this.appComponet.ativaNav = false;
-    this.appComponet.pedidoAtivo = false
   }
 
 }

@@ -8,20 +8,16 @@ import { PedidoService } from 'src/app/pedido/shared/pedido.service';
 import { MenuPedidosComponent } from '../menu-pedidos.component';
 
 @Component({
-  selector: 'app-visualizar',
-  templateUrl: './visualizar.component.html',
-  styleUrls: ['./visualizar.component.css']
+  selector: 'app-editar-pedido',
+  templateUrl: './editar-pedido.component.html',
+  styleUrls: ['./editar-pedido.component.css']
 })
-export class VisualizarComponent implements OnInit {
+export class EditarPedidoComponent implements OnInit {
 
   pedido: Pedido;
   produtosPedido: Observable<any>;
-  opcoesBtn = ['Aceitar Pedido', 'Pedido Preparado', 'Pedido Entregue']
-  estado = ['Aguardando a Distribuidora aceitar...', 'Pedido em preparo pela Distribuidora...', 'Pedido saiu para entrega...', 'Pedido foi finalizado...'];
-  btn: string;
-  mostraBtn: boolean = true;
 
-  constructor(private db: AngularFireDatabase, private pedidoDataService: PedidoDataService, private menuPedidos: MenuPedidosComponent,
+  constructor(private db: AngularFireDatabase, private pedidoDataService: PedidoDataService,
     private pedidoService: PedidoService) { }
 
   ngOnInit(): void {
@@ -42,26 +38,9 @@ export class VisualizarComponent implements OnInit {
         this.pedido.instrucoes = data.pedido.instrucoes,
         this.pedido.tipoDesconto = data.pedido.tipoDesconto,
         this.pedido.desconto = data.pedido.desconto,
-        this.pedido.troco = data.pedido.troco,
       this.produtosPedido = this.getAllProdPedido();
-      this.mudaBotao();
+      console.log(data)
     })
-  }
-
-  mudaBotao() {
-    for (var i = 0; i < 3; i++) {
-      if (this.pedido.estado == this.estado[i] && this.pedido.estado != this.estado[3]) {
-        this.btn = this.opcoesBtn[i];
-        this.mostraBtn = true;
-        break
-      } else {
-        this.mostraBtn = false;
-      }
-    }
-  }
-
-  fechar() {
-    this.menuPedidos.mostraDetalhes = false
   }
 
   getAllProdPedido() {
@@ -72,37 +51,6 @@ export class VisualizarComponent implements OnInit {
           return changes.map(c => ({ key: c.payload.key, ...c.payload.exportVal() }));
         })
       );
-  }
-
-  editarPedido(){
-    
-  }
-
-  cancelarPedido() {
-    this.pedido.estado = 'Seu pedido foi cancelado...';
-    this.menuPedidos.mostraDetalhes = false;
-    this.db.list('cliente/' + this.pedido.clienteId).update('pedido', this.pedido)
-      .catch((error: any) => {
-        console.error(error);
-      });
-  }
-
-  updatePedido() {
-    for (var i = 0; i < 4; i++) {
-      if (this.estado[i] == this.pedido.estado) {
-        this.pedido.estado = this.estado[i + 1];
-        if (this.pedido.estado == 'Pedido finalizado...') {
-          this.pedidoService.salvaPedidoFinalizado(this.pedido)
-          this.pedidoService.salvarPedidoCliente(this.pedido)
-        }
-        this.db.list('cliente/' + this.pedido.clienteId).update('pedido', this.pedido)
-          .catch((error: any) => {
-            console.error(error);
-          });
-        this.menuPedidos.mostraDetalhes = false
-        break
-      }
-    }
   }
 
 }

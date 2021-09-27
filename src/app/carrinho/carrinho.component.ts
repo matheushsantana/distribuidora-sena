@@ -37,6 +37,8 @@ export class CarrinhoComponent implements OnInit {
   descontoCupom: number = 0;
   cupomAdd: boolean = false;
   tipoDescon: string = 'Sem desconto...';
+  troco: string;
+  precisaTroco: boolean = false;
 
   data = new Date();
 
@@ -179,6 +181,21 @@ export class CarrinhoComponent implements OnInit {
 
   }
 
+  verificaTroco(){
+    if(this.metodoPagamento == 'Dinheiro'){
+     this.troco = window.prompt('Se precisa de troco digite o valor, caso não precise é só clicar em cancelar.');
+     if(this.troco == ''){
+      this.verificaTroco()
+     }
+     if(this.troco == null){
+      this.troco = 'Não preciso de troco...'
+     }
+     this.precisaTroco = true
+     console.log(this.troco)
+    }
+   
+  }
+
   pegaProduros() {
     this.carrinho.subscribe(dados => {
       this.produtos = dados
@@ -312,6 +329,7 @@ export class CarrinhoComponent implements OnInit {
             }
             this.pedido.tipoDesconto = this.tipoDescon;
             this.pedido.desconto = this.descontoCupom;
+            this.pedido.troco = this.troco;
             this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
             this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
             this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;

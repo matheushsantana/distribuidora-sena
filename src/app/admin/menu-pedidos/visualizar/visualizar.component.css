@@ -11,3 +11,8 @@
 #btn-update-pedido{
     padding-bottom: 10px;
 }
+
+#btnEditar{
+    background-color: rgb(224, 165, 1);
+    color: white;
+}

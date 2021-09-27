@@ -12,6 +12,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { VisualizarComponent } from './menu-pedidos/visualizar/visualizar.component';
 import { AdminRoutingModule } from './admin.routing.module';
 import { CadastroCupomComponent } from './cupom/cadastro-cupom/cadastro-cupom.component';
+import { EditarPedidoComponent } from './menu-pedidos/editar-pedido/editar-pedido.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { CadastroCupomComponent } from './cupom/cadastro-cupom/cadastro-cupom.co
     MenuConcluidosComponent,
     VisualizarComponent,
     CadastroCupomComponent,
+    EditarPedidoComponent,
   ],
   schemas: [],
   providers: [],

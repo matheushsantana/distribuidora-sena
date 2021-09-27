@@ -6,6 +6,7 @@
         <p class="card-text"><strong>Telefone:</strong> {{ pedido.clienteNumero | mask: '(00) 00000-0000' }}</p>
         <p class="card-text"><strong>Metodo de pagamento:</strong> {{ pedido.metodoPag }}</p>
         <p class="card-text"><strong>Valor:</strong> R${{ pedido.valor | number : "1.2" }}</p>
+        <p class="card-text"><strong>Troco para:</strong> R${{ pedido.troco }}</p>
         <p class="card-text"><strong>Desconto:</strong> {{ pedido.tipoDesconto }} R${{ pedido.desconto | number : "1.2" }}</p>
         <p class="card-text"><strong>Observação:</strong> {{ pedido.instrucoes }}</p>
         <p class="card-text"><strong>produtos:</strong></p>
@@ -14,10 +15,10 @@
         <div class="d-grid gap-2 d-md-flex" *ngIf="mostraBtn != false" id="btn-update-pedido">      
             <button class="btn btn-success" type="button" (click)="updatePedido()">{{ btn }}</button>
             <button class="btn btn-danger" type="button" (click)="cancelarPedido()">Recusar Pedido</button>
+            <!--button id="btnEditar" class="btn" type="button" [routerLink]="['/admin/menu/editar-pedido']" (click)="editarPedido()">Editar Pedido</button-->
         </div>
         <div class="d-grid gap-2 d-md-flex">      
             <button class="btn btn-primary" type="button" (click)="fechar()">Minimizar Pedido</button>        
         </div>
-            
     </div>
 </div>

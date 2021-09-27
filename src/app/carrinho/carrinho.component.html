@@ -59,11 +59,15 @@
     </div>
     <div class="divisao"></div>
     <div class="container">
-        <select class="form-select" id="select" [(ngModel)]="metodoPagamento">
+        <select class="form-select" id="select" [(ngModel)]="metodoPagamento" (click)="verificaTroco()">
             <option selected>Selecione a forma de pagamento</option>
             <option value="Dinheiro">Dinheiro</option>
             <option value="Cartão">Cartão</option>
         </select>
+    </div>
+    <div class="container" *ngIf="precisaTroco != false" id="troco">
+        <label class="form-label" style="color:rgb(128, 128, 128)"><strong>Troco para: </strong></label>
+        <input type="text" class="form-control" placeholder="Digite o valor" [(ngModel)]="troco">
     </div>
     <div class="divisao"></div>
     <div class="container">
