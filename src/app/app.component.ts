@@ -31,6 +31,7 @@ export class AppComponent {
   auxMenu: boolean = false;
   estadoDistribuidora: string = 'Aberto';
   estadoBtn: string = '....';
+  btnMenuPedido: string;
 
   constructor(private authService: AuthService, private router: Router, private clienteLogado: ClienteLogado,
     private clienteVerificaCadastro: ClienteVerificaCadastro, private authGuard: AuthGuard,
@@ -114,6 +115,15 @@ export class AppComponent {
     site.display = 'block';
     var carregamento = document.getElementById('carregamento')
     carregamento.classList.add("hide")
+    this.mudaBtnMenu();
+  }
+
+  mudaBtnMenu(){
+    if (this.clienteVerificaCadastro.pedido != null || this.clienteVerificaCadastro.pedido != undefined) {
+      this.btnMenuPedido = 'pedido'
+    } else {
+      this.btnMenuPedido = 'carrinho'
+    }
   }
 
   verifica() {

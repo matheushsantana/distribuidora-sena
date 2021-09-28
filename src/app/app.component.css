@@ -233,6 +233,19 @@
     font-weight: 600;
 }
 
+#alertaPedido{
+    color: white;
+    position: absolute;
+    background-color: rgb(53, 228, 0);
+    left: 50%;
+    border-radius: 100%;
+    width: 19px;
+    font-size: 13px;
+    text-align: center;
+    top: 3px;
+    font-weight: 600;
+}
+
 #text-inicio{
     color: white;
     padding-bottom: 0;
@@ -258,6 +271,14 @@
     width: 28px;
 }
 
+.pedido{
+    text-align: center;
+}
+
+.pedido{
+    text-align: center;
+}
+
 .carrinho{
     text-align: center;
 }
@@ -267,6 +288,11 @@
 }
 
 #btn-menu-carrinho{
+    width: 28px;
+    text-align: center;
+}
+
+#btn-menu-pedido{
     width: 28px;
     text-align: center;
 }

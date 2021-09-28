@@ -191,7 +191,6 @@ export class CarrinhoComponent implements OnInit {
       this.troco = 'Não preciso de troco...'
      }
      this.precisaTroco = true
-     console.log(this.troco)
     }
    
   }
@@ -329,7 +328,11 @@ export class CarrinhoComponent implements OnInit {
             }
             this.pedido.tipoDesconto = this.tipoDescon;
             this.pedido.desconto = this.descontoCupom;
-            this.pedido.troco = this.troco;
+            if(this.metodoPagamento == 'Cartão'){
+              this.pedido.troco = 'Não preciso de troco...'
+            }else{
+              this.pedido.troco = this.troco;
+            }
             this.pedido.clienteEnderecoRua = this.clienteVerificaCadastro.dadosCliente.enderecoRua;
             this.pedido.clienteEnderecoBairro = this.clienteVerificaCadastro.dadosCliente.enderecoBairro;
             this.pedido.clienteEnderecoNumero = this.clienteVerificaCadastro.dadosCliente.enderecoNumero;

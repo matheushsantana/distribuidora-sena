@@ -91,7 +91,7 @@ export class VisualizarComponent implements OnInit {
     for (var i = 0; i < 4; i++) {
       if (this.estado[i] == this.pedido.estado) {
         this.pedido.estado = this.estado[i + 1];
-        if (this.pedido.estado == 'Pedido finalizado...') {
+        if (this.pedido.estado == 'Pedido foi finalizado...') {
           this.pedidoService.salvaPedidoFinalizado(this.pedido)
           this.pedidoService.salvarPedidoCliente(this.pedido)
         }

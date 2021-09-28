@@ -73,17 +73,11 @@ export class PedidoComponent implements OnInit {
         barra.style.width = '100%',
           barra.className = 'progress-bar progress-bar-striped bg-success',
           this.tempoEntrega = ''
-        setTimeout(() => {
-          window.location.href = "/"
-        }, 3000)
       }
       if (String(this.infoPedido['estado']) == estado[4]) {
         barra.style.width = '100%',
           barra.className = 'progress-bar progress-bar-striped bg-danger',
           this.tempoEntrega = ''
-        setTimeout(() => {
-          window.location.href = "/"
-        }, 3000)
       }
     }, 500)
     this.appComponet.ativaNav = false;

@@ -62,7 +62,12 @@
         <img id="btn-menu-busca" src="assets/busca.png">
         <p id="text-inicio">Procurar</p>
       </div>
-      <div class="carrinho" (click)="verifica()" (click)="scroll()">
+      <div class="pedido" (click)="verifica()" (click)="scroll()" *ngIf="btnMenuPedido == 'pedido'">
+        <img id="btn-menu-pedido" src="assets/btn-pedido.png">
+        <label id="alertaPedido">1</label>
+        <p id="text-inicio">Pedido</p>
+      </div>
+      <div class="carrinho" (click)="verifica()" (click)="scroll()" *ngIf="btnMenuPedido == 'carrinho'">
         <img id="btn-menu-carrinho" src="assets/carrinho.png">
         <label id="qdtProds" *ngIf="qtdProdutos != 0">{{ qtdProdutos }}</label>
         <p id="text-inicio">Carrinho</p>
